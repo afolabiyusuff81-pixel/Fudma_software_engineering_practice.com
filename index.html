@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUDMA Software Engineering CBT Practice Portal</title>
+    <style>
+        /* [EXISTING CSS REMAINS UNCHANGED UP TO THIS POINT] */
+        * * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Claude Chat Font */
+body {
+    font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+
+    /* Animated Claude-style gradient */
+    background: linear-gradient(45deg, #6A11CB, #2575FC, #FF5F6D, #FFC371);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Background Animation */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* =========================================
+   🔥 GLOBAL ANIMATED GRADIENT TEXT
+   ========================================= */
+h1, h2, h3, h4, h5, h6, p, label, span {
+    background: linear-gradient(90deg, #ff00c8, #7b2fff, #00c8ff, #ff00c8);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textGradient 6s ease infinite;
+}
+
+@keyframes textGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* =========================================
+   🔥 ANIMATED BUTTONS (Gradient + Hover)
+   ========================================= */
+.btn, .btn-secondary, .animated-btn, button {
+    background: linear-gradient(90deg, #7b2fff, #ff00b8, #ff6f61);
+    background-size: 300% 300%;
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: buttonGradient 5s ease infinite;
+    width: 100%;
+    margin-top: 10px;
+    font-family: inherit;
+}
+
+.btn:hover,
+.btn-secondary:hover,
+.animated-btn:hover,
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(255, 0, 200, 0.5);
+}
+
+@keyframes buttonGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* CONTAINER / LAYOUT */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+/* Keep text animated */
+.header h1, .header p {
+    -webkit-text-fill-color: transparent;
+}
+
+/* CONTENT AREA */
+.content {
+    padding: 40px;
+}
+
+.auth-section, 
+.course-selection, 
+.test-config, 
+.test-section, 
+.results-section {
+    display: none;
+}
+
+.auth-section.active, 
+.course-selection.active, 
+.test-config.active, 
+.test-section.active, 
+.results-section.active {
+    display: block;
+}
+
+/* FORM STYLING */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    font-family: inherit;
+    color: black;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* COURSE GRID */
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.course-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px 20px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-family: inherit;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* TEST CONFIG */
+.config-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.option-group {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.option-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.option-btn {
+    padding: 10px 20px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.option-btn:hover, 
+.option-btn.selected {
+    background: #667eea;
+    color: white;
+}
+
+/* TEST TIMER */
+.timer-display {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #f44336;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 5px 20px rgba(244, 67, 54, 0.4);
+    z-index: 1000;
+}
+
+/* QUESTIONS */
+.question-container {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.question-number {
+    color: #667eea;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option {
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    background: white;
+    transition: all 0.3s;
+}
+
+.option:hover {
+    border-color: #667eea;
+    background: #f0f4ff;
+}
+
+.option.selected {
+    border-color: #667eea;
+    background: #667eea;
+    color: white;
+}
+
+/* RESULTS */
+.results-summary {
+    text-align: center;
+    padding: 40px;
+}
+
+.score-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px auto;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.results-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.result-card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+    .config-options {
+        grid-template-columns: 1fr;
+    }
+
+    .results-details {
+        grid-template-columns: 1fr;
+    }
+
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body>
+    <button class="logout-btn" id="logoutBtn" style="display: none;" onclick="logout()">Logout</button>
+    <button class="history-btn" id="historyBtn" style="display: none;" onclick="showHistory()">View History</button>
+    <div class="timer-display" id="timerDisplay" style="display: none;">00:00</div>
+
+
+    <div class="container">
+        <div class="header">
+            <h1>🎓 FUDMA SOFTWARE ENGINEERING STUDENT</h1>
+            <h2>CBT PRACTICE PORTAL</h2>
+            <p>Federal University Dutsin-Ma, Katsina State</p>
+        </div>
+
+        <div class="content">
+            <div class="auth-section active" id="authSection">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Welcome! Please Login or Register</h2>
+                
+                <div id="loginForm">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password">
+                    </div>
+                    <button class="btn" onclick="login()">Login</button>
+                    <button class="btn btn-secondary" onclick="showRegister()">Register New Account</button>
+                </div>
+
+                <div id="registerForm" style="display: none;">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="regName" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="regEmail" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="regPassword" placeholder="Create a password (min 6 characters)">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="regConfirmPassword" placeholder="Confirm your password">
+                    </div>
+                    <button class="btn" onclick="register()">Register</button>
+                    <button class="btn btn-secondary" onclick="showLogin()">Back to Login</button>
+                </div>
+            </div>
+
+            <div class="course-selection" id="courseSelection">
+                <div class="welcome-message">
+                    <h2>Welcome, <span id="userName"></span>!</h2>
+                    <p>Select a course to begin your practice session</p>
+                </div>
+
+                <div class="stats-grid" id="userStats">
+                    </div>
+
+                <div class="course-grid">
+                    <div class="course-card" onclick="selectCourse('COS101')">
+                        <h3>COS 101</h3>
+                        <p>Introduction to Computing Sciences</p>
+                        <p style="margin-top: 10px; font-size: 12px;">50 Questions Available</p>
+                    </div>
+                    <div class="course-card" onclick="selectCourse('PHY111')">
+                        <h3>PHY 111</h3>
+                        <p>General Physics I</p>
+                        <p style="margin-top: 10px; font-size: 12px;">50 Questions Available</p>
+                    </div>
+                    <div class="course-card" onclick="selectCourse('CSC101')">
+                        <h3>CSC 101</h3>
+                        <p>Computer Installation & Maintenance</p>
+                        <p style="margin-top: 10px; font-size: 12px;">50 Questions Available</p>
+                    </div>
+                    <div class="course-card" onclick="selectCourse('MTH101')">
+                        <h3>MTH 101</h3>
+                        <p>Elementary Mathematics I</p>
+                        <p style="margin-top: 10px; font-size: 12px;">50 Questions Available</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-config" id="testConfig">
+                <h2 style="text-align: center; margin-bottom: 10px; color: #333;">Configure Your Test</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 30px;">Course: <strong id="selectedCourseName"></strong></p>
+
+                <div class="config-options">
+                    <div class="option-group">
+                        <h3>Number of Questions</h3>
+                        <div class="option-buttons" id="questionButtons">
+                            <button class="option-btn" onclick="selectQuestionCount(10)">10</button>
+                            <button class="option-btn" onclick="selectQuestionCount(20)">20</button>
+                            <button class="option-btn" onclick="selectQuestionCount(30)">30</button>
+                            <button class="option-btn" onclick="selectQuestionCount(40)">40</button>
+                            <button class="option-btn" onclick="selectQuestionCount(50)">50</button>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <h3>Timer (Minutes)</h3>
+                        <div class="option-buttons" id="timerButtons">
+                            <button class="option-btn" onclick="selectTimer(5)">5</button>
+                            <button class="option-btn" onclick="selectTimer(10)">10</button>
+                            <button class="option-btn" onclick="selectTimer(15)">15</button>
+                            <button class="option-btn" onclick="selectTimer(20)">20</button>
+                            <button class="option-btn" onclick="selectTimer(30)">30</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="startTest()" style="margin-top: 30px;">Start Test</button>
+                <button class="btn btn-secondary" onclick="backToCourses()">Back to Courses</button>
+            </div>
+
+            <div class="test-section" id="testSection">
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+
+                <div class="question-container">
+                    <div class="question-number" id="questionNumber">Question 1 of 10</div>
+                    <div class="question-text" id="questionText"></div>
+                    <div class="options" id="optionsContainer"></div>
+                </div>
+
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn">Previous</button>
+                    <button class="btn" onclick="nextQuestion()" id="nextBtn">Next</button>
+                </div>
+            </div>
+
+            <div class="results-section" id="resultsSection">
+                <div class="results-summary">
+                    <h2 style="color: #333; margin-bottom: 20px;">Test Completed! 🎉</h2>
+                    
+                    <div class="score-circle">
+                        <div>
+                            <span id="scorePercentage">0</span>%
+                            <div class="score-label">Score</div>
+                        </div>
+                    </div>
+
+                    <div class="results-details">
+                        <div class="result-card">
+                            <h4>Correct Answers</h4>
+                            <p id="correctCount" style="color: #4caf50;">0</p>
+                        </div>
+                        <div class="result-card">
+                            <h4>Wrong Answers</h4>
+                            <p id="wrongCount" style="color: #f44336;">0</p>
+                        </div>
+                        <div class="result-card">
+                            <h4>Total Questions</h4>
+                            <p id="totalCount" style="color: #667eea;">0</p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-tertiary" onclick="showReview()" style="margin-top: 30px;">Review Answers</button> <button class="btn" onclick="backToCourses()" style="margin-top: 10px;">Take Another Test</button>
+                </div>
+            </div>
+
+            <div class="review-section" id="reviewSection">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Detailed Answer Review</h2>
+                <div id="reviewContent">
+                    </div>
+                <button class="btn btn-secondary" onclick="showSection('resultsSection')" style="margin-top: 30px;">Back to Summary</button>
+                <button class="btn" onclick="backToCourses()" style="margin-top: 10px;">Take Another Test</button>
+            </div>
+
+
+            <div class="history-section" id="historySection">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Your Test History</h2>
+                
+                <div id="historyContent">
+                    <div class="loading">Loading history...</div>
+                </div>
+
+                <button class="btn btn-secondary" onclick="backToCourses()" style="margin-top: 30px;">Back to Courses</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // --- 1. CONFIGURATION AND INITIALIZATION ---
+
+        // ⚠️ REPLACE WITH YOUR ACTUAL FIREBASE CONFIGURATION
+        const firebaseConfig = {
+            apiKey: "AIzaSyC5uF795h9jkPmVFu_-jS7npbrFIHSZ26E",
+            authDomain: "fudma-cbt-portal.firebaseapp.com",
+            projectId: "fudma-cbt-portal",
+            storageBucket: "fudma-cbt-portal.firebasestorage.app",
+            messagingSenderId: "587587261232",
+            appId: "1:587587261232:web:73ba6ded2879d94f03aef5"
+        };
+
+        // Initialize Firebase
+        let auth, db;
+        try {
+            const firebaseApp = firebase.initializeApp(firebaseConfig);
+            auth = firebase.auth();
+            db = firebase.firestore();
+            console.log("Firebase initialized successfully.");
+        } catch (error) {
+            console.error("Firebase initialization error:", error);
+            alert("Firebase is not configured correctly. Check the console for details.");
+        }
+
+        // Question Bank
+        const questionBank = {
+            COS101: [
+                {q: "Who is considered the father of computing?", options: ["Charles Babbage", "Alan Turing", "John von Neumann", "Bill Gates"], correct: 0},
+                {q: "What does ENIAC stand for?", options: ["Electronic Numerical Integrator and Calculator", "Electronic Network Integration", "Enhanced Numerical Integration", "Electronic Number Calculator"], correct: 0},
+                {q: "Which generation of computers used vacuum tubes?", options: ["First Generation", "Second Generation", "Third Generation", "Fourth Generation"], correct: 0},
+                {q: "Transistors were introduced in which generation?", options: ["First", "Second", "Third", "Fourth"], correct: 1},
+                {q: "What technology characterized third generation computers?", options: ["Vacuum tubes", "Transistors", "Integrated Circuits", "Microprocessors"], correct: 2},
+                {q: "Microprocessors were introduced in which generation?", options: ["Second", "Third", "Fourth", "Fifth"], correct: 2},
+                {q: "What does AI stand for?", options: ["Automated Intelligence", "Artificial Intelligence", "Advanced Integration", "Automated Integration"], correct: 1},
+                {q: "The first commercial computer was?", options: ["ENIAC", "UNIVAC I", "IBM 701", "EDVAC"], correct: 1},
+                {q: "Who invented the World Wide Web?", options: ["Bill Gates", "Steve Jobs", "Tim Berners-Lee", "Mark Zuckerberg"], correct: 2},
+                {q: "What year was the first personal computer introduced?", options: ["1971", "1975", "1981", "1985"], correct: 1},
+                {q: "VLSI stands for?", options: ["Very Large Scale Integration", "Very Low Speed Integration", "Virtual Large Scale Integration", "Visible Integration"], correct: 0},
+                {q: "Who is known as the first computer programmer?", options: ["Charles Babbage", "Ada Lovelace", "Alan Turing", "John von Neumann"], correct: 1},
+                {q: "What does IBM stand for?", options: ["International Business Machines", "Internet Business Machines", "International Binary Machines", "Internet Binary Machines"], correct: 0},
+                {q: "CPU stands for?", options: ["Central Processing Unit", "Computer Processing Unit", "Central Program Unit", "Computer Program Unit"], correct: 0},
+                {q: "RAM stands for?", options: ["Random Access Memory", "Read Access Memory", "Random Array Memory", "Read Array Memory"], correct: 0},
+                {q: "ROM stands for?", options: ["Random Only Memory", "Read Only Memory", "Random Order Memory", "Read Order Memory"], correct: 1},
+                {q: "What is the brain of the computer?", options: ["RAM", "ROM", "CPU", "Hard Drive"], correct: 2},
+                {q: "What does GUI stand for?", options: ["Graphical User Interface", "General User Interface", "Graphical Universal Interface", "General Universal Interface"], correct: 0},
+                {q: "What is the smallest unit of data?", options: ["Byte", "Bit", "Nibble", "Word"], correct: 1},
+                {q: "How many bits are in a byte?", options: ["4", "8", "16", "32"], correct: 1},
+                {q: "What does HTML stand for?", options: ["HyperText Markup Language", "HyperText Machine Language", "HighText Markup Language", "HyperText Modern Language"], correct: 0},
+                {q: "What does URL stand for?", options: ["Universal Resource Locator", "Uniform Resource Locator", "Universal Reference Locator", "Uniform Reference Locator"], correct: 1},
+                {q: "What is an operating system?", options: ["Application software", "System software", "Hardware", "Firmware"], correct: 1},
+                {q: "Examples of operating systems include?", options: ["MS Word", "Windows", "Chrome", "Excel"], correct: 1},
+                {q: "What does HTTP stand for?", options: ["HyperText Transfer Protocol", "HyperText Translation Protocol", "HighText Transfer Protocol", "HyperText Transmission Protocol"], correct: 0},
+                {q: "What is a browser?", options: ["Operating system", "Application for accessing web", "Programming language", "Database"], correct: 1},
+                {q: "Examples of browsers include?", options: ["Windows", "Chrome", "Linux", "Android"], correct: 1},
+                {q: "What is a computer virus?", options: ["Hardware problem", "Malicious software", "Operating system", "Printer error"], correct: 1},
+                {q: "What is software?", options: ["Physical components", "Programs and data", "Monitor", "Keyboard"], correct: 1},
+                {q: "What is hardware?", options: ["Programs", "Physical components", "Data", "Files"], correct: 1},
+                {q: "Input devices include?", options: ["Monitor", "Keyboard", "Printer", "Speaker"], correct: 1},
+                {q: "Output devices include?", options: ["Mouse", "Scanner", "Monitor", "Microphone"], correct: 2},
+                {q: "What does LAN stand for?", options: ["Local Area Network", "Large Area Network", "Limited Area Network", "Long Area Network"], correct: 0},
+                {q: "What does WAN stand for?", options: ["Wide Area Network", "Wireless Area Network", "World Area Network", "Web Area Network"], correct: 0},
+                {q: "What is the purpose of a compiler?", options: ["Run programs", "Translate code", "Store data", "Display output"], correct: 1},
+                {q: "What is an algorithm?", options: ["Programming language", "Step-by-step procedure", "Computer hardware", "Software application"], correct: 1},
+                {q: "Binary system uses how many digits?", options: ["2", "8", "10", "16"], correct: 0},
+                {q: "Hexadecimal system uses how many digits?", options: ["2", "8", "10", "16"], correct: 3},
+                {q: "What is a database?", options: ["Hardware device", "Organized data collection", "Programming language", "Operating system"], correct: 1},
+                {q: "SQL stands for?", options: ["Standard Query Language", "Structured Query Language", "Simple Query Language", "System Query Language"], correct: 1},
+                {q: "What is cloud computing?", options: ["Local storage", "Internet-based computing", "Hardware upgrade", "Software installation"], correct: 1},
+                {q: "What is an IP address?", options: ["Internet Protocol address", "Internal Processing address", "Internet Processing address", "Internal Protocol address"], correct: 0},
+                {q: "What does PDF stand for?", options: ["Portable Document Format", "Public Document Format", "Private Document Format", "Personal Document Format"], correct: 0},
+                {q: "What is encryption?", options: ["Data compression", "Data security method", "Data deletion", "Data backup"], correct: 1},
+                {q: "What is a firewall?", options: ["Hardware component", "Security system", "Software application", "Network cable"], correct: 1},
+                {q: "What does USB stand for?", options: ["Universal Serial Bus", "Universal System Bus", "United Serial Bus", "United System Bus"], correct: 0},
+                {q: "What is bandwidth?", options: ["Data transfer rate", "Storage capacity", "Processing speed", "Screen resolution"], correct: 0},
+                {q: "What is malware?", options: ["Good software", "Malicious software", "System software", "Application software"], correct: 1},
+                {q: "What is phishing?", options: ["Cyber attack method", "Programming technique", "Hardware issue", "Software update"], correct: 0},
+                {q: "What does VPN stand for?", options: ["Virtual Private Network", "Virtual Public Network", "Visual Private Network", "Visual Public Network"], correct: 0}
+            ],
+            PHY111: [
+                {q: "What is the SI unit of force?", options: ["Joule", "Newton", "Watt", "Pascal"], correct: 1},
+                {q: "What is the acceleration due to gravity?", options: ["9.8 m/s²", "10 m/s²", "8.9 m/s²", "11 m/s²"], correct: 0},
+                {q: "Newton's first law is also known as?", options: ["Law of inertia", "Law of acceleration", "Law of action", "Law of momentum"], correct: 0},
+                {q: "What is the formula for kinetic energy?", options: ["mgh", "½mv²", "mv", "Fd"], correct: 1},
+                {q: "What is the SI unit of work?", options: ["Newton", "Joule", "Watt", "Pascal"], correct: 1},
+                {q: "Power is defined as?", options: ["Work/Time", "Force×Distance", "Mass×Velocity", "Force×Time"], correct: 0},
+                {q: "What is momentum?", options: ["Mass×Velocity", "Mass×Acceleration", "Force×Time", "Work/Time"], correct: 0},
+                {q: "The SI unit of pressure is?", options: ["Newton", "Pascal", "Joule", "Watt"], correct: 1},
+                {q: "What is the speed of light?", options: ["3×10⁸ m/s", "3×10⁶ m/s", "3×10⁷ m/s", "3×10⁹ m/s"], correct: 0},
+                {q: "Which law states F=ma?", options: ["Newton's First Law", "Newton's Second Law", "Newton's Third Law", "Law of Gravitation"], correct: 1}
+            ],
+            CSC101: [
+                {q: "What does PC stand for?", options: ["Personal Computer", "Public Computer", "Private Computer", "Professional Computer"], correct: 0},
+                {q: "The motherboard is?", options: ["Main circuit board", "Power supply", "Storage device", "Display unit"], correct: 0},
+                {q: "BIOS stands for?", options: ["Basic Input Output System", "Binary Input Output System", "Basic Internal Operating System", "Binary Internal Operating System"], correct: 0},
+                {q: "What is the function of RAM?", options: ["Temporary storage", "Permanent storage", "Processing", "Display"], correct: 0},
+                {q: "Hard disk is a?", options: ["Storage device", "Input device", "Output device", "Processing unit"], correct: 0},
+                {q: "SSD stands for?", options: ["Solid State Drive", "Super Storage Drive", "System State Drive", "Solid Storage Device"], correct: 0},
+                {q: "What is the purpose of a power supply?", options: ["Provide electricity", "Store data", "Process information", "Display output"], correct: 0},
+                {q: "GPU stands for?", options: ["Graphics Processing Unit", "General Processing Unit", "Graphics Program Unit", "General Program Unit"], correct: 0}
+            ],
+            MTH101: [
+                {q: "What is 2 + 2?", options: ["3", "4", "5", "6"], correct: 1},
+                {q: "What is 5 × 3?", options: ["15", "8", "12", "20"], correct: 0},
+                {q: "What is 10 ÷ 2?", options: ["5", "8", "2", "20"], correct: 0},
+                {q: "What is 8 - 3?", options: ["5", "11", "4", "6"], correct: 0},
+                {q: "Square root of 16?", options: ["4", "8", "2", "16"], correct: 0},
+                {q: "What is $2^3$?", options: ["6", "8", "9", "4"], correct: 1},
+                {q: "What is 50% of 100?", options: ["50", "25", "75", "100"], correct: 0},
+                {q: "What is the value of $\pi$ (pi)?", options: ["3.14", "2.71", "1.41", "1.73"], correct: 0}
+            ]
+        };
+
+        // Global State Variables
+        let currentUser = null;
+        let selectedCourse = null;
+        let questionCount = 10;
+        let timerMinutes = 5;
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let timerInterval = null;
+        let timeRemaining = 0;
+
+
+        // --- 2. AUTHENTICATION FUNCTIONS ---
+
+        function showRegister() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+        }
+
+        function showLogin() {
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        }
+
+        async function register() {
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+
+            if (!name || !email || !password || !confirmPassword) return alert('Please fill all fields');
+            if (password !== confirmPassword) return alert('Passwords do not match');
+            if (password.length < 6) return alert('Password must be at least 6 characters');
+
+            try {
+                // 1. Create user in Firebase Auth
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
+                // 2. Save user profile to Firestore
+                await db.collection('users').doc(user.uid).set({
+                    name: name,
+                    email: email,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                alert('Registration successful! Please login.');
+                showLogin();
+            } catch (error) {
+                console.error('Registration error:', error);
+                alert('Registration failed: ' + error.message);
+            }
+        }
+
+        async function login() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) return alert('Please fill all fields');
+
+            try {
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
+                // 1. Get user profile
+                const userDoc = await db.collection('users').doc(user.uid).get();
+                if (userDoc.exists) {
+                    currentUser = {
+                        uid: user.uid,
+                        ...userDoc.data()
+                    };
+                    
+                    document.getElementById('userName').textContent = currentUser.name;
+                    await loadUserStats();
+                    showSection('courseSelection');
+                    document.getElementById('logoutBtn').style.display = 'block';
+                    document.getElementById('historyBtn').style.display = 'block';
+                } else {
+                    alert('User profile not found. Data may be inconsistent.');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('Login failed: ' + error.message);
+            }
+        }
+
+        async function logout() {
+            try {
+                await auth.signOut();
+                currentUser = null;
+                showSection('authSection');
+                document.getElementById('logoutBtn').style.display = 'none';
+                document.getElementById('historyBtn').style.display = 'none';
+                document.getElementById('timerDisplay').style.display = 'none'; // Hide timer
+                resetTestState();
+            } catch (error) {
+                console.error('Logout error:', error);
+                alert('Logout failed: ' + error.message);
+            }
+        }
+
+        // --- 3. NAVIGATION & UI FUNCTIONS ---
+
+        function showSection(sectionId) {
+            const sections = ['authSection', 'courseSelection', 'testConfig', 'testSection', 'resultsSection', 'historySection', 'reviewSection']; // Added reviewSection
+            sections.forEach(id => {
+                document.getElementById(id).classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function selectCourse(courseCode) {
+            selectedCourse = courseCode;
+            document.getElementById('selectedCourseName').textContent = courseCode;
+            resetConfigSelection(); // Reset buttons on course selection
+            showSection('testConfig');
+        }
+
+        function resetConfigSelection() {
+            // Remove 'selected' class from all config buttons
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            // Reset to default internal values
+            questionCount = 10;
+            timerMinutes = 5;
+        }
+
+        function selectQuestionCount(count) {
+            questionCount = count;
+            document.querySelectorAll('#questionButtons .option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            // Find and select the button that was clicked
+            const button = Array.from(document.querySelectorAll('#questionButtons .option-btn')).find(b => parseInt(b.textContent) === count);
+            if (button) button.classList.add('selected');
+        }
+
+        function selectTimer(minutes) {
+            timerMinutes = minutes;
+            document.querySelectorAll('#timerButtons .option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            // Find and select the button that was clicked
+            const button = Array.from(document.querySelectorAll('#timerButtons .option-btn')).find(b => parseInt(b.textContent) === minutes);
+            if (button) button.classList.add('selected');
+        }
+
+        function backToCourses() {
+            resetTestState();
+            loadUserStats(); // Reload stats on return
+            showSection('courseSelection');
+        }
+
+
+        // --- 4. TEST LOGIC FUNCTIONS ---
+
+        function startTest() {
+            if (!questionCount || !timerMinutes || !selectedCourse) {
+                alert('Please ensure you have selected a course, number of questions, and a timer.');
+                return;
+            }
+
+            const allQuestions = questionBank[selectedCourse];
+            currentQuestions = [];
+            const usedIndices = new Set();
+            
+            // Randomly select unique questions
+            while (currentQuestions.length < Math.min(questionCount, allQuestions.length)) {
+                const randomIndex = Math.floor(Math.random() * allQuestions.length);
+                if (!usedIndices.has(randomIndex)) {
+                    usedIndices.add(randomIndex);
+                    currentQuestions.push(allQuestions[randomIndex]);
+                }
+            }
+
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            currentQuestionIndex = 0;
+            
+            timeRemaining = timerMinutes * 60;
+            
+            showSection('testSection');
+            document.getElementById('timerDisplay').style.display = 'block';
+            startTimer();
+            displayQuestion();
+        }
+
+        function startTimer() {
+            updateTimerDisplay();
+            if (timerInterval) clearInterval(timerInterval); // Clear any existing interval
+            
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            document.getElementById('timerDisplay').textContent = 
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function displayQuestion() {
+            const question = currentQuestions[currentQuestionIndex];
+            
+            document.getElementById('questionNumber').textContent = 
+                `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+            document.getElementById('questionText').textContent = question.q;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                if (userAnswers[currentQuestionIndex] === index) {
+                    optionDiv.classList.add('selected');
+                }
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            // Update Progress Bar
+            const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            // Update Navigation Buttons
+            document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+            document.getElementById('nextBtn').textContent = 
+                currentQuestionIndex === currentQuestions.length - 1 ? 'Submit' : 'Next';
+        }
+
+        function selectAnswer(answerIndex) {
+            userAnswers[currentQuestionIndex] = answerIndex;
+            displayQuestion(); // Re-render to show selection
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex === currentQuestions.length - 1) {
+                submitTest();
+            } else {
+                currentQuestionIndex++;
+                displayQuestion();
+            }
+        }
+
+        async function submitTest() {
+            clearInterval(timerInterval);
+            document.getElementById('timerDisplay').style.display = 'none';
+
+            let correct = 0;
+            let wrong = 0;
+            
+            currentQuestions.forEach((question, index) => {
+                if (userAnswers[index] === question.correct) {
+                    correct++;
+                } else {
+                    wrong++;
+                }
+            });
+
+            const percentage = Math.round((correct / currentQuestions.length) * 100);
+
+            // Save test result to Firebase
+            try {
+                await db.collection('tests').add({
+                    userId: currentUser.uid,
+                    userName: currentUser.name,
+                    course: selectedCourse,
+                    totalQuestions: currentQuestions.length,
+                    correct: correct,
+                    wrong: wrong,
+                    percentage: percentage,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    // Save questions and answers for review (optional, but good practice for full history)
+                    // questions: currentQuestions.map(q => ({q: q.q, options: q.options, correct: q.correct})),
+                    // answers: userAnswers
+                });
+
+                console.log('Test result saved successfully');
+            } catch (error) {
+                console.error('Error saving test result:', error);
+                alert('Could not save test result. Check console.');
+            }
+
+            // Display Results
+            document.getElementById('scorePercentage').textContent = percentage;
+            document.getElementById('correctCount').textContent = correct;
+            document.getElementById('wrongCount').textContent = wrong;
+            document.getElementById('totalCount').textContent = currentQuestions.length;
+
+            showSection('resultsSection');
+        }
+
+        function resetTestState() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            currentQuestions = [];
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            timeRemaining = 0;
+        }
+
+        // --- 5. NEW REVIEW FUNCTION ---
+
+        function showReview() {
+            if (currentQuestions.length === 0) return alert('No test data to review.');
+
+            const reviewContent = document.getElementById('reviewContent');
+            reviewContent.innerHTML = '';
+            
+            currentQuestions.forEach((question, index) => {
+                const userChoice = userAnswers[index];
+                const isCorrect = userChoice === question.correct;
+                const statusClass = isCorrect ? 'correct' : 'wrong';
+
+                let questionHTML = `
+                    <div class="review-question ${statusClass}">
+                        <h4>Question ${index + 1}: ${question.q}</h4>
+                `;
+                
+                question.options.forEach((option, optionIndex) => {
+                    let optionClass = 'review-option';
+                    let prefix = '';
+                    
+                    if (optionIndex === question.correct) {
+                        // This is the correct answer
+                        optionClass += ' correct-answer';
+                        prefix = '✅ Correct Answer: ';
+                    } else if (optionIndex === userChoice && !isCorrect) {
+                        // This is the user's selected answer, and it was wrong
+                        optionClass += ' user-wrong';
+                        prefix = '❌ Your Wrong Answer: ';
+                    } else if (optionIndex === userChoice && isCorrect) {
+                         // This is the user's selected answer, and it was correct (use a slightly different look)
+                        optionClass += ' correct-answer';
+                        prefix = '✅ Your Correct Answer: ';
+                    }
+
+                    questionHTML += `<div class="${optionClass}">${prefix}${option}</div>`;
+                });
+
+                questionHTML += '</div>';
+                reviewContent.innerHTML += questionHTML;
+            });
+
+            showSection('reviewSection');
+        }
+
+
+        // --- 6. STATS AND HISTORY FUNCTIONS ---
+        
+        async function loadUserStats() {
+            if (!currentUser) return;
+            try {
+                // Fetch all tests for the current user
+                const testsSnapshot = await db.collection('tests')
+                    .where('userId', '==', currentUser.uid)
+                    .get();
+
+                const totalTests = testsSnapshot.size;
+                let totalScore = 0;
+                let highestScore = 0;
+
+                testsSnapshot.forEach(doc => {
+                    const data = doc.data();
+                    const percentage = data.percentage || 0;
+                    totalScore += percentage;
+                    if (percentage > highestScore) {
+                        highestScore = percentage;
+                    }
+                });
+
+                const averageScore = totalTests > 0 ? Math.round(totalScore / totalTests) : 0;
+
+                const statsHTML = `
+                    <div class="stat-card">
+                        <h3>Total Tests</h3>
+                        <p>${totalTests}</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Average Score</h3>
+                        <p>${averageScore}%</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Highest Score</h3>
+                        <p>${highestScore}%</p>
+                    </div>
+                `;
+
+                document.getElementById('userStats').innerHTML = statsHTML;
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        async function showHistory() {
+            if (!currentUser) return;
+
+            showSection('historySection');
+            document.getElementById('historyContent').innerHTML = '<div class="loading">Loading history...</div>';
+
+            try {
+                const testsSnapshot = await db.collection('tests')
+                    .where('userId', '==', currentUser.uid)
+                    .orderBy('timestamp', 'desc')
+                    .limit(20) // Limit to last 20 tests
+                    .get();
+
+                if (testsSnapshot.empty) {
+                    document.getElementById('historyContent').innerHTML = 
+                        '<p style="text-align: center; color: #666;">No test history yet. Take your first test!</p>';
+                    return;
+                }
+
+                let tableHTML = `
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Course</th>
+                                <th>Questions</th>
+                                <th>Correct</th>
+                                <th>Wrong</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                testsSnapshot.forEach(doc => {
+                    const data = doc.data();
+                    // Convert Firestore Timestamp to local date string
+                    const date = data.timestamp ? data.timestamp.toDate().toLocaleDateString('en-GB') : 'N/A';
+                    tableHTML += `
+                        <tr>
+                            <td>${date}</td>
+                            <td>${data.course}</td>
+                            <td>${data.totalQuestions}</td>
+                            <td style="color: #4caf50;">${data.correct}</td>
+                            <td style="color: #f44336;">${data.wrong}</td>
+                            <td style="font-weight: bold;">${data.percentage}%</td>
+                        </tr>
+                    `;
+                });
+
+                tableHTML += '</tbody></table>';
+                document.getElementById('historyContent').innerHTML = tableHTML;
+            } catch (error) {
+                console.error('Error loading history:', error);
+                document.getElementById('historyContent').innerHTML = 
+                    '<p style="text-align: center; color: #f44336;">Error loading history. Please try again.</p>';
+            }
+        }
+
+        // --- 7. INITIALIZATION & AUTH STATE LISTENER ---
+
+        // Firebase Auth listener to handle page reload/initial state
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                // User is signed in. Load profile data.
+                try {
+                    const userDoc = await db.collection('users').doc(user.uid).get();
+                    if (userDoc.exists) {
+                        currentUser = {
+                            uid: user.uid,
+                            ...userDoc.data()
+                        };
+                        document.getElementById('userName').textContent = currentUser.name;
+                        await loadUserStats();
+                        showSection('courseSelection');
+                        document.getElementById('logoutBtn').style.display = 'block';
+                        document.getElementById('historyBtn').style.display = 'block';
+                    } else {
+                        // Profile missing, log out user for safety
+                        console.error("User profile document missing.");
+                        logout();
+                    }
+                } catch (error) {
+                    console.error("Error fetching user data on startup:", error);
+                    logout();
+                }
+            } else {
+                // User is signed out.
+                currentUser = null;
+                showSection('authSection');
+                document.getElementById('logoutBtn').style.display = 'none';
+                document.getElementById('historyBtn').style.display = 'none';
+                document.getElementById('timerDisplay').style.display = 'none';
+            }
+        });
+
+    </script>
+</body>
+</html>

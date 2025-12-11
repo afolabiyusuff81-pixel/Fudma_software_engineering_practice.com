@@ -7,7 +7,7 @@
     <style>
         /* [EXISTING CSS REMAINS UNCHANGED UP TO THIS POINT] */
         * /* RESET */
-* {
+** {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -43,6 +43,7 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 2000;
+    /* NOTE: The image URL 'https://i.imgur.com/MG6iQGv.png' is required for this effect to work. */
     background-image: url('https://i.imgur.com/MG6iQGv.png');
     animation: snowFall 15s linear infinite;
     opacity: 0.7;
@@ -120,6 +121,37 @@ h1, h2, h3, h4, h5, h6, p, label, span {
 }
 
 /* =========================================
+   🎓 DESIGN LABEL (Integrated with Christmas Theme)
+   ========================================= */
+.design-label {
+    margin-top: 15px;
+    font-size: 14px; 
+    font-weight: 700;
+    
+    /* Inherit the animated button/text style */
+    background: linear-gradient(90deg, #ff0000, #0f9b0f, #ffcc00);
+    background-size: 300% 300%;
+    animation: buttonGlow 5s ease infinite; /* Use the existing button animation */
+    
+    color: white; 
+    
+    padding: 8px 20px;
+    border-radius: 20px; /* More pill-shaped */
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 3px black; 
+}
+
+/* Ensure the text inside the label is NOT animated by the general text rule */
+.design-label * {
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: white !important;
+    animation: none !important;
+    text-shadow: none !important;
+    background: none !important;
+}
+
+/* =========================================
    CONTAINERS / APP UI
    ========================================= */
 .container {
@@ -148,7 +180,9 @@ h1, h2, h3, h4, h5, h6, p, label, span {
 .course-selection, 
 .test-config, 
 .test-section, 
-.results-section {
+.results-section,
+.review-section, /* Added missing section from previous HTML */
+.history-section { /* Added missing section from previous HTML */
     display: none;
 }
 
@@ -156,7 +190,9 @@ h1, h2, h3, h4, h5, h6, p, label, span {
 .course-selection.active, 
 .test-config.active, 
 .test-section.active, 
-.results-section.active {
+.results-section.active,
+.review-section.active,
+.history-section.active {
     display: block;
 }
 
@@ -315,12 +351,16 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     <div class="timer-display" id="timerDisplay" style="display: none;">00:00</div>
 
 
-    <div class="container">
-        <div class="header">
-            <h1>🎓 FUDMA SOFTWARE ENGINEERING STUDENT</h1>
-            <h2>CBT PRACTICE PORTAL</h2>
-            <p>Federal University Dutsin-Ma, Katsina State</p>
-        </div>
+    <div class="header">
+    <h1>🎓 FUDMA SOFTWARE ENGINEERING STUDENT</h1>
+    <h2>CBT PRACTICE PORTAL</h2>
+    <p>Federal University Dutsin-Ma, Katsina State</p>
+    
+    <div class="design-label">
+        Design by Software Engineering Students
+    </div>
+    
+</div>
 
         <div class="content">
             <div class="auth-section active" id="authSection">

@@ -7,7 +7,7 @@
     <style>
         /* [EXISTING CSS REMAINS UNCHANGED UP TO THIS POINT] */
         * /* RESET */
-** {
+*  {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -43,8 +43,8 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 2000;
-    /* NOTE: The image URL 'https://i.imgur.com/MG6iQGv.png' is required for this effect to work. */
-    background-image: url('https://i.imgur.com/MG6iQGv.png');
+    /* NOTE: The image URL '' is required for this effect to work. */
+    background-image: url('');
     animation: snowFall 15s linear infinite;
     opacity: 0.7;
 }
@@ -343,9 +343,33 @@ h1, h2, h3, h4, h5, h6, p, label, span {
         grid-template-columns: 1fr; 
     }
 }
+/* ❄ CLICK SNOW BURST EFFECT */
+.click-snow {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background-image: url('https://i.imgur.com/MG6iQGv.png');
+    background-size: cover;
+    pointer-events: none;
+    animation: clickSnowAnim 1s ease-out forwards;
+    z-index: 9999;
+}
+
+@keyframes clickSnowAnim {
+    0% {
+        opacity: 1;
+        transform: scale(1) translate(0, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2.5) translate(0, -80px);
+    }
+}
     </style>
 </head>
 <body>
+    <body>
+    <div class="snow"></div> 
     <button class="logout-btn" id="logoutBtn" style="display: none;" onclick="logout()">Logout</button>
     <button class="history-btn" id="historyBtn" style="display: none;" onclick="showHistory()">View History</button>
     <div class="timer-display" id="timerDisplay" style="display: none;">00:00</div>
@@ -357,7 +381,7 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     <p>Federal University Dutsin-Ma, Katsina State</p>
     
     <div class="design-label">
-        Design by Software Engineering Students
+        Designed by Software Engineering Students
     </div>
     
 </div>
@@ -1317,4 +1341,53 @@ h1, h2, h3, h4, h5, h6, p, label, span {
 
     </script>
 </body>
+<script>
+    document.addEventListener('click', function(e) {
+        // Create 12 particles per click
+        const particleCount = 12;
+        
+        for (let i = 0; i < particleCount; i++) {
+            createSnowParticle(e.clientX, e.clientY);
+        }
+    });
+
+    function createSnowParticle(x, y) {
+        const particle = document.createElement('div');
+        
+        // Style the particle dynamically
+        particle.style.position = 'fixed';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.width = '8px';
+        particle.style.height = '8px';
+        particle.style.background = 'white';
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none'; // Click through them
+        particle.style.zIndex = '9999';
+        particle.style.boxShadow = '0 0 10px white'; // Glow effect
+        
+        // Randomize movement direction
+        const destinationX = (Math.random() - 0.5) * 200; // Move left/right
+        const destinationY = (Math.random() - 0.5) * 200; // Move up/down
+        const rotation = Math.random() * 520;
+        const delay = Math.random() * 200;
+
+        // Apply animation via Web Animations API (Smoother than CSS classes for dynamic coords)
+        particle.animate([
+            { transform: `translate(0, 0) scale(1)`, opacity: 1 },
+            { transform: `translate(${destinationX}px, ${destinationY}px) scale(0)`, opacity: 0 }
+        ], {
+            duration: 1000 + delay,
+            easing: 'cubic-bezier(0, .9, .57, 1)',
+            delay: delay
+        });
+
+        document.body.appendChild(particle);
+
+        // Remove particle from DOM after animation finishes
+        setTimeout(() => {
+            particle.remove();
+        }, 1200 + delay);
+    }
+</script>
 </html>

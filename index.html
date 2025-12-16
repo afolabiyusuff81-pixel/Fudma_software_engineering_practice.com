@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FUDMA Software Engineering CBT Practice Portal</title>
     <style>
-        /* [EXISTING CSS REMAINS UNCHANGED UP TO THIS POINT] */
-        * /* RESET */
-*  {
+    * { /* Added the universal selector * to encapsulate the margin/padding/box-sizing */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -43,10 +41,8 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 2000;
-    /* NOTE: The image URL '' is required for this effect to work. */
-    background-image: url('');
-    animation: snowFall 15s linear infinite;
-    opacity: 0.7;
+   
+    
 }
 
 @keyframes snowFall {
@@ -230,6 +226,7 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     gap: 20px;
 }
 
+/* FIX: The original file had a missing '{' here, causing a CSS error. */
 .course-card {
     background: linear-gradient(135deg, #ff0000, #0f9b0f);
     color: white;
@@ -238,6 +235,16 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     text-align: center;
     cursor: pointer;
     transition: .3s;
+}
+
+.course-card h3,
+.course-card p {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: white !important;
+    animation: none !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3) !important;
+    color: white !important;
 }
 
 .course-card:hover {
@@ -459,6 +466,22 @@ h1, h2, h3, h4, h5, h6, p, label, span {
                         <p>Elementary Mathematics I</p>
                         <p style="margin-top: 10px; font-size: 12px;">50 Questions Available</p>
                     </div>
+                    <div class="course-card" onclick="selectCourse('BIO101')">
+                        <h3>BIO 101</h3>
+                        <p>General Biology I</p>
+                        <p style="margin-top: 25px; font-size: 12px;">100 Questions Available</p>
+                    </div>
+                    <div class="course-card" onclick="selectCourse('CHS101')">
+                        <h3>CHS 101</h3>
+                        <p>Security and Safety Management</p>
+                        <p style="margin-top: 10px; font-size: 12px;">25 Questions Available</p>
+                    </div>
+
+                    <div class="course-card" onclick="selectCourse('CHM101')">
+                        <h3>CHM 101</h3>
+                        <p>Chemistry Fundamentals</p>
+                        <p style="margin-top: 10px; font-size: 12px;">32 Questions Available</p>
+                    </div>
                 </div>
             </div>
 
@@ -647,6 +670,104 @@ h1, h2, h3, h4, h5, h6, p, label, span {
                 {q: "What is phishing?", options: ["Cyber attack method", "Programming technique", "Hardware issue", "Software update"], correct: 0},
                 {q: "What does VPN stand for?", options: ["Virtual Private Network", "Virtual Public Network", "Visual Private Network", "Visual Public Network"], correct: 0}
             ],
+            BIO101: [
+    {q: "Who discovered the cell in 1665?", options: ["Charles Darwin", "Robert Hooke", "Matthias Schleiden", "Theodor Schwann"], correct: 1},
+    {q: "The cell theory was first developed in which year by Schleiden and Schwann?", options: ["1665", "1839", "1858", "1900"], correct: 1},
+    {q: "Which of the following is NOT a principle of cell theory?", options: ["All organisms are composed of cells", "All cells contain mitochondria", "All cells arise from pre-existing cells", "Vital functions occur within cells"], correct: 1},
+    {q: "The undefined nuclear region in prokaryotic cells is called:", options: ["Nucleus", "Nucleoid", "Nucleolus", "Nuclear membrane"], correct: 1},
+    {q: "Which bacteria lacks a cell wall?", options: ["E. coli", "Mycoplasma", "Staphylococcus", "Streptococcus"], correct: 1},
+    {q: "The cell wall of bacteria primarily consists of:", options: ["Cellulose", "Chitin", "Peptidoglycan", "Lignin"], correct: 2},
+    {q: "Eukaryotic cells are approximately how many times wider than prokaryotic cells?", options: ["5 times", "10 times", "15 times", "20 times"], correct: 2},
+    {q: "Which type of ribosomes are characteristic of prokaryotic cells?", options: ["60S", "70S", "80S", "90S"], correct: 1},
+    {q: "The primary function of mitochondria is:", options: ["Protein synthesis", "Photosynthesis", "Cellular respiration and ATP production", "Cell division"], correct: 2},
+    {q: "Which organelle is responsible for protein packaging and modification?", options: ["Endoplasmic reticulum", "Golgi apparatus", "Lysosome", "Ribosome"], correct: 1},
+    {q: "Lysosomes contain powerful:", options: ["DNA molecules", "RNA strands", "Digestive enzymes", "Chlorophyll pigments"], correct: 2},
+    {q: "Which organelle controls all cellular activities?", options: ["Mitochondrion", "Nucleus", "Ribosome", "Golgi apparatus"], correct: 1},
+    {q: "Photosynthesis occurs in which organelle?", options: ["Mitochondrion", "Chloroplast", "Lysosome", "Peroxisome"], correct: 1},
+    {q: "The endoplasmic reticulum studded with ribosomes is called:", options: ["Smooth ER", "Rough ER", "Both A and B", "Neither A nor B"], correct: 1},
+    {q: "Centrioles are typically found in:", options: ["Plant cells only", "Animal cells only", "Bacterial cells", "All cell types"], correct: 1},
+    {q: "The membrane surrounding a plant cell vacuole is called:", options: ["Plasma membrane", "Tonoplast", "Cell wall", "Nuclear envelope"], correct: 1},
+    {q: "Which Swedish botanist classified organisms into plant and animal kingdoms?", options: ["Charles Darwin", "Carolus Linnaeus", "Robert Hooke", "Ernst Haeckel"], correct: 1},
+    {q: "Modern classification recognizes how many kingdoms?", options: ["Two", "Three", "Four", "Five"], correct: 3},
+    {q: "Kingdom Monera consists primarily of:", options: ["Fungi and algae", "Bacteria and blue-green algae", "Protozoa and algae", "Plants and animals"], correct: 1},
+    {q: "Organisms in Kingdom Protista are mostly:", options: ["Multicellular with nucleus", "Unicellular without nucleus", "Unicellular with nucleus", "Multicellular without nucleus"], correct: 2},
+    {q: "Fungal cell walls are primarily composed of:", options: ["Cellulose", "Chitin", "Peptidoglycan", "Starch"], correct: 1},
+    {q: "The network of fungal filaments is called:", options: ["Hypha", "Mycelium", "Sporangium", "Rhizoid"], correct: 1},
+    {q: "Plants with naked seeds are classified as:", options: ["Angiosperms", "Gymnosperms", "Bryophytes", "Pteridophytes"], correct: 1},
+    {q: "Bryophytes are characterized by:", options: ["Presence of vascular tissue", "Dominance of sporophyte generation", "Dependence on water for fertilization", "Presence of true roots"], correct: 2},
+    {q: "The leaves of ferns are called:", options: ["Fronds", "Blades", "Needles", "Scales"], correct: 0},
+    {q: "In flowering plants, seeds are enclosed in:", options: ["Cones", "Fruits", "Spores", "Rhizomes"], correct: 1},
+    {q: "Asexual reproduction involves:", options: ["Two parents", "Fusion of gametes", "A single parent", "Meiosis"], correct: 2},
+    {q: "Which is NOT a type of asexual reproduction in animals?", options: ["Fission", "Budding", "Fragmentation", "Fertilization"], correct: 3},
+    {q: "The union of sperm and egg produces a:", options: ["Gamete", "Zygote", "Spore", "Bud"], correct: 1},
+    {q: "Meiosis results in daughter cells that are:", options: ["Diploid", "Haploid", "Triploid", "Polyploid"], correct: 1},
+    {q: "Species with separate male and female individuals are:", options: ["Hermaphroditic", "Unisexual", "Parthenogenetic", "Bisexual"], correct: 1},
+    {q: "Parthenogenesis involves:", options: ["Two parents", "Fertilized eggs", "Unfertilized eggs producing offspring", "Spore formation"], correct: 2},
+    {q: "In oviparity, eggs are:", options: ["Retained internally", "Deposited externally", "Never formed", "Always unfertilized"], correct: 1},
+    {q: "Viviparity is characterized by:", options: ["External egg development", "Nourishment from egg yolk only", "Direct nourishment from mother's blood", "Spore formation"], correct: 2},
+    {q: "Vegetative propagation through underground stems occurs in:", options: ["Cuttings", "Rhizomes", "Runners", "Bulbs"], correct: 1},
+    {q: "Potato tubers are examples of:", options: ["Modified roots", "Underground storage stems", "Runners", "Bulbs"], correct: 1},
+    {q: "The basic unit of inheritance is the:", options: ["Chromosome", "Gene", "Nucleotide", "Allele"], correct: 1},
+    {q: "Mendel's First Law is the law of:", options: ["Independent assortment", "Segregation", "Dominance", "Linkage"], correct: 1},
+    {q: "In Mendel's experiments, the F1 generation from crossing DD × dd is:", options: ["All DD", "All dd", "All Dd", "1:2:1 ratio"], correct: 2},
+    {q: "The phenotypic ratio of F2 generation in a monohybrid cross is:", options: ["1:1", "1:2:1", "3:1", "9:3:3:1"], correct: 2},
+    {q: "The genotypic ratio of F2 generation in a monohybrid cross is:", options: ["1:1", "1:2:1", "3:1", "9:3:3:1"], correct: 1},
+    {q: "Mendel's Second Law deals with:", options: ["Segregation", "Independent assortment", "Dominance", "Linkage"], correct: 1},
+    {q: "A dihybrid cross involves parents differing in how many trait pairs?", options: ["One", "Two", "Three", "Four"], correct: 1},
+    {q: "The phenotypic ratio of F2 in a dihybrid cross is:", options: ["3:1", "1:2:1", "9:3:3:1", "1:1:1:1"], correct: 2},
+    {q: "An organism with identical alleles for a trait is:", options: ["Heterozygous", "Homozygous", "Hemizygous", "Polygenic"], correct: 1},
+    {q: "The observable characteristics of an organism constitute its:", options: ["Genotype", "Phenotype", "Karyotype", "Genome"], correct: 1},
+    {q: "Lamarck's theory emphasized:", options: ["Natural selection", "Use and disuse of organs", "Genetic mutation", "Random variation"], correct: 1},
+    {q: "Darwin's theory of evolution is based on:", options: ["Inheritance of acquired characteristics", "Natural selection and survival of the fittest", "Spontaneous generation", "Divine creation"], correct: 1},
+    {q: "Which is NOT evidence for evolution?", options: ["Fossil records", "Comparative anatomy", "Embryology", "Astrology"], correct: 3},
+    {q: "The father of ecology, Ernst Haeckel, defined it as the study of:", options: ["Plants only", "Animals only", "Organism-environment relationships", "Fossils"], correct: 2},
+    {q: "The collection of all living organisms in a geographic area is called:", options: ["Population", "Community", "Ecosystem", "Biome"], correct: 2},
+    {q: "A group of organisms of the same species in an area is a:", options: ["Community", "Population", "Ecosystem", "Biosphere"], correct: 1},
+    {q: "The specific physical location where an organism lives is its:", options: ["Niche", "Habitat", "Biome", "Territory"], correct: 1},
+    {q: "An organism's role or occupation within a community is its:", options: ["Habitat", "Niche", "Territory", "Range"], correct: 1},
+    {q: "Autecology focuses on:", options: ["Communities", "Individual species", "Ecosystems", "Biomes"], correct: 1},
+    {q: "Synecology deals with:", options: ["Individual organisms", "Groups of different species", "Only plants", "Only animals"], correct: 1},
+    {q: "In predation, the organism that is killed and eaten is the:", options: ["Predator", "Prey", "Parasite", "Host"], correct: 1},
+    {q: "Parasitism benefits:", options: ["Both organisms", "Only the host", "Only the parasite", "Neither organism"], correct: 2},
+    {q: "Tapeworms are examples of:", options: ["Ectoparasites", "Endoparasites", "Predators", "Commensals"], correct: 1},
+    {q: "Competition for resources between members of the same species is:", options: ["Interspecific", "Intraspecific", "Commensalism", "Mutualism"], correct: 1},
+    {q: "In commensalism:", options: ["Both benefit", "One benefits, one is harmed", "One benefits, other unaffected", "Both are harmed"], correct: 2},
+    {q: "The remora-shark relationship exemplifies:", options: ["Parasitism", "Predation", "Commensalism", "Competition"], correct: 2},
+    {q: "Amensalism involves:", options: ["Both organisms benefiting", "One harmed, other unaffected", "Both harmed", "Mutual dependence"], correct: 1},
+    {q: "Black walnut trees inhibit growth of nearby plants through:", options: ["Predation", "Competition", "Allelopathy", "Parasitism"], correct: 2},
+    {q: "In mutualism:", options: ["One benefits only", "Both organisms benefit", "One is harmed", "No interaction occurs"], correct: 1},
+    {q: "The symbiotic relationship between fungi and algae in lichens is:", options: ["Parasitism", "Commensalism", "Mutualism", "Predation"], correct: 2},
+    {q: "Prokaryotic cells lack:", options: ["Ribosomes", "Membrane-bound nucleus", "DNA", "Cell membrane"], correct: 1},
+    {q: "Which level of biological organization comes immediately after tissue?", options: ["Cell", "Organ", "Organ system", "Organism"], correct: 1},
+    {q: "The three basic types of mammalian cells are:", options: ["Somatic, germ, stem", "Prokaryotic, eukaryotic, viral", "Plant, animal, fungal", "Diploid, haploid, polyploid"], correct: 0},
+    {q: "Somatic cells are:", options: ["Sex cells", "Body cells", "Stem cells", "Germ cells"], correct: 1},
+    {q: "Germ line cells give rise to:", options: ["Body tissues", "Gametes", "Blood cells", "Nerve cells"], correct: 1},
+    {q: "Stem cells are characterized by their ability to:", options: ["Die quickly", "Divide indefinitely and differentiate", "Only form blood", "Never divide"], correct: 1},
+    {q: "Plant cells differ from animal cells by having:", options: ["Mitochondria", "Cell wall and chloroplasts", "Ribosomes", "Nucleus"], correct: 1},
+    {q: "Animal cells store carbohydrates as:", options: ["Starch", "Cellulose", "Glycogen", "Chitin"], correct: 2},
+    {q: "Plant cells store lipids as:", options: ["Fat", "Oil", "Wax", "Glycogen"], correct: 1},
+    {q: "Centrioles are present in:", options: ["Plant cells only", "Animal cells only", "Both plant and animal cells", "Bacterial cells"], correct: 1},
+    {q: "The largest organelle in mature plant cells is:", options: ["Nucleus", "Chloroplast", "Central vacuole", "Mitochondrion"], correct: 2},
+    {q: "Smooth ER is involved in:", options: ["Protein synthesis", "Lipid synthesis", "DNA replication", "Cell division"], correct: 1},
+    {q: "The function of rough ER includes:", options: ["Lipid synthesis", "Protein synthesis and transport", "Photosynthesis", "Cell movement"], correct: 1},
+    {q: "Dictyosomes in plant cells are equivalent to:", options: ["Mitochondria", "Golgi apparatus", "Lysosomes", "Ribosomes"], correct: 1},
+    {q: "Kingdom Mycota includes organisms that:", options: ["Photosynthesize", "Lack chlorophyll", "Have vascular tissue", "Are all unicellular"], correct: 1},
+    {q: "Cryptogams are plants that:", options: ["Produce seeds", "Reproduce by spores", "Have flowers", "Are all aquatic"], correct: 1},
+    {q: "Phanerogams are characterized by:", options: ["Lack of vascular tissue", "Spore production", "Seed production", "Aquatic habitat"], correct: 2},
+    {q: "Thallophytes lack:", options: ["Chlorophyll", "True roots, stems, and leaves", "Cell walls", "Reproduction"], correct: 1},
+    {q: "In bryophytes, the dominant generation is:", options: ["Sporophyte", "Gametophyte", "Neither", "Both equally"], correct: 1},
+    {q: "In pteridophytes, the dominant generation is:", options: ["Gametophyte", "Sporophyte", "Neither", "Both equally"], correct: 1},
+    {q: "Angiosperms are divided into:", options: ["Monocots and dicots", "Gymnosperms and ferns", "Algae and fungi", "Mosses and liverworts"], correct: 0},
+    {q: "Kingdom Animalia organisms are characterized by:", options: ["Autotrophy", "Heterotrophy", "Photosynthesis", "Cell walls"], correct: 1},
+    {q: "Parazoa includes organisms that:", options: ["Have complex organ systems", "Lack definite symmetry", "Are all vertebrates", "Have bilateral symmetry"], correct: 1},
+    {q: "Eumetazoa are characterized by:", options: ["Lack of symmetry", "Definite shape and symmetry", "No tissues", "Single cells"], correct: 1},
+    {q: "The genetic makeup of an organism is its:", options: ["Phenotype", "Genotype", "Karyotype", "Allele"], correct: 1},
+    {q: "Diploid organisms have:", options: ["One set of chromosomes", "Two sets of chromosomes", "Three sets of chromosomes", "No chromosomes"], correct: 1},
+    {q: "Haploid cells are produced by:", options: ["Mitosis", "Meiosis", "Binary fission", "Budding"], correct: 1},
+    {q: "Hermaphroditic organisms can produce:", options: ["Only male gametes", "Only female gametes", "Both male and female gametes", "No gametes"], correct: 2},
+    {q: "Ovoviviparity involves:", options: ["External egg laying", "Eggs retained in mother, nourished by yolk", "Direct maternal nourishment", "Asexual reproduction"], correct: 1},
+    {q: "Runners in strawberry plants are used for:", options: ["Water absorption", "Photosynthesis", "Vegetative propagation", "Flower production"], correct: 2}
+],
                         PHY101: [
     {q: "What is the SI unit of force?", options: ["Joule", "Newton", "Watt", "Pascal"], correct: 1},
     {q: "What is the acceleration due to gravity?", options: ["9.8 m/s²", "10 m/s²", "8.9 m/s²", "11 m/s²"], correct: 0},
@@ -762,7 +883,7 @@ h1, h2, h3, h4, h5, h6, p, label, span {
                 {q: "Accuracy in computing ensures:", options: ["Faster typing", "Reliable results", "More storage", "Better graphics"], correct: 1}
             ],
                         MTH101: [
-    {q: "What is 2 + 2?", options: ["3", "4", "5", "6"], correct: 1},
+    {q: "The nth term of an A.P is given by an = 5n - 2. What is the 7th term??", options: ["33", "31", "35", "37"], correct: 0},
     {q: "What is 5 × 3?", options: ["15", "8", "12", "20"], correct: 0},
     {q: "What is 10 ÷ 2?", options: ["5", "8", "2", "20"], correct: 0},
     {q: "What is 8 - 3?", options: ["5", "11", "4", "6"], correct: 0},
@@ -812,8 +933,69 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     {q: "Which of the following is a unit set?", options: ["{}", "{a}", "{a, b}", "{{}}"], correct: 1},
     {q: "Which of the following is a correct representation of a set in set-builder notation?", options: ["{1, 2, 3}", "{x: x is even}", "{x ∈ N: x > 5}", "{1, 2, 3, ...}"], correct: 1},
     {q: "What is the degree of the polynomial P(x) = 5x⁴ - 2x³ + 7x - 1?", options: ["1", "3", "4", "5"], correct: 2}
-]
-
+],
+            // --- NEW COURSES ADDED BELOW ---
+            CHS101: [
+                {q: "What is the primary purpose of a security and safety management system?", options: ["To increase profits", "To protect assets, people, and the environment", "To simplify administrative tasks", "To monitor employee performance"], correct: 1},
+                {q: "The 'A' in the CIA triad of information security stands for:", options: ["Authority", "Authenticity", "Availability", "Accountability"], correct: 2},
+                {q: "What is the first step in a risk assessment process?", options: ["Implementing controls", "Monitoring and review", "Identifying hazards and risks", "Analyzing the severity of harm"], correct: 2},
+                {q: "A near miss is defined as:", options: ["An incident causing major injury", "An incident causing property damage", "An unplanned event that did not result in injury or damage, but had the potential to", "A successful safety drill"], correct: 2},
+                {q: "What is the main characteristic of a fire's Class A rating?", options: ["Flammable liquids", "Electrical equipment", "Ordinary combustibles (wood, paper)", "Combustible metals"], correct: 2},
+                {q: "The best fire extinguisher type for a Class C (electrical) fire is typically:", options: ["Water (APW)", "Foam", "Dry Chemical (DCP)", "Carbon Dioxide (CO2)"], correct: 3},
+                {q: "What does PPE stand for?", options: ["Personal Program Equipment", "Pre-Planned Events", "Personal Protective Equipment", "Public Protection Element"], correct: 2},
+                {q: "Hazard identification should be:", options: ["Done once a year", "Continuous and proactive", "Only performed after an incident", "Only performed by safety experts"], correct: 1},
+                {q: "What is the primary goal of an Incident Response Plan?", options: ["To assign blame", "To minimize damage and restore normal operations quickly", "To file insurance claims", "To prevent all future incidents"], correct: 1},
+                {q: "Ergonomics focuses on:", options: ["The aesthetic design of workspaces", "The relationship between a worker and their environment", "The chemical hazards in a lab", "The financial management of a company"], correct: 1},
+                {q: "Which of these is a form of access control?", options: ["CCTV cameras", "Fire extinguishers", "Password authentication", "Safety signage"], correct: 2},
+                {q: "The term 'Confidentiality' in security ensures that:", options: ["Data is only available to authorized users", "Data is accurate and complete", "Systems are always operational", "Users can be tracked by their actions"], correct: 0},
+                {q: "What is a 'LOTO' procedure used for in industrial safety?", options: ["Lifting Objects Together Only", "Lockout/Tagout", "Logging of Training Outcomes", "Local Office Temperature Optimization"], correct: 1},
+                {q: "What is the most effective way to communicate a new safety policy?", options: ["Post it in a rarely visited location", "Send a single email", "Use multiple channels (training, signs, meetings)", "Only tell supervisors"], correct: 2},
+                {q: "What is the significance of an SDS (Safety Data Sheet)?", options: ["It lists employee contact information", "It provides detailed information on hazardous chemicals", "It contains the company's emergency response phone numbers", "It tracks safety inspection dates"], correct: 1},
+                {q: "The hierarchy of controls suggests which method is the most effective?", options: ["Personal Protective Equipment (PPE)", "Substitution", "Elimination", "Administrative Controls"], correct: 2},
+                {q: "What is 'phishing'?", options: ["A type of physical surveillance", "An attempt to obtain sensitive information by disguising as a trustworthy entity", "A form of data backup", "A network diagnostic tool"], correct: 1},
+                {q: "Which fire triangle element is removed by using a CO2 extinguisher?", options: ["Heat", "Fuel", "Oxygen", "Chain Reaction"], correct: 2},
+                {q: "What does 'Integrity' in the CIA triad refer to?", options: ["Ensuring that data is correct and unaltered", "Ensuring systems are physically secure", "Ensuring fast network speed", "Ensuring only administrators can log in"], correct: 0},
+                {q: "A Job Safety Analysis (JSA) is used to:", options: ["Review salary performance", "Break down a job into steps and identify hazards at each step", "Calculate worker productivity", "Manage time off requests"], correct: 1},
+                {q: "What is the primary concern when managing portable electrical tools?", options: ["Color of the casing", "Electrical shock and fire hazards", "Brand name of the tool", "The weight of the tool"], correct: 1},
+                {q: "A root cause analysis (RCA) is performed to:", options: ["Quickly fix a visible problem", "Determine the underlying reason why an incident occurred", "Punish the people involved in an incident", "Check the compliance status of the facility"], correct: 1},
+                {q: "Which factor is most important in determining the effectiveness of a safety training program?", options: ["The number of people who attended", "The quality of the follow-up and retention of knowledge", "The cost of the training materials", "The length of the presentation"], correct: 1},
+                {q: "In a workplace, 'Housekeeping' primarily refers to:", options: ["Cleaning the floor once a week", "Maintaining order and cleanliness to prevent hazards", "Decorating the office for holidays", "Managing the organization's financial records"], correct: 1},
+                {q: "What is 'Two-Factor Authentication' (2FA)?", options: ["Using two different passwords", "A security process requiring two different methods of verification", "Logging in twice in a row", "Having two administrators approve a login"], correct: 1}
+            ],
+            CHM101: [
+                {q: "What is the SI unit for the amount of substance?", options: ["Kilogram", "Mole", "Gram", "Liter"], correct: 1},
+                {q: "Which of the following is a physical change?", options: ["Burning wood", "Rusting of iron", "Dissolving sugar in water", "Cooking an egg"], correct: 2},
+                {q: "The number of protons in an atom is known as its:", options: ["Mass number", "Atomic number", "Neutron number", "Isotope number"], correct: 1},
+                {q: "Which state of matter has a definite volume but no definite shape?", options: ["Solid", "Liquid", "Gas", "Plasma"], correct: 1},
+                {q: "An ion with a net positive charge is called a(n):", options: ["Anion", "Cation", "Isotope", "Electron"], correct: 1},
+                {q: "The chemical symbol for Gold is:", options: ["Ag", "Au", "Gd", "Ge"], correct: 1},
+                {q: "What is the maximum number of electrons that can be held in the second energy shell (n=2)?", options: ["2", "8", "18", "32"], correct: 1},
+                {q: "What type of bond is formed when electrons are shared between two atoms?", options: ["Ionic bond", "Metallic bond", "Covalent bond", "Hydrogen bond"], correct: 2},
+                {q: "A substance that dissolves another substance is called the:", options: ["Solute", "Solvent", "Solution", "Precipitate"], correct: 1},
+                {q: "What is the approximate molar mass of water (H₂O)? (Atomic masses: H=1, O=16)", options: ["17 g/mol", "18 g/mol", "16 g/mol", "20 g/mol"], correct: 1},
+                {q: "Which of the following elements is a noble gas?", options: ["Nitrogen", "Oxygen", "Neon", "Chlorine"], correct: 2},
+                {q: "An atom that loses an electron becomes:", options: ["Neutral", "A cation", "An anion", "An isotope"], correct: 1},
+                {q: "What is the common name for NaCl?", options: ["Baking soda", "Table sugar", "Table salt", "Vinegar"], correct: 2},
+                {q: "Boyle's Law relates which two variables of a gas at constant temperature?", options: ["Volume and Temperature", "Pressure and Temperature", "Pressure and Volume", "Volume and Moles"], correct: 2},
+                {q: "A reaction in which heat is absorbed from the surroundings is called:", options: ["Exothermic", "Endothermic", "Combustion", "Neutralization"], correct: 1},
+                {q: "The process of a solid turning directly into a gas is called:", options: ["Evaporation", "Condensation", "Sublimation", "Melting"], correct: 2},
+                {q: "What is the pH of a neutral solution at 25°C?", options: ["0", "7", "14", "10"], correct: 1},
+                {q: "Which scientist is credited with developing the periodic table?", options: ["Ernest Rutherford", "Niels Bohr", "Dmitri Mendeleev", "John Dalton"], correct: 2},
+                {q: "The outermost electrons of an atom are called:", options: ["Core electrons", "Valence electrons", "Transition electrons", "Inner electrons"], correct: 1},
+                {q: "The Law of Conservation of Mass states that in a chemical reaction:", options: ["Mass is always lost", "New elements are created", "Mass is neither created nor destroyed", "Volume is conserved"], correct: 2},
+                {q: "What is the oxidation number of oxygen in most compounds?", options: ["+2", "-1", "-2", "0"], correct: 2},
+                {q: "A catalyst is a substance that:", options: ["Is consumed in the reaction", "Changes the products", "Increases the reaction rate without being consumed", "Decreases the energy of the products"], correct: 2},
+                {q: "The splitting of a heavy nucleus into two smaller nuclei is called:", options: ["Fusion", "Fission", "Ionization", "Sublimation"], correct: 1},
+                {q: "In organic chemistry, a hydrocarbon that contains only single bonds is classified as a(n):", options: ["Alkene", "Alkyne", "Alkane", "Aromatic compound"], correct: 2},
+                {q: "What color does litmus paper turn in a basic (alkaline) solution?", options: ["Red", "Green", "Blue", "Yellow"], correct: 2},
+                {q: "How many milliliters are in one liter?", options: ["10", "100", "1000", "10000"], correct: 2},
+                {q: "The energy required to remove an electron from a gaseous atom is called:", options: ["Electronegativity", "Ionization energy", "Electron affinity", "Atomic radius"], correct: 1},
+                {q: "Which element is the most electronegative on the periodic table?", options: ["Oxygen", "Chlorine", "Fluorine", "Nitrogen"], correct: 2},
+                {q: "Isotopes are atoms of the same element that have different numbers of:", options: ["Protons", "Electrons", "Neutrons", "Nuclei"], correct: 2},
+                {q: "What is the maximum number of covalent bonds a carbon atom can typically form?", options: ["2", "3", "4", "5"], correct: 2},
+                {q: "A homogenous mixture is one that:", options: ["Has visible distinct parts", "Has a uniform composition throughout", "Is only composed of metals", "Always separates into layers"], correct: 1},
+                {q: "Which piece of lab equipment is primarily used to measure the volume of a liquid precisely?", options: ["Beaker", "Erlenmeyer flask", "Graduated cylinder", "Watch glass"], correct: 2}
+            ]
         };
 
         // Global State Variables
@@ -1391,3 +1573,4 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     }
 </script>
 </html>
+

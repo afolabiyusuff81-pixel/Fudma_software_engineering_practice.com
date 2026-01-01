@@ -5,34 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FUDMA Software Engineering CBT Practice Portal</title>
     <style>
-    * { /* Added the universal selector * to encapsulate the margin/padding/box-sizing */
+   {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 /* =========================================
-   🎄 CHRISTMAS DELUXE BACKGROUND
+   🎆 NEW YEAR DELUXE BACKGROUND
    ========================================= */
 body {
     font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
 
-    /* Christmas animated gradient */
-    background: linear-gradient(120deg, #ff0000, #0f9b0f, #ffcc00, #ffffff);
+    /* New Year animated gradient - midnight blue, gold, silver, purple */
+    background: linear-gradient(120deg, #0a0a2e, #ffd700, #c0c0c0, #4a148c, #000428);
     background-size: 400% 400%;
-    animation: christmasGradient 12s ease infinite;
+    animation: newYearGradient 12s ease infinite;
 
     min-height: 100vh;
     padding: 20px;
 }
 
-@keyframes christmasGradient {
+@keyframes newYearGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* ❄ Falling Snow Overlay */
+/* 🎇 Falling Confetti Overlay */
 .snow {
     position: fixed;
     top: 0;
@@ -41,20 +41,25 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 2000;
-   
-    
+    background-image: 
+        radial-gradient(circle, #ffd700 2px, transparent 2px),
+        radial-gradient(circle, #c0c0c0 2px, transparent 2px),
+        radial-gradient(circle, #ff1744 2px, transparent 2px),
+        radial-gradient(circle, #00e5ff 2px, transparent 2px);
+    background-size: 50px 50px, 80px 80px, 60px 60px, 70px 70px;
+    animation: confettiFall 15s linear infinite;
 }
 
-@keyframes snowFall {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 1000px; }
+@keyframes confettiFall {
+    0% { background-position: 0 0, 20px 0, 40px 0, 60px 0; }
+    100% { background-position: 0 1000px, 20px 1200px, 40px 900px, 60px 1100px; }
 }
 
 /* =========================================
-   ✨ GLOBAL ANIMATED CHRISTMAS LIGHT TEXT
+   ✨ GLOBAL ANIMATED NEW YEAR TEXT
    ========================================= */
 h1, h2, h3, h4, h5, h6, p, label, span {
-    background: linear-gradient(90deg, red, green, gold, white);
+    background: linear-gradient(90deg, #ffd700, #c0c0c0, #ffffff, #ffd700);
     background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -62,16 +67,16 @@ h1, h2, h3, h4, h5, h6, p, label, span {
 }
 
 @keyframes glowText {
-    0% { text-shadow: 0 0 10px red; background-position: 0% 50%; }
-    50% { text-shadow: 0 0 20px gold; background-position: 100% 50%; }
-    100% { text-shadow: 0 0 15px green; background-position: 0% 50%; }
+    0% { text-shadow: 0 0 10px #ffd700; background-position: 0% 50%; }
+    50% { text-shadow: 0 0 20px #ffffff; background-position: 100% 50%; }
+    100% { text-shadow: 0 0 15px #c0c0c0; background-position: 0% 50%; }
 }
 
 /* =========================================
-   🎁 CHRISTMAS BUTTONS
+   🎊 NEW YEAR BUTTONS
    ========================================= */
 .btn, .btn-secondary, .animated-btn, button {
-    background: linear-gradient(90deg, #ff0000, #0f9b0f, #ffcc00);
+    background: linear-gradient(90deg, #ffd700, #4a148c, #00e5ff, #ffd700);
     background-size: 300% 300%;
     color: white;
     padding: 14px 30px;
@@ -94,51 +99,49 @@ h1, h2, h3, h4, h5, h6, p, label, span {
 
 .btn:hover, .btn-secondary:hover, .animated-btn:hover, button:hover {
     transform: scale(1.08);
-    box-shadow: 0 0 25px gold;
+    box-shadow: 0 0 25px #ffd700, 0 0 50px #00e5ff;
 }
 
 /* =========================================
-   🌟 SPARKLES
+   🌟 SPARKLES (Gold & Silver)
    ========================================= */
 .sparkle {
     position: absolute;
     width: 8px;
     height: 8px;
-    background: gold;
+    background: linear-gradient(45deg, #ffd700, #c0c0c0);
     border-radius: 50%;
     z-index: 3000;
     animation: sparkleAnim 1.5s infinite ease-in-out;
 }
 
 @keyframes sparkleAnim {
-    0% { opacity: 0; transform: scale(0); }
-    50% { opacity: 1; transform: scale(1.6); }
-    100% { opacity: 0; transform: scale(0); }
+    0% { opacity: 0; transform: scale(0) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.6) rotate(180deg); }
+    100% { opacity: 0; transform: scale(0) rotate(360deg); }
 }
 
 /* =========================================
-   🎓 DESIGN LABEL (Integrated with Christmas Theme)
+   🎓 DESIGN LABEL (New Year Theme)
    ========================================= */
 .design-label {
     margin-top: 15px;
     font-size: 14px; 
     font-weight: 700;
     
-    /* Inherit the animated button/text style */
-    background: linear-gradient(90deg, #ff0000, #0f9b0f, #ffcc00);
+    background: linear-gradient(90deg, #ffd700, #4a148c, #00e5ff);
     background-size: 300% 300%;
-    animation: buttonGlow 5s ease infinite; /* Use the existing button animation */
+    animation: buttonGlow 5s ease infinite;
     
     color: white; 
     
     padding: 8px 20px;
-    border-radius: 20px; /* More pill-shaped */
+    border-radius: 20px;
     display: inline-block;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
     text-shadow: 1px 1px 3px black; 
 }
 
-/* Ensure the text inside the label is NOT animated by the general text rule */
 .design-label * {
     -webkit-background-clip: unset !important;
     -webkit-text-fill-color: white !important;
@@ -153,15 +156,16 @@ h1, h2, h3, h4, h5, h6, p, label, span {
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    background: rgba(255,255,255,0.8);
+    background: rgba(10, 10, 46, 0.85);
     border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
     overflow: hidden;
     backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 215, 0, 0.3);
 }
 
 .header {
-    background: linear-gradient(135deg, #ff0000 0%, #0f9b0f 100%);
+    background: linear-gradient(135deg, #0a0a2e 0%, #4a148c 50%, #ffd700 100%);
     padding: 30px;
     text-align: center;
 }
@@ -177,8 +181,8 @@ h1, h2, h3, h4, h5, h6, p, label, span {
 .test-config, 
 .test-section, 
 .results-section,
-.review-section, /* Added missing section from previous HTML */
-.history-section { /* Added missing section from previous HTML */
+.review-section,
+.history-section {
     display: none;
 }
 
@@ -207,16 +211,18 @@ h1, h2, h3, h4, h5, h6, p, label, span {
 .form-group select {
     width: 100%;
     padding: 12px;
-    border: 2px solid #c0c0c0;
+    border: 2px solid #ffd700;
     border-radius: 8px;
     font-size: 16px;
     transition: .3s;
-    color: black;
+    color: white;
+    background: rgba(10, 10, 46, 0.6);
 }
 
 .form-group input:focus, 
 .form-group select:focus {
-    border-color: red;
+    border-color: #00e5ff;
+    box-shadow: 0 0 10px #ffd700;
 }
 
 /* COURSE GRID */
@@ -226,15 +232,15 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     gap: 20px;
 }
 
-/* FIX: The original file had a missing '{' here, causing a CSS error. */
 .course-card {
-    background: linear-gradient(135deg, #ff0000, #0f9b0f);
+    background: linear-gradient(135deg, #ffd700, #4a148c);
     color: white;
     padding: 30px 20px;
     border-radius: 12px;
     text-align: center;
     cursor: pointer;
     transition: .3s;
+    border: 2px solid rgba(255, 215, 0, 0.5);
 }
 
 .course-card h3,
@@ -249,7 +255,7 @@ h1, h2, h3, h4, h5, h6, p, label, span {
 
 .course-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 20px gold;
+    box-shadow: 0 0 20px #ffd700, 0 0 40px #00e5ff;
 }
 
 /* TEST TIMER */
@@ -257,27 +263,29 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: red;
+    background: linear-gradient(135deg, #ffd700, #4a148c);
     color: white;
     padding: 15px 25px;
     border-radius: 10px;
     font-size: 24px;
     font-weight: bold;
     z-index: 5000;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
 }
 
 /* QUESTIONS */
 .question-container {
-    background: rgba(255,255,255,0.9);
+    background: rgba(10, 10, 46, 0.8);
     padding: 30px;
     border-radius: 10px;
     margin-bottom: 20px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
 }
 
 .question-number {
     font-weight: bold;
     font-size: 18px;
-    color: green;
+    color: #ffd700;
 }
 
 .options {
@@ -288,20 +296,22 @@ h1, h2, h3, h4, h5, h6, p, label, span {
 
 .option {
     padding: 15px;
-    border: 2px solid #c0c0c0;
+    border: 2px solid #ffd700;
     border-radius: 8px;
     cursor: pointer;
     transition: .3s;
+    background: rgba(255, 215, 0, 0.1);
 }
 
 .option:hover {
-    border-color: green;
-    background: #e8ffe6;
+    border-color: #00e5ff;
+    background: rgba(0, 229, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
 }
 
 .option.selected {
-    border-color: red;
-    background: red;
+    border-color: #ffd700;
+    background: linear-gradient(135deg, #ffd700, #4a148c);
     color: white;
 }
 
@@ -315,7 +325,7 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ff0000, #0f9b0f);
+    background: linear-gradient(135deg, #ffd700, #4a148c);
     color: white;
     display: flex;
     align-items: center;
@@ -323,6 +333,7 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     margin: 30px auto;
     font-size: 48px;
     font-weight: bold;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
 }
 
 .results-details {
@@ -332,10 +343,11 @@ h1, h2, h3, h4, h5, h6, p, label, span {
 }
 
 .result-card {
-    background: white;
+    background: rgba(10, 10, 46, 0.8);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    border: 2px solid rgba(255, 215, 0, 0.3);
 }
 
 /* RESPONSIVE */
@@ -350,26 +362,29 @@ h1, h2, h3, h4, h5, h6, p, label, span {
         grid-template-columns: 1fr; 
     }
 }
-/* ❄ CLICK SNOW BURST EFFECT */
+
+/* 🎆 CLICK FIREWORK BURST EFFECT */
 .click-snow {
     position: fixed;
     width: 12px;
     height: 12px;
-    background-image: url('https://i.imgur.com/MG6iQGv.png');
-    background-size: cover;
+    background: radial-gradient(circle, #ffd700, #ff1744);
+    border-radius: 50%;
     pointer-events: none;
-    animation: clickSnowAnim 1s ease-out forwards;
+    animation: clickFireworkAnim 1s ease-out forwards;
     z-index: 9999;
 }
 
-@keyframes clickSnowAnim {
+@keyframes clickFireworkAnim {
     0% {
         opacity: 1;
         transform: scale(1) translate(0, 0);
+        box-shadow: 0 0 10px #ffd700;
     }
     100% {
         opacity: 0;
-        transform: scale(2.5) translate(0, -80px);
+        transform: scale(3) translate(0, -100px);
+        box-shadow: 0 0 30px #ff1744, 0 0 50px #00e5ff;
     }
 }
     </style>
@@ -1573,4 +1588,3 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     }
 </script>
 </html>
-

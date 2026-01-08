@@ -3,414 +3,585 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUDMA Software Engineering CBT Practice Portal</title>
+    <title>FUDMA CBT Practice Portal</title>
     <style>
-   {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* =========================================
-   🎆 NEW YEAR DELUXE BACKGROUND
-   ========================================= */
-body {
-    font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a3e 0%, #2d1b4e 50%, #1a1a3e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #ffffff;
+        }
 
-    /* New Year animated gradient - midnight blue, gold, silver, purple */
-    background: linear-gradient(120deg, #0a0a2e, #ffd700, #c0c0c0, #4a148c, #000428);
-    background-size: 400% 400%;
-    animation: newYearGradient 12s ease infinite;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
 
-    min-height: 100vh;
-    padding: 20px;
-}
+        .header {
+            background: linear-gradient(135deg, #4a148c, #7b1fa2);
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 3px solid #ffd700;
+        }
 
-@keyframes newYearGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+        .header h1 {
+            color: #ffd700;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
 
-/* 🎇 Falling Confetti Overlay */
-.snow {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 2000;
-    background-image: 
-        radial-gradient(circle, #ffd700 2px, transparent 2px),
-        radial-gradient(circle, #c0c0c0 2px, transparent 2px),
-        radial-gradient(circle, #ff1744 2px, transparent 2px),
-        radial-gradient(circle, #00e5ff 2px, transparent 2px);
-    background-size: 50px 50px, 80px 80px, 60px 60px, 70px 70px;
-    animation: confettiFall 15s linear infinite;
-}
+        .header h2 {
+            color: #ffffff;
+            font-size: 20px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
 
-@keyframes confettiFall {
-    0% { background-position: 0 0, 20px 0, 40px 0, 60px 0; }
-    100% { background-position: 0 1000px, 20px 1200px, 40px 900px, 60px 1100px; }
-}
+        .header p {
+            color: #e0e0e0;
+            font-size: 14px;
+        }
 
-/* =========================================
-   ✨ GLOBAL ANIMATED NEW YEAR TEXT
-   ========================================= */
-h1, h2, h3, h4, h5, h6, p, label, span {
-    background: linear-gradient(90deg, #ffd700, #c0c0c0, #ffffff, #ffd700);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: glowText 3s infinite alternate;
-}
+        .design-credit {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            color: #ffd700;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
 
-@keyframes glowText {
-    0% { text-shadow: 0 0 10px #ffd700; background-position: 0% 50%; }
-    50% { text-shadow: 0 0 20px #ffffff; background-position: 100% 50%; }
-    100% { text-shadow: 0 0 15px #c0c0c0; background-position: 0% 50%; }
-}
+        .content {
+            padding: 40px 30px;
+        }
 
-/* =========================================
-   🎊 NEW YEAR BUTTONS
-   ========================================= */
-.btn, .btn-secondary, .animated-btn, button {
-    background: linear-gradient(90deg, #ffd700, #4a148c, #00e5ff, #ffd700);
-    background-size: 300% 300%;
-    color: white;
-    padding: 14px 30px;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
-    animation: buttonGlow 5s ease infinite;
-    transition: transform .3s, box-shadow .3s;
-    width: 100%;
-    margin-top: 10px;
-    font-family: inherit;
-}
+        .section {
+            display: none;
+        }
 
-@keyframes buttonGlow {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
-}
+        .section.active {
+            display: block;
+        }
 
-.btn:hover, .btn-secondary:hover, .animated-btn:hover, button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 25px #ffd700, 0 0 50px #00e5ff;
-}
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-/* =========================================
-   🌟 SPARKLES (Gold & Silver)
-   ========================================= */
-.sparkle {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: linear-gradient(45deg, #ffd700, #c0c0c0);
-    border-radius: 50%;
-    z-index: 3000;
-    animation: sparkleAnim 1.5s infinite ease-in-out;
-}
+        .form-group label {
+            display: block;
+            color: #ffd700;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
 
-@keyframes sparkleAnim {
-    0% { opacity: 0; transform: scale(0) rotate(0deg); }
-    50% { opacity: 1; transform: scale(1.6) rotate(180deg); }
-    100% { opacity: 0; transform: scale(0) rotate(360deg); }
-}
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
 
-/* =========================================
-   🎓 DESIGN LABEL (New Year Theme)
-   ========================================= */
-.design-label {
-    margin-top: 15px;
-    font-size: 14px; 
-    font-weight: 700;
-    
-    background: linear-gradient(90deg, #ffd700, #4a148c, #00e5ff);
-    background-size: 300% 300%;
-    animation: buttonGlow 5s ease infinite;
-    
-    color: white; 
-    
-    padding: 8px 20px;
-    border-radius: 20px;
-    display: inline-block;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-    text-shadow: 1px 1px 3px black; 
-}
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.15);
+        }
 
-.design-label * {
-    -webkit-background-clip: unset !important;
-    -webkit-text-fill-color: white !important;
-    animation: none !important;
-    text-shadow: none !important;
-    background: none !important;
-}
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
 
-/* =========================================
-   CONTAINERS / APP UI
-   ========================================= */
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    background: rgba(10, 10, 46, 0.85);
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 215, 0, 0.3);
-}
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #1a1a3e;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
 
-.header {
-    background: linear-gradient(135deg, #0a0a2e 0%, #4a148c 50%, #ffd700 100%);
-    padding: 30px;
-    text-align: center;
-}
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+        }
 
-/* CONTENT */
-.content {
-    padding: 40px;
-}
+        .btn-secondary {
+            background: linear-gradient(135deg, #7b1fa2, #9c27b0);
+            color: #ffffff;
+        }
 
-/* SECTIONS */
-.auth-section, 
-.course-selection, 
-.test-config, 
-.test-section, 
-.results-section,
-.review-section,
-.history-section {
-    display: none;
-}
+        .btn-secondary:hover {
+            box-shadow: 0 4px 12px rgba(123, 31, 162, 0.4);
+        }
 
-.auth-section.active, 
-.course-selection.active, 
-.test-config.active, 
-.test-section.active, 
-.results-section.active,
-.review-section.active,
-.history-section.active {
-    display: block;
-}
+        .forgot-link {
+            text-align: right;
+            margin-top: 10px;
+        }
 
-/* FORM INPUT */
-.form-group {
-    margin-bottom: 20px;
-}
+        .forgot-link a {
+            color: #00e5ff;
+            text-decoration: none;
+            font-size: 13px;
+        }
 
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-}
+        .forgot-link a:hover {
+            text-decoration: underline;
+        }
 
-.form-group input, 
-.form-group select {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #ffd700;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: .3s;
-    color: white;
-    background: rgba(10, 10, 46, 0.6);
-}
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
 
-.form-group input:focus, 
-.form-group select:focus {
-    border-color: #00e5ff;
-    box-shadow: 0 0 10px #ffd700;
-}
+        .course-card {
+            background: linear-gradient(135deg, #7b1fa2, #4a148c);
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s;
+        }
 
-/* COURSE GRID */
-.course-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
+        .course-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffd700;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+        }
 
-.course-card {
-    background: linear-gradient(135deg, #ffd700, #4a148c);
-    color: white;
-    padding: 30px 20px;
-    border-radius: 12px;
-    text-align: center;
-    cursor: pointer;
-    transition: .3s;
-    border: 2px solid rgba(255, 215, 0, 0.5);
-}
+        .course-card h3 {
+            color: #ffd700;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
 
-.course-card h3,
-.course-card p {
-    background: none !important;
-    -webkit-background-clip: unset !important;
-    -webkit-text-fill-color: white !important;
-    animation: none !important;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3) !important;
-    color: white !important;
-}
+        .course-card p {
+            color: #e0e0e0;
+            font-size: 14px;
+        }
 
-.course-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px #ffd700, 0 0 40px #00e5ff;
-}
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
 
-/* TEST TIMER */
-.timer-display {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: linear-gradient(135deg, #ffd700, #4a148c);
-    color: white;
-    padding: 15px 25px;
-    border-radius: 10px;
-    font-size: 24px;
-    font-weight: bold;
-    z-index: 5000;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-}
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
 
-/* QUESTIONS */
-.question-container {
-    background: rgba(10, 10, 46, 0.8);
-    padding: 30px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    border: 2px solid rgba(255, 215, 0, 0.3);
-}
+        .stat-card h3 {
+            color: #ffd700;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
 
-.question-number {
-    font-weight: bold;
-    font-size: 18px;
-    color: #ffd700;
-}
+        .stat-card p {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 700;
+        }
 
-.options {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
+        .welcome-msg {
+            margin-bottom: 30px;
+        }
 
-.option {
-    padding: 15px;
-    border: 2px solid #ffd700;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: .3s;
-    background: rgba(255, 215, 0, 0.1);
-}
+        .welcome-msg h2 {
+            color: #ffd700;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
 
-.option:hover {
-    border-color: #00e5ff;
-    background: rgba(0, 229, 255, 0.2);
-    box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
-}
+        .welcome-msg p {
+            color: #e0e0e0;
+            font-size: 15px;
+        }
 
-.option.selected {
-    border-color: #ffd700;
-    background: linear-gradient(135deg, #ffd700, #4a148c);
-    color: white;
-}
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
 
-/* RESULTS */
-.results-summary {
-    text-align: center;
-    padding: 40px;
-}
+        .config-section h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
 
-.score-circle {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #ffd700, #4a148c);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 30px auto;
-    font-size: 48px;
-    font-weight: bold;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
-}
+        .option-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
 
-.results-details {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
+        .option-btn {
+            padding: 10px 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 8px;
+            color: #ffd700;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
 
-.result-card {
-    background: rgba(10, 10, 46, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    border: 2px solid rgba(255, 215, 0, 0.3);
-}
+        .option-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+        }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .config-options { 
-        grid-template-columns: 1fr; 
-    }
-    .results-details { 
-        grid-template-columns: 1fr; 
-    }
-    .course-grid { 
-        grid-template-columns: 1fr; 
-    }
-}
+        .option-btn.selected {
+            background: #ffd700;
+            color: #1a1a3e;
+            border-color: #ffd700;
+        }
 
-/* 🎆 CLICK FIREWORK BURST EFFECT */
-.click-snow {
-    position: fixed;
-    width: 12px;
-    height: 12px;
-    background: radial-gradient(circle, #ffd700, #ff1744);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: clickFireworkAnim 1s ease-out forwards;
-    z-index: 9999;
-}
+        .question-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
 
-@keyframes clickFireworkAnim {
-    0% {
-        opacity: 1;
-        transform: scale(1) translate(0, 0);
-        box-shadow: 0 0 10px #ffd700;
-    }
-    100% {
-        opacity: 0;
-        transform: scale(3) translate(0, -100px);
-        box-shadow: 0 0 30px #ff1744, 0 0 50px #00e5ff;
-    }
-}
+        .question-num {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-item {
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #ffffff;
+        }
+
+        .option-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: #ffd700;
+        }
+
+        .option-item.selected {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #1a1a3e;
+            border-color: #ffd700;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #00e5ff);
+            transition: width 0.3s;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .nav-buttons button {
+            flex: 1;
+        }
+
+        .timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #1a1a3e;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+            display: none;
+        }
+
+        .top-buttons {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .top-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #7b1fa2, #9c27b0);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: none;
+        }
+
+        .top-btn:hover {
+            box-shadow: 0 4px 12px rgba(123, 31, 162, 0.4);
+        }
+
+        .results-box {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-box h2 {
+            color: #ffd700;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        .score-display {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #1a1a3e;
+            box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+        }
+
+        .score-display .percentage {
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .score-display .label {
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .result-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .result-item h4 {
+            color: #ffd700;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .result-item p {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .review-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .review-item h4 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .review-option {
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .review-option.correct {
+            background: rgba(76, 175, 80, 0.2);
+            border: 2px solid #4caf50;
+            color: #4caf50;
+        }
+
+        .review-option.wrong {
+            background: rgba(244, 67, 54, 0.2);
+            border: 2px solid #f44336;
+            color: #f44336;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .history-table thead {
+            background: linear-gradient(135deg, #7b1fa2, #4a148c);
+        }
+
+        .history-table th {
+            padding: 15px;
+            text-align: left;
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        .history-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            color: #e0e0e0;
+        }
+
+        .history-table tr:hover {
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #ffd700;
+            font-size: 16px;
+        }
+
+        .page-title {
+            text-align: center;
+            color: #ffd700;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .course-info {
+            text-align: center;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid,
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .config-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timer {
+                top: 10px;
+                right: 10px;
+                font-size: 18px;
+                padding: 10px 15px;
+            }
+
+            .top-buttons {
+                top: 10px;
+                left: 10px;
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
-    <body>
-    <div class="snow"></div> 
-    <button class="logout-btn" id="logoutBtn" style="display: none;" onclick="logout()">Logout</button>
-    <button class="history-btn" id="historyBtn" style="display: none;" onclick="showHistory()">View History</button>
-    <div class="timer-display" id="timerDisplay" style="display: none;">00:00</div>
-
-
-    <div class="header">
-    <h1>🎓 FUDMA SOFTWARE ENGINEERING STUDENT</h1>
-    <h2>CBT PRACTICE PORTAL</h2>
-    <p>Federal University Dutsin-Ma, Katsina State</p>
-    
-    <div class="design-label">
-        Designed by Software Engineering Students
+    <div class="top-buttons">
+        <button class="top-btn" id="logoutBtn" onclick="handleLogout()">Logout</button>
+        <button class="top-btn" id="historyBtn" onclick="showHistory()">History</button>
     </div>
-    
-</div>
+
+    <div class="timer" id="timer">00:00</div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🎓 FUDMA SOFTWARE ENGINEERING</h1>
+            <h2>CBT PRACTICE PORTAL</h2>
+            <p>Federal University Dutsin-Ma, Katsina State</p>
+            <div class="design-credit">Designed by Software Engineering Students</div>
+        </div>
 
         <div class="content">
-            <div class="auth-section active" id="authSection">
-                <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Welcome! Please Login or Register</h2>
+            <!-- Auth Section -->
+            <div class="section active" id="authSection">
+                <h2 class="page-title">Welcome! Please Login or Register</h2>
                 
                 <div id="loginForm">
                     <div class="form-group">
@@ -421,11 +592,10 @@ h1, h2, h3, h4, h5, h6, p, label, span {
                         <label>Password</label>
                         <input type="password" id="loginPassword" placeholder="Enter your password">
                     </div>
-                    <div class="forgot-password-link">
+                    <div class="forgot-link">
                         <a href="#" onclick="resetPassword()">Forgot Password?</a>
                     </div>
-                    
-                    <button class="btn" onclick="login()">Login</button>
+                    <button class="btn" onclick="handleLogin()">Login</button>
                     <button class="btn btn-secondary" onclick="showRegister()">Register New Account</button>
                 </div>
 
@@ -440,164 +610,161 @@ h1, h2, h3, h4, h5, h6, p, label, span {
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" id="regPassword" placeholder="Create a password (min 6 characters)">
+                        <input type="password" id="regPassword" placeholder="Create password (min 6 characters)">
                     </div>
                     <div class="form-group">
                         <label>Confirm Password</label>
                         <input type="password" id="regConfirmPassword" placeholder="Confirm your password">
                     </div>
-                    <button class="btn" onclick="register()">Register</button>
+                    <button class="btn" onclick="handleRegister()">Register</button>
                     <button class="btn btn-secondary" onclick="showLogin()">Back to Login</button>
                 </div>
             </div>
 
-            <div class="course-selection" id="courseSelection">
-                <div class="welcome-message">
+            <!-- Course Selection -->
+            <div class="section" id="courseSection">
+                <div class="welcome-msg">
                     <h2>Welcome, <span id="userName"></span>!</h2>
                     <p>Select a course to begin your practice session</p>
                 </div>
 
-                <div class="stats-grid" id="userStats">
-                    </div>
+                <div class="stats-grid" id="statsGrid"></div>
 
                 <div class="course-grid">
                     <div class="course-card" onclick="selectCourse('COS101')">
                         <h3>COS 101</h3>
-                        <p>Introduction to Computing Sciences</p>
-                        <p style="margin-top: 10px; font-size: 12px;">50 Questions Available</p>
+                        <p>Introduction to Computing</p>
+                        <p style="margin-top: 10px; font-size: 12px;">50 Questions</p>
                     </div>
                     <div class="course-card" onclick="selectCourse('PHY101')">
                         <h3>PHY 101</h3>
                         <p>General Physics I</p>
-                        <p style="margin-top: 10px; font-size: 12px;">50 Questions Available</p>
+                        <p style="margin-top: 10px; font-size: 12px;">50 Questions</p>
                     </div>
                     <div class="course-card" onclick="selectCourse('CSC101')">
                         <h3>CSC 101</h3>
-                        <p>Computer Installation & Maintenance</p>
-                        <p style="margin-top: 10px; font-size: 12px;">50 Questions Available</p>
+                        <p>Computer Installation</p>
+                        <p style="margin-top: 10px; font-size: 12px;">50 Questions</p>
                     </div>
                     <div class="course-card" onclick="selectCourse('MTH101')">
                         <h3>MTH 101</h3>
-                        <p>Elementary Mathematics I</p>
-                        <p style="margin-top: 10px; font-size: 12px;">50 Questions Available</p>
+                        <p>Elementary Mathematics</p>
+                        <p style="margin-top: 10px; font-size: 12px;">50 Questions</p>
                     </div>
                     <div class="course-card" onclick="selectCourse('BIO101')">
                         <h3>BIO 101</h3>
                         <p>General Biology I</p>
-                        <p style="margin-top: 25px; font-size: 12px;">100 Questions Available</p>
+                        <p style="margin-top: 10px; font-size: 12px;">100 Questions</p>
                     </div>
                     <div class="course-card" onclick="selectCourse('CHS101')">
                         <h3>CHS 101</h3>
-                        <p>Security and Safety Management</p>
-                        <p style="margin-top: 10px; font-size: 12px;">25 Questions Available</p>
+                        <p>Security Management</p>
+                        <p style="margin-top: 10px; font-size: 12px;">25 Questions</p>
                     </div>
-
                     <div class="course-card" onclick="selectCourse('CHM101')">
                         <h3>CHM 101</h3>
                         <p>Chemistry Fundamentals</p>
-                        <p style="margin-top: 10px; font-size: 12px;">32 Questions Available</p>
+                        <p style="margin-top: 10px; font-size: 12px;">32 Questions</p>
                     </div>
                 </div>
             </div>
 
-            <div class="test-config" id="testConfig">
-                <h2 style="text-align: center; margin-bottom: 10px; color: #333;">Configure Your Test</h2>
-                <p style="text-align: center; color: #666; margin-bottom: 30px;">Course: <strong id="selectedCourseName"></strong></p>
+            <!-- Test Config -->
+            <div class="section" id="configSection">
+                <h2 class="page-title">Configure Your Test</h2>
+                <p class="course-info">Course: <strong id="courseName"></strong></p>
 
-                <div class="config-options">
-                    <div class="option-group">
+                <div class="config-grid">
+                    <div class="config-section">
                         <h3>Number of Questions</h3>
-                        <div class="option-buttons" id="questionButtons">
-                            <button class="option-btn" onclick="selectQuestionCount(10)">10</button>
-                            <button class="option-btn" onclick="selectQuestionCount(20)">20</button>
-                            <button class="option-btn" onclick="selectQuestionCount(30)">30</button>
-                            <button class="option-btn" onclick="selectQuestionCount(40)">40</button>
-                            <button class="option-btn" onclick="selectQuestionCount(50)">50</button>
+                        <div class="option-buttons" id="questionBtns">
+                            <button class="option-btn" onclick="selectQuestions(10)">10</button>
+                            <button class="option-btn" onclick="selectQuestions(20)">20</button>
+                            <button class="option-btn" onclick="selectQuestions(30)">30</button>
+                            <button class="option-btn" onclick="selectQuestions(40)">40</button>
+                            <button class="option-btn" onclick="selectQuestions(50)">50</button>
                         </div>
                     </div>
 
-                    <div class="option-group">
+                    <div class="config-section">
                         <h3>Timer (Minutes)</h3>
-                        <div class="option-buttons" id="timerButtons">
-                            <button class="option-btn" onclick="selectTimer(5)">5</button>
-                            <button class="option-btn" onclick="selectTimer(10)">10</button>
-                            <button class="option-btn" onclick="selectTimer(15)">15</button>
-                            <button class="option-btn" onclick="selectTimer(20)">20</button>
-                            <button class="option-btn" onclick="selectTimer(30)">30</button>
+                        <div class="option-buttons" id="timerBtns">
+                            <button class="option-btn" onclick="selectTime(5)">5</button>
+                            <button class="option-btn" onclick="selectTime(10)">10</button>
+                            <button class="option-btn" onclick="selectTime(15)">15</button>
+                            <button class="option-btn" onclick="selectTime(20)">20</button>
+                            <button class="option-btn" onclick="selectTime(30)">30</button>
                         </div>
                     </div>
                 </div>
 
-                <button class="btn" onclick="startTest()" style="margin-top: 30px;">Start Test</button>
+                <button class="btn" onclick="startTest()">Start Test</button>
                 <button class="btn btn-secondary" onclick="backToCourses()">Back to Courses</button>
             </div>
 
-            <div class="test-section" id="testSection">
-                
+            <!-- Test Section -->
+            <div class="section" id="testSection">
                 <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    <div class="progress-fill" id="progress"></div>
                 </div>
 
-                <div class="question-container">
-                    <div class="question-number" id="questionNumber">Question 1 of 10</div>
+                <div class="question-box">
+                    <div class="question-num" id="questionNum"></div>
                     <div class="question-text" id="questionText"></div>
-                    <div class="options" id="optionsContainer"></div>
+                    <div class="options-list" id="optionsList"></div>
                 </div>
 
-                <div class="navigation">
-                    <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn">Previous</button>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()" id="prevBtn">Previous</button>
                     <button class="btn" onclick="nextQuestion()" id="nextBtn">Next</button>
                 </div>
             </div>
 
-            <div class="results-section" id="resultsSection">
-                <div class="results-summary">
-                    <h2 style="color: #333; margin-bottom: 20px;">Test Completed! 🎉</h2>
+            <!-- Results Section -->
+            <div class="section" id="resultsSection">
+                <div class="results-box">
+                    <h2>Test Completed! 🎉</h2>
                     
-                    <div class="score-circle">
-                        <div>
-                            <span id="scorePercentage">0</span>%
-                            <div class="score-label">Score</div>
-                        </div>
+                    <div class="score-display">
+                        <div class="percentage" id="scorePercent">0%</div>
+                        <div class="label">Score</div>
                     </div>
 
-                    <div class="results-details">
-                        <div class="result-card">
-                            <h4>Correct Answers</h4>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <h4>Correct</h4>
                             <p id="correctCount" style="color: #4caf50;">0</p>
                         </div>
-                        <div class="result-card">
-                            <h4>Wrong Answers</h4>
+                        <div class="result-item">
+                            <h4>Wrong</h4>
                             <p id="wrongCount" style="color: #f44336;">0</p>
                         </div>
-                        <div class="result-card">
-                            <h4>Total Questions</h4>
-                            <p id="totalCount" style="color: #667eea;">0</p>
+                        <div class="result-item">
+                            <h4>Total</h4>
+                            <p id="totalCount">0</p>
                         </div>
                     </div>
 
-                    <button class="btn btn-tertiary" onclick="showReview()" style="margin-top: 30px;">Review Answers</button> 
-                    <button class="btn" onclick="backToCourses()" style="margin-top: 10px;">Take Another Test</button>
+                    <button class="btn" onclick="showReview()">Review Answers</button>
+                    <button class="btn btn-secondary" onclick="backToCourses()">Take Another Test</button>
                 </div>
             </div>
 
-            <div class="review-section" id="reviewSection">
-                <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Detailed Answer Review</h2>
-                <div id="reviewContent">
-                    </div>
-                <button class="btn btn-secondary" onclick="showSection('resultsSection')" style="margin-top: 30px;">Back to Summary</button>
-                <button class="btn" onclick="backToCourses()" style="margin-top: 10px;">Take Another Test</button>
+            <!-- Review Section -->
+            <div class="section" id="reviewSection">
+                <h2 class="page-title">Answer Review</h2>
+                <div id="reviewContent"></div>
+                <button class="btn btn-secondary" onclick="showResults()">Back to Results</button>
+                <button class="btn" onclick="backToCourses()">Take Another Test</button>
             </div>
 
-
-            <div class="history-section" id="historySection">
-                <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Your Test History</h2>
-                
+            <!-- History Section -->
+            <div class="section" id="historySection">
+                <h2 class="page-title">Your Test History</h2>
                 <div id="historyContent">
                     <div class="loading">Loading history...</div>
                 </div>
-
-                <button class="btn btn-secondary" onclick="backToCourses()" style="margin-top: 30px;">Back to Courses</button>
+                <button class="btn btn-secondary" onclick="backToCourses()">Back to Courses</button>
             </div>
         </div>
     </div>
@@ -607,9 +774,7 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
     <script>
-        // --- 1. CONFIGURATION AND INITIALIZATION ---
-
-        // ⚠️ REPLACE WITH YOUR ACTUAL FIREBASE CONFIGURATION
+        // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyC5uF795h9jkPmVFu_-jS7npbrFIHSZ26E",
             authDomain: "fudma-cbt-portal.firebaseapp.com",
@@ -619,414 +784,89 @@ h1, h2, h3, h4, h5, h6, p, label, span {
             appId: "1:587587261232:web:73ba6ded2879d94f03aef5"
         };
 
-        // Initialize Firebase
         let auth, db;
         try {
-            const firebaseApp = firebase.initializeApp(firebaseConfig);
+            firebase.initializeApp(firebaseConfig);
             auth = firebase.auth();
             db = firebase.firestore();
-            console.log("Firebase initialized successfully.");
         } catch (error) {
-            console.error("Firebase initialization error:", error);
-            alert("Firebase is not configured correctly. Check the console for details.");
+            console.error("Firebase error:", error);
         }
 
         // Question Bank
-        const questionBank = {
+        const questions = {
             COS101: [
-                {q: "Who is considered the father of computing?", options: ["Charles Babbage", "Alan Turing", "John von Neumann", "Bill Gates"], correct: 0},
-                {q: "What does ENIAC stand for?", options: ["Electronic Numerical Integrator and Calculator", "Electronic Network Integration", "Enhanced Numerical Integration", "Electronic Number Calculator"], correct: 0},
-                {q: "Which generation of computers used vacuum tubes?", options: ["First Generation", "Second Generation", "Third Generation", "Fourth Generation"], correct: 0},
-                {q: "Transistors were introduced in which generation?", options: ["First", "Second", "Third", "Fourth"], correct: 1},
-                {q: "What technology characterized third generation computers?", options: ["Vacuum tubes", "Transistors", "Integrated Circuits", "Microprocessors"], correct: 2},
-                {q: "Microprocessors were introduced in which generation?", options: ["Second", "Third", "Fourth", "Fifth"], correct: 2},
-                {q: "What does AI stand for?", options: ["Automated Intelligence", "Artificial Intelligence", "Advanced Integration", "Automated Integration"], correct: 1},
-                {q: "The first commercial computer was?", options: ["ENIAC", "UNIVAC I", "IBM 701", "EDVAC"], correct: 1},
-                {q: "Who invented the World Wide Web?", options: ["Bill Gates", "Steve Jobs", "Tim Berners-Lee", "Mark Zuckerberg"], correct: 2},
-                {q: "What year was the first personal computer introduced?", options: ["1971", "1975", "1981", "1985"], correct: 1},
-                {q: "VLSI stands for?", options: ["Very Large Scale Integration", "Very Low Speed Integration", "Virtual Large Scale Integration", "Visible Integration"], correct: 0},
-                {q: "Who is known as the first computer programmer?", options: ["Charles Babbage", "Ada Lovelace", "Alan Turing", "John von Neumann"], correct: 1},
-                {q: "What does IBM stand for?", options: ["International Business Machines", "Internet Business Machines", "International Binary Machines", "Internet Binary Machines"], correct: 0},
-                {q: "CPU stands for?", options: ["Central Processing Unit", "Computer Processing Unit", "Central Program Unit", "Computer Program Unit"], correct: 0},
-                {q: "RAM stands for?", options: ["Random Access Memory", "Read Access Memory", "Random Array Memory", "Read Array Memory"], correct: 0},
-                {q: "ROM stands for?", options: ["Random Only Memory", "Read Only Memory", "Random Order Memory", "Read Order Memory"], correct: 1},
-                {q: "What is the brain of the computer?", options: ["RAM", "ROM", "CPU", "Hard Drive"], correct: 2},
-                {q: "What does GUI stand for?", options: ["Graphical User Interface", "General User Interface", "Graphical Universal Interface", "General Universal Interface"], correct: 0},
-                {q: "What is the smallest unit of data?", options: ["Byte", "Bit", "Nibble", "Word"], correct: 1},
-                {q: "How many bits are in a byte?", options: ["4", "8", "16", "32"], correct: 1},
-                {q: "What does HTML stand for?", options: ["HyperText Markup Language", "HyperText Machine Language", "HighText Markup Language", "HyperText Modern Language"], correct: 0},
-                {q: "What does URL stand for?", options: ["Universal Resource Locator", "Uniform Resource Locator", "Universal Reference Locator", "Uniform Reference Locator"], correct: 1},
-                {q: "What is an operating system?", options: ["Application software", "System software", "Hardware", "Firmware"], correct: 1},
-                {q: "Examples of operating systems include?", options: ["MS Word", "Windows", "Chrome", "Excel"], correct: 1},
-                {q: "What does HTTP stand for?", options: ["HyperText Transfer Protocol", "HyperText Translation Protocol", "HighText Transfer Protocol", "HyperText Transmission Protocol"], correct: 0},
-                {q: "What is a browser?", options: ["Operating system", "Application for accessing web", "Programming language", "Database"], correct: 1},
-                {q: "Examples of browsers include?", options: ["Windows", "Chrome", "Linux", "Android"], correct: 1},
-                {q: "What is a computer virus?", options: ["Hardware problem", "Malicious software", "Operating system", "Printer error"], correct: 1},
-                {q: "What is software?", options: ["Physical components", "Programs and data", "Monitor", "Keyboard"], correct: 1},
-                {q: "What is hardware?", options: ["Programs", "Physical components", "Data", "Files"], correct: 1},
-                {q: "Input devices include?", options: ["Monitor", "Keyboard", "Printer", "Speaker"], correct: 1},
-                {q: "Output devices include?", options: ["Mouse", "Scanner", "Monitor", "Microphone"], correct: 2},
-                {q: "What does LAN stand for?", options: ["Local Area Network", "Large Area Network", "Limited Area Network", "Long Area Network"], correct: 0},
-                {q: "What does WAN stand for?", options: ["Wide Area Network", "Wireless Area Network", "World Area Network", "Web Area Network"], correct: 0},
-                {q: "What is the purpose of a compiler?", options: ["Run programs", "Translate code", "Store data", "Display output"], correct: 1},
-                {q: "What is an algorithm?", options: ["Programming language", "Step-by-step procedure", "Computer hardware", "Software application"], correct: 1},
-                {q: "Binary system uses how many digits?", options: ["2", "8", "10", "16"], correct: 0},
-                {q: "Hexadecimal system uses how many digits?", options: ["2", "8", "10", "16"], correct: 3},
-                {q: "What is a database?", options: ["Hardware device", "Organized data collection", "Programming language", "Operating system"], correct: 1},
-                {q: "SQL stands for?", options: ["Standard Query Language", "Structured Query Language", "Simple Query Language", "System Query Language"], correct: 1},
-                {q: "What is cloud computing?", options: ["Local storage", "Internet-based computing", "Hardware upgrade", "Software installation"], correct: 1},
-                {q: "What is an IP address?", options: ["Internet Protocol address", "Internal Processing address", "Internet Processing address", "Internal Protocol address"], correct: 0},
-                {q: "What does PDF stand for?", options: ["Portable Document Format", "Public Document Format", "Private Document Format", "Personal Document Format"], correct: 0},
-                {q: "What is encryption?", options: ["Data compression", "Data security method", "Data deletion", "Data backup"], correct: 1},
-                {q: "What is a firewall?", options: ["Hardware component", "Security system", "Software application", "Network cable"], correct: 1},
-                {q: "What does USB stand for?", options: ["Universal Serial Bus", "Universal System Bus", "United Serial Bus", "United System Bus"], correct: 0},
-                {q: "What is bandwidth?", options: ["Data transfer rate", "Storage capacity", "Processing speed", "Screen resolution"], correct: 0},
-                {q: "What is malware?", options: ["Good software", "Malicious software", "System software", "Application software"], correct: 1},
-                {q: "What is phishing?", options: ["Cyber attack method", "Programming technique", "Hardware issue", "Software update"], correct: 0},
-                {q: "What does VPN stand for?", options: ["Virtual Private Network", "Virtual Public Network", "Visual Private Network", "Visual Public Network"], correct: 0}
+                {q: "Who is the father of computing?", opts: ["Charles Babbage", "Alan Turing", "John von Neumann", "Bill Gates"], ans: 0},
+                {q: "What does ENIAC stand for?", opts: ["Electronic Numerical Integrator and Calculator", "Electronic Network Integration", "Enhanced Numerical Integration", "Electronic Number Calculator"], ans: 0},
+                {q: "Vacuum tubes were used in which generation?", opts: ["First", "Second", "Third", "Fourth"], ans: 0},
+                {q: "Transistors were introduced in which generation?", opts: ["First", "Second", "Third", "Fourth"], ans: 1},
+                {q: "Third generation computers used?", opts: ["Vacuum tubes", "Transistors", "Integrated Circuits", "Microprocessors"], ans: 2},
+                {q: "Microprocessors introduced in which generation?", opts: ["Second", "Third", "Fourth", "Fifth"], ans: 2},
+                {q: "AI stands for?", opts: ["Automated Intelligence", "Artificial Intelligence", "Advanced Integration", "Automated Integration"], ans: 1},
+                {q: "First commercial computer?", opts: ["ENIAC", "UNIVAC I", "IBM 701", "EDVAC"], ans: 1},
+                {q: "Who invented the World Wide Web?", opts: ["Bill Gates", "Steve Jobs", "Tim Berners-Lee", "Mark Zuckerberg"], ans: 2},
+                {q: "First personal computer year?", opts: ["1971", "1975", "1981", "1985"], ans: 1},
+                {q: "VLSI stands for?", opts: ["Very Large Scale Integration", "Very Low Speed Integration", "Virtual Large Scale Integration", "Visible Integration"], ans: 0},
+                {q: "First computer programmer?", opts: ["Charles Babbage", "Ada Lovelace", "Alan Turing", "John von Neumann"], ans: 1},
+                {q: "IBM stands for?", opts: ["International Business Machines", "Internet Business Machines", "International Binary Machines", "Internet Binary Machines"], ans: 0},
+                {q: "CPU stands for?", opts: ["Central Processing Unit", "Computer Processing Unit", "Central Program Unit", "Computer Program Unit"], ans: 0},
+                {q: "RAM stands for?", opts: ["Random Access Memory", "Read Access Memory", "Random Array Memory", "Read Array Memory"], ans: 0},
+                {q: "ROM stands for?", opts: ["Random Only Memory", "Read Only Memory", "Random Order Memory", "Read Order Memory"], ans: 1},
+                {q: "Brain of computer?", opts: ["RAM", "ROM", "CPU", "Hard Drive"], ans: 2},
+                {q: "GUI stands for?", opts: ["Graphical User Interface", "General User Interface", "Graphical Universal Interface", "General Universal Interface"], ans: 0},
+                {q: "Smallest unit of data?", opts: ["Byte", "Bit", "Nibble", "Word"], ans: 1},
+                {q: "Bits in a byte?", opts: ["4", "8", "16", "32"], ans: 1},
+                {q: "HTML stands for?", opts: ["HyperText Markup Language", "HyperText Machine Language", "HighText Markup Language", "HyperText Modern Language"], ans: 0},
+                {q: "URL stands for?", opts: ["Universal Resource Locator", "Uniform Resource Locator", "Universal Reference Locator", "Uniform Reference Locator"], ans: 1},
+                {q: "Operating system is?", opts: ["Application software", "System software", "Hardware", "Firmware"], ans: 1},
+                {q: "Example of OS?", opts: ["MS Word", "Windows", "Chrome", "Excel"], ans: 1},
+                {q: "HTTP stands for?", opts: ["HyperText Transfer Protocol", "HyperText Translation Protocol", "HighText Transfer Protocol", "HyperText Transmission Protocol"], ans: 0},
+                {q: "Browser is?", opts: ["Operating system", "Web accessing app", "Programming language", "Database"], ans: 1},
+                {q: "Example of browser?", opts: ["Windows", "Chrome", "Linux", "Android"], ans: 1},
+                {q: "Computer virus is?", opts: ["Hardware problem", "Malicious software", "Operating system", "Printer error"], ans: 1},
+                {q: "Software is?", opts: ["Physical components", "Programs and data", "Monitor", "Keyboard"], ans: 1},
+                {q: "Hardware is?", opts: ["Programs", "Physical components", "Data", "Files"], ans: 1},
+                {q: "Input device?", opts: ["Monitor", "Keyboard", "Printer", "Speaker"], ans: 1},
+                {q: "Output device?", opts: ["Mouse", "Scanner", "Monitor", "Microphone"], ans: 2},
+                {q: "LAN stands for?", opts: ["Local Area Network", "Large Area Network", "Limited Area Network", "Long Area Network"], ans: 0},
+                {q: "WAN stands for?", opts: ["Wide Area Network", "Wireless Area Network", "World Area Network", "Web Area Network"], ans: 0},
+                {q: "Compiler purpose?", opts: ["Run programs", "Translate code", "Store data", "Display output"], ans: 1},
+                {q: "Algorithm is?", opts: ["Programming language", "Step-by-step procedure", "Computer hardware", "Software application"], ans: 1},
+                {q: "Binary digits?", opts: ["2", "8", "10", "16"], ans: 0},
+                {q: "Hexadecimal digits?", opts: ["2", "8", "10", "16"], ans: 3},
+                {q: "Database is?", opts: ["Hardware device", "Organized data collection", "Programming language", "Operating system"], ans: 1},
+                {q: "SQL stands for?", opts: ["Standard Query Language", "Structured Query Language", "Simple Query Language", "System Query Language"], ans: 1},
+                {q: "Cloud computing?", opts: ["Local storage", "Internet-based computing", "Hardware upgrade", "Software installation"], ans: 1},
+                {q: "IP address?", opts: ["Internet Protocol address", "Internal Processing address", "Internet Processing address", "Internal Protocol address"], ans: 0},
+                {q: "PDF stands for?", opts: ["Portable Document Format", "Public Document Format", "Private Document Format", "Personal Document Format"], ans: 0},
+                {q: "Encryption is?", opts: ["Data compression", "Data security method", "Data deletion", "Data backup"], ans: 1},
+                {q: "Firewall is?", opts: ["Hardware component", "Security system", "Software application", "Network cable"], ans: 1},
+                {q: "USB stands for?", opts: ["Universal Serial Bus", "Universal System Bus", "United Serial Bus", "United System Bus"], ans: 0},
+                {q: "Bandwidth is?", opts: ["Data transfer rate", "Storage capacity", "Processing speed", "Screen resolution"], ans: 0},
+                {q: "Malware is?", opts: ["Good software", "Malicious software", "System software", "Application software"], ans: 1},
+                {q: "Phishing is?", opts: ["Cyber attack method", "Programming technique", "Hardware issue", "Software update"], ans: 0},
+                {q: "VPN stands for?", opts: ["Virtual Private Network", "Virtual Public Network", "Visual Private Network", "Visual Public Network"], ans: 0}
             ],
-            BIO101: [
-    {q: "Who discovered the cell in 1665?", options: ["Charles Darwin", "Robert Hooke", "Matthias Schleiden", "Theodor Schwann"], correct: 1},
-    {q: "The cell theory was first developed in which year by Schleiden and Schwann?", options: ["1665", "1839", "1858", "1900"], correct: 1},
-    {q: "Which of the following is NOT a principle of cell theory?", options: ["All organisms are composed of cells", "All cells contain mitochondria", "All cells arise from pre-existing cells", "Vital functions occur within cells"], correct: 1},
-    {q: "The undefined nuclear region in prokaryotic cells is called:", options: ["Nucleus", "Nucleoid", "Nucleolus", "Nuclear membrane"], correct: 1},
-    {q: "Which bacteria lacks a cell wall?", options: ["E. coli", "Mycoplasma", "Staphylococcus", "Streptococcus"], correct: 1},
-    {q: "The cell wall of bacteria primarily consists of:", options: ["Cellulose", "Chitin", "Peptidoglycan", "Lignin"], correct: 2},
-    {q: "Eukaryotic cells are approximately how many times wider than prokaryotic cells?", options: ["5 times", "10 times", "15 times", "20 times"], correct: 2},
-    {q: "Which type of ribosomes are characteristic of prokaryotic cells?", options: ["60S", "70S", "80S", "90S"], correct: 1},
-    {q: "The primary function of mitochondria is:", options: ["Protein synthesis", "Photosynthesis", "Cellular respiration and ATP production", "Cell division"], correct: 2},
-    {q: "Which organelle is responsible for protein packaging and modification?", options: ["Endoplasmic reticulum", "Golgi apparatus", "Lysosome", "Ribosome"], correct: 1},
-    {q: "Lysosomes contain powerful:", options: ["DNA molecules", "RNA strands", "Digestive enzymes", "Chlorophyll pigments"], correct: 2},
-    {q: "Which organelle controls all cellular activities?", options: ["Mitochondrion", "Nucleus", "Ribosome", "Golgi apparatus"], correct: 1},
-    {q: "Photosynthesis occurs in which organelle?", options: ["Mitochondrion", "Chloroplast", "Lysosome", "Peroxisome"], correct: 1},
-    {q: "The endoplasmic reticulum studded with ribosomes is called:", options: ["Smooth ER", "Rough ER", "Both A and B", "Neither A nor B"], correct: 1},
-    {q: "Centrioles are typically found in:", options: ["Plant cells only", "Animal cells only", "Bacterial cells", "All cell types"], correct: 1},
-    {q: "The membrane surrounding a plant cell vacuole is called:", options: ["Plasma membrane", "Tonoplast", "Cell wall", "Nuclear envelope"], correct: 1},
-    {q: "Which Swedish botanist classified organisms into plant and animal kingdoms?", options: ["Charles Darwin", "Carolus Linnaeus", "Robert Hooke", "Ernst Haeckel"], correct: 1},
-    {q: "Modern classification recognizes how many kingdoms?", options: ["Two", "Three", "Four", "Five"], correct: 3},
-    {q: "Kingdom Monera consists primarily of:", options: ["Fungi and algae", "Bacteria and blue-green algae", "Protozoa and algae", "Plants and animals"], correct: 1},
-    {q: "Organisms in Kingdom Protista are mostly:", options: ["Multicellular with nucleus", "Unicellular without nucleus", "Unicellular with nucleus", "Multicellular without nucleus"], correct: 2},
-    {q: "Fungal cell walls are primarily composed of:", options: ["Cellulose", "Chitin", "Peptidoglycan", "Starch"], correct: 1},
-    {q: "The network of fungal filaments is called:", options: ["Hypha", "Mycelium", "Sporangium", "Rhizoid"], correct: 1},
-    {q: "Plants with naked seeds are classified as:", options: ["Angiosperms", "Gymnosperms", "Bryophytes", "Pteridophytes"], correct: 1},
-    {q: "Bryophytes are characterized by:", options: ["Presence of vascular tissue", "Dominance of sporophyte generation", "Dependence on water for fertilization", "Presence of true roots"], correct: 2},
-    {q: "The leaves of ferns are called:", options: ["Fronds", "Blades", "Needles", "Scales"], correct: 0},
-    {q: "In flowering plants, seeds are enclosed in:", options: ["Cones", "Fruits", "Spores", "Rhizomes"], correct: 1},
-    {q: "Asexual reproduction involves:", options: ["Two parents", "Fusion of gametes", "A single parent", "Meiosis"], correct: 2},
-    {q: "Which is NOT a type of asexual reproduction in animals?", options: ["Fission", "Budding", "Fragmentation", "Fertilization"], correct: 3},
-    {q: "The union of sperm and egg produces a:", options: ["Gamete", "Zygote", "Spore", "Bud"], correct: 1},
-    {q: "Meiosis results in daughter cells that are:", options: ["Diploid", "Haploid", "Triploid", "Polyploid"], correct: 1},
-    {q: "Species with separate male and female individuals are:", options: ["Hermaphroditic", "Unisexual", "Parthenogenetic", "Bisexual"], correct: 1},
-    {q: "Parthenogenesis involves:", options: ["Two parents", "Fertilized eggs", "Unfertilized eggs producing offspring", "Spore formation"], correct: 2},
-    {q: "In oviparity, eggs are:", options: ["Retained internally", "Deposited externally", "Never formed", "Always unfertilized"], correct: 1},
-    {q: "Viviparity is characterized by:", options: ["External egg development", "Nourishment from egg yolk only", "Direct nourishment from mother's blood", "Spore formation"], correct: 2},
-    {q: "Vegetative propagation through underground stems occurs in:", options: ["Cuttings", "Rhizomes", "Runners", "Bulbs"], correct: 1},
-    {q: "Potato tubers are examples of:", options: ["Modified roots", "Underground storage stems", "Runners", "Bulbs"], correct: 1},
-    {q: "The basic unit of inheritance is the:", options: ["Chromosome", "Gene", "Nucleotide", "Allele"], correct: 1},
-    {q: "Mendel's First Law is the law of:", options: ["Independent assortment", "Segregation", "Dominance", "Linkage"], correct: 1},
-    {q: "In Mendel's experiments, the F1 generation from crossing DD × dd is:", options: ["All DD", "All dd", "All Dd", "1:2:1 ratio"], correct: 2},
-    {q: "The phenotypic ratio of F2 generation in a monohybrid cross is:", options: ["1:1", "1:2:1", "3:1", "9:3:3:1"], correct: 2},
-    {q: "The genotypic ratio of F2 generation in a monohybrid cross is:", options: ["1:1", "1:2:1", "3:1", "9:3:3:1"], correct: 1},
-    {q: "Mendel's Second Law deals with:", options: ["Segregation", "Independent assortment", "Dominance", "Linkage"], correct: 1},
-    {q: "A dihybrid cross involves parents differing in how many trait pairs?", options: ["One", "Two", "Three", "Four"], correct: 1},
-    {q: "The phenotypic ratio of F2 in a dihybrid cross is:", options: ["3:1", "1:2:1", "9:3:3:1", "1:1:1:1"], correct: 2},
-    {q: "An organism with identical alleles for a trait is:", options: ["Heterozygous", "Homozygous", "Hemizygous", "Polygenic"], correct: 1},
-    {q: "The observable characteristics of an organism constitute its:", options: ["Genotype", "Phenotype", "Karyotype", "Genome"], correct: 1},
-    {q: "Lamarck's theory emphasized:", options: ["Natural selection", "Use and disuse of organs", "Genetic mutation", "Random variation"], correct: 1},
-    {q: "Darwin's theory of evolution is based on:", options: ["Inheritance of acquired characteristics", "Natural selection and survival of the fittest", "Spontaneous generation", "Divine creation"], correct: 1},
-    {q: "Which is NOT evidence for evolution?", options: ["Fossil records", "Comparative anatomy", "Embryology", "Astrology"], correct: 3},
-    {q: "The father of ecology, Ernst Haeckel, defined it as the study of:", options: ["Plants only", "Animals only", "Organism-environment relationships", "Fossils"], correct: 2},
-    {q: "The collection of all living organisms in a geographic area is called:", options: ["Population", "Community", "Ecosystem", "Biome"], correct: 2},
-    {q: "A group of organisms of the same species in an area is a:", options: ["Community", "Population", "Ecosystem", "Biosphere"], correct: 1},
-    {q: "The specific physical location where an organism lives is its:", options: ["Niche", "Habitat", "Biome", "Territory"], correct: 1},
-    {q: "An organism's role or occupation within a community is its:", options: ["Habitat", "Niche", "Territory", "Range"], correct: 1},
-    {q: "Autecology focuses on:", options: ["Communities", "Individual species", "Ecosystems", "Biomes"], correct: 1},
-    {q: "Synecology deals with:", options: ["Individual organisms", "Groups of different species", "Only plants", "Only animals"], correct: 1},
-    {q: "In predation, the organism that is killed and eaten is the:", options: ["Predator", "Prey", "Parasite", "Host"], correct: 1},
-    {q: "Parasitism benefits:", options: ["Both organisms", "Only the host", "Only the parasite", "Neither organism"], correct: 2},
-    {q: "Tapeworms are examples of:", options: ["Ectoparasites", "Endoparasites", "Predators", "Commensals"], correct: 1},
-    {q: "Competition for resources between members of the same species is:", options: ["Interspecific", "Intraspecific", "Commensalism", "Mutualism"], correct: 1},
-    {q: "In commensalism:", options: ["Both benefit", "One benefits, one is harmed", "One benefits, other unaffected", "Both are harmed"], correct: 2},
-    {q: "The remora-shark relationship exemplifies:", options: ["Parasitism", "Predation", "Commensalism", "Competition"], correct: 2},
-    {q: "Amensalism involves:", options: ["Both organisms benefiting", "One harmed, other unaffected", "Both harmed", "Mutual dependence"], correct: 1},
-    {q: "Black walnut trees inhibit growth of nearby plants through:", options: ["Predation", "Competition", "Allelopathy", "Parasitism"], correct: 2},
-    {q: "In mutualism:", options: ["One benefits only", "Both organisms benefit", "One is harmed", "No interaction occurs"], correct: 1},
-    {q: "The symbiotic relationship between fungi and algae in lichens is:", options: ["Parasitism", "Commensalism", "Mutualism", "Predation"], correct: 2},
-    {q: "Prokaryotic cells lack:", options: ["Ribosomes", "Membrane-bound nucleus", "DNA", "Cell membrane"], correct: 1},
-    {q: "Which level of biological organization comes immediately after tissue?", options: ["Cell", "Organ", "Organ system", "Organism"], correct: 1},
-    {q: "The three basic types of mammalian cells are:", options: ["Somatic, germ, stem", "Prokaryotic, eukaryotic, viral", "Plant, animal, fungal", "Diploid, haploid, polyploid"], correct: 0},
-    {q: "Somatic cells are:", options: ["Sex cells", "Body cells", "Stem cells", "Germ cells"], correct: 1},
-    {q: "Germ line cells give rise to:", options: ["Body tissues", "Gametes", "Blood cells", "Nerve cells"], correct: 1},
-    {q: "Stem cells are characterized by their ability to:", options: ["Die quickly", "Divide indefinitely and differentiate", "Only form blood", "Never divide"], correct: 1},
-    {q: "Plant cells differ from animal cells by having:", options: ["Mitochondria", "Cell wall and chloroplasts", "Ribosomes", "Nucleus"], correct: 1},
-    {q: "Animal cells store carbohydrates as:", options: ["Starch", "Cellulose", "Glycogen", "Chitin"], correct: 2},
-    {q: "Plant cells store lipids as:", options: ["Fat", "Oil", "Wax", "Glycogen"], correct: 1},
-    {q: "Centrioles are present in:", options: ["Plant cells only", "Animal cells only", "Both plant and animal cells", "Bacterial cells"], correct: 1},
-    {q: "The largest organelle in mature plant cells is:", options: ["Nucleus", "Chloroplast", "Central vacuole", "Mitochondrion"], correct: 2},
-    {q: "Smooth ER is involved in:", options: ["Protein synthesis", "Lipid synthesis", "DNA replication", "Cell division"], correct: 1},
-    {q: "The function of rough ER includes:", options: ["Lipid synthesis", "Protein synthesis and transport", "Photosynthesis", "Cell movement"], correct: 1},
-    {q: "Dictyosomes in plant cells are equivalent to:", options: ["Mitochondria", "Golgi apparatus", "Lysosomes", "Ribosomes"], correct: 1},
-    {q: "Kingdom Mycota includes organisms that:", options: ["Photosynthesize", "Lack chlorophyll", "Have vascular tissue", "Are all unicellular"], correct: 1},
-    {q: "Cryptogams are plants that:", options: ["Produce seeds", "Reproduce by spores", "Have flowers", "Are all aquatic"], correct: 1},
-    {q: "Phanerogams are characterized by:", options: ["Lack of vascular tissue", "Spore production", "Seed production", "Aquatic habitat"], correct: 2},
-    {q: "Thallophytes lack:", options: ["Chlorophyll", "True roots, stems, and leaves", "Cell walls", "Reproduction"], correct: 1},
-    {q: "In bryophytes, the dominant generation is:", options: ["Sporophyte", "Gametophyte", "Neither", "Both equally"], correct: 1},
-    {q: "In pteridophytes, the dominant generation is:", options: ["Gametophyte", "Sporophyte", "Neither", "Both equally"], correct: 1},
-    {q: "Angiosperms are divided into:", options: ["Monocots and dicots", "Gymnosperms and ferns", "Algae and fungi", "Mosses and liverworts"], correct: 0},
-    {q: "Kingdom Animalia organisms are characterized by:", options: ["Autotrophy", "Heterotrophy", "Photosynthesis", "Cell walls"], correct: 1},
-    {q: "Parazoa includes organisms that:", options: ["Have complex organ systems", "Lack definite symmetry", "Are all vertebrates", "Have bilateral symmetry"], correct: 1},
-    {q: "Eumetazoa are characterized by:", options: ["Lack of symmetry", "Definite shape and symmetry", "No tissues", "Single cells"], correct: 1},
-    {q: "The genetic makeup of an organism is its:", options: ["Phenotype", "Genotype", "Karyotype", "Allele"], correct: 1},
-    {q: "Diploid organisms have:", options: ["One set of chromosomes", "Two sets of chromosomes", "Three sets of chromosomes", "No chromosomes"], correct: 1},
-    {q: "Haploid cells are produced by:", options: ["Mitosis", "Meiosis", "Binary fission", "Budding"], correct: 1},
-    {q: "Hermaphroditic organisms can produce:", options: ["Only male gametes", "Only female gametes", "Both male and female gametes", "No gametes"], correct: 2},
-    {q: "Ovoviviparity involves:", options: ["External egg laying", "Eggs retained in mother, nourished by yolk", "Direct maternal nourishment", "Asexual reproduction"], correct: 1},
-    {q: "Runners in strawberry plants are used for:", options: ["Water absorption", "Photosynthesis", "Vegetative propagation", "Flower production"], correct: 2}
-],
-                        PHY101: [
-    {q: "What is the SI unit of force?", options: ["Joule", "Newton", "Watt", "Pascal"], correct: 1},
-    {q: "What is the acceleration due to gravity?", options: ["9.8 m/s²", "10 m/s²", "8.9 m/s²", "11 m/s²"], correct: 0},
-    {q: "Newton's first law is also known as?", options: ["Law of inertia", "Law of acceleration", "Law of action", "Law of momentum"], correct: 0},
-    {q: "What is the formula for kinetic energy?", options: ["mgh", "1/2 mv²", "mv", "Fd"], correct: 1},
-    {q: "What is the SI unit of work?", options: ["Newton", "Joule", "Watt", "Pascal"], correct: 1},
-    {q: "Power is defined as?", options: ["Work/Time", "Force×Distance", "Mass×Velocity", "Force×Time"], correct: 0},
-    {q: "What is momentum?", options: ["Mass×Velocity", "Mass×Acceleration", "Force×Time", "Work/Time"], correct: 0},
-    {q: "The SI unit of pressure is?", options: ["Newton", "Pascal", "Joule", "Watt"], correct: 1},
-    {q: "What is the speed of light?", options: ["3×10⁸ m/s", "3×10⁶ m/s", "3×10⁷ m/s", "3×10⁹ m/s"], correct: 0},
-    {q: "Which law states F = ma?", options: ["Newton's First Law", "Newton's Second Law", "Newton's Third Law", "Law of Gravitation"], correct: 1},
-    {q: "Which of the following is a fundamental physical quantity?", options: ["Velocity", "Pressure", "Mass", "Force"], correct: 2},
-    {q: "Which unit is used to measure luminous intensity in the SI system?", options: ["Lux", "Lumen", "Candela", "Watt"], correct: 2},
-    {q: "Which of the following is a derived quantity?", options: ["Time", "Length", "Mass", "Velocity"], correct: 3},
-    {q: "The SI unit of pressure is:", options: ["Pascal", "Newton", "Joule", "Watt"], correct: 0},
-    {q: "Which of the following is not a base unit in the SI system?", options: ["Kilogram", "Second", "Radian", "Mole"], correct: 2},
-    {q: "Which of the following quantities is dimensionless?", options: ["Acceleration", "Strain", "Force", "Pressure"], correct: 1},
-    {q: "The unit of electric charge is:", options: ["Ampere", "Coulomb", "Volt", "Ohm"], correct: 1},
-    {q: "Which of the following is not a correct pair of unit and quantity?", options: ["Hertz – Frequency", "Tesla – Magnetic flux", "Farad – Capacitance", "Watt – Power"], correct: 1},
-    {q: "Which of the following is a correct dimensional formula for pressure?", options: ["ML⁻¹T⁻²", "MLT⁻²", "MLT⁻¹", "M²L²T⁻²"], correct: 0},
-    {q: "Which of the following is a unit of energy?", options: ["Watt", "Joule", "Newton", "Pascal"], correct: 1},
-    {q: "Which of the following is the SI unit for electric potential difference?", options: ["Ampere", "Coulomb", "Volt", "Ohm"], correct: 2},
-    {q: "The unit of magnetic flux is:", options: ["Tesla", "Weber", "Henry", "Farad"], correct: 1},
-    {q: "Which of the following is not a derived unit with a special name?", options: ["Newton", "Joule", "Kilogram", "Pascal"], correct: 2},
-    {q: "Which is the dimensional formula for acceleration?", options: ["LT⁻²", "L²T⁻²", "MT⁻²", "MLT⁻¹"], correct: 0},
-    {q: "The SI unit of power is:", options: ["Joule", "Watt", "Newton", "Volt"], correct: 1},
-    {q: "Which is the dimensional formula for surface tension?", options: ["MT⁻²", "ML⁻¹T⁻²", "MLT⁻²", "ML²T⁻²"], correct: 0},
-    {q: "Which is the dimensional formula for coefficient of viscosity?", options: ["ML⁻¹T⁻¹", "MLT⁻²", "MLT⁻¹", "ML²T⁻²"], correct: 0},
-    {q: "Dimensional formula for universal gravitational constant is:", options: ["M⁻¹L³T⁻²", "ML²T⁻²", "MLT⁻²", "M²L⁻²T⁻²"], correct: 0},
-    {q: "Unit of specific heat capacity is:", options: ["Jkg⁻¹K⁻¹", "Jm⁻¹K⁻¹", "JkgK", "JmK⁻¹"], correct: 0},
-    {q: "Which of the following is not a correct dimensional formula?", options: ["Electric charge – TI", "Electric resistance – ML²T⁻³I⁻²", "Electric field – MLT⁻³I⁻¹", "Capacitance – M⁻¹L⁻²T⁴I²"], correct: 0},
-    {q: "Dimensional formula for inductance is:", options: ["ML²T⁻²I⁻²", "MLT⁻²", "ML²T⁻³", "M⁻¹L²T²"], correct: 0},
-    {q: "Dimensional formula for magnetic field strength is:", options: ["L⁻¹I", "MLT⁻²", "ML²T⁻²", "MLT⁻³"], correct: 0},
-    {q: "Dimensional formula for electric power is:", options: ["ML²T⁻³", "MLT⁻²", "ML²T⁻²", "MLT⁻³"], correct: 0},
-    {q: "Dimensional formula of capacitance is:", options: ["M⁻¹L⁻²T⁴I²", "ML²T⁻²", "MLT⁻²", "ML⁻¹T⁻²"], correct: 0},
-    {q: "Dimensional formula for electric potential is:", options: ["ML²T⁻³I⁻¹", "MLT⁻²", "ML²T⁻²", "MLT⁻³"], correct: 0},
-    {q: "Which is a scalar quantity?", options: ["Force", "Acceleration", "Pressure", "Displacement"], correct: 2},
-    {q: "Which is a vector quantity?", options: ["Time", "Mass", "Velocity", "Temperature"], correct: 2},
-    {q: "A unit vector has a magnitude of:", options: ["0", "1", "√2", "Undefined"], correct: 1},
-    {q: "The cross product of i-hat × j-hat is:", options: ["i-hat", "j-hat", "k-hat", "0"], correct: 2},
-    {q: "The dot product of i-hat · i-hat is:", options: ["0", "1", "-1", "k-hat"], correct: 1},
-    {q: "If A = 3i-hat + 2j-hat and B = 2i-hat + 4j-hat, then A + B =", options: ["5i-hat + 6j-hat", "1i-hat - 2j-hat", "6i-hat + 8j-hat", "3i-hat + 2j-hat"], correct: 0},
-    {q: "If A = 5i-hat - 3j-hat and B = 2i-hat + 4j-hat, then A - B =", options: ["3i-hat - 7j-hat", "7i-hat + 1j-hat", "-3i-hat + 7j-hat", "3i-hat + 1j-hat"], correct: 0},
-    {q: "Magnitude of vector A = 3i-hat + 4j-hat is:", options: ["5", "7", "1", "25"], correct: 0},
-    {q: "Dot product of two perpendicular vectors is:", options: ["1", "0", "-1", "Undefined"], correct: 1},
-    {q: "Cross product of two parallel vectors is:", options: ["Maximum", "Zero", "Negative", "Undefined"], correct: 1},
-    {q: "If A = 2i + 3j + k and B = -4i + 2j - k, what is A · B?", options: ["-3", "3", "0", "5"], correct: 0},
-    {q: "The angle between vectors is found using:", options: ["A × B", "A + B", "A · B", "A - B"], correct: 2},
-    {q: "If A = 2i - j + k and B = i + 2j - 2k, then A × B =", options: ["5j + 5k", "-j + 3k", "5j - 5k", "5j + k"], correct: 2},
-    {q: "Magnitude of A × B is:", options: ["AB cosθ", "AB sinθ", "A + B", "A - B"], correct: 1},
-    {q: "Which is true about vector addition?", options: ["It is not associative", "It is not commutative", "It is both associative and commutative", "It is only distributive"], correct: 2}
-],
-                        CSC101: [
-                // (Existing 8 CSC101 questions)                        
-                {q: "What does PC stand for?", options: ["Personal Computer", "Public Computer", "Private Computer", "Professional Computer"], correct: 0},
-                {q: "The motherboard is?", options: ["Main circuit board", "Power supply", "Storage device", "Display unit"], correct: 0},
-                {q: "BIOS stands for?", options: ["Basic Input Output System", "Binary Input Output System", "Basic Internal Operating System", "Binary Internal Operating System"], correct: 0},
-                {q: "What is the function of RAM?", options: ["Temporary storage", "Permanent storage", "Processing", "Display"], correct: 0},
-                {q: "Hard disk is a?", options: ["Storage device", "Input device", "Output device", "Processing unit"], correct: 0},
-                {q: "SSD stands for?", options: ["Solid State Drive", "Super Storage Drive", "System State Drive", "Solid Storage Device"], correct: 0},
-                {q: "What is the purpose of a power supply?", options: ["Provide electricity", "Store data", "Process information", "Display output"], correct: 0},
-                {q: "GPU stands for?", options: ["Graphics Processing Unit", "General Processing Unit", "Graphics Program Unit", "General Program Unit"], correct: 0},
-                // (New 42 CSC101 questions added below)
-                {q: "Which of the following best describes the IPO model of computing?", options: ["Input-Program-Output", "Input-Process-Output", "Instruction-Processing-Operation", "Input-Peripheral-Output"], correct: 1},
-                {q: "What is the primary distinction between data and information?", options: ["Data is processed; information is raw", "Data is always numeric; information is textual", "Data is raw; information is processed and meaningful", "Data is stored; information is deleted"], correct: 2},
-                {q: "Which method of data processing is most prone to human error?", options: ["Mechanical", "Manual", "Computerized", "Automated"], correct: 1},
-                {q: "What is a major limitation of mechanical data processing?", options: ["Requires programming", "Cannot be used in offices", "Noisy and error-prone", "Too fast for human use"], correct: 2},
-                {q: "When was the first microcomputer introduced?", options: ["1965", "1975", "1985", "1995"], correct: 1},
-                {q: "Which of the following is NOT a benefit of electronic data processing?", options: ["Speed", "Accuracy", "Manual entry", "Reliability"], correct: 2},
-                {q: "A program is best defined as:", options: ["A type of hardware", "A sequence of instructions", "A data storage unit", "A peripheral device"], correct: 1},
-                {q: "Which of the following is an example of Computer-Aided Instruction (CAI)?", options: ["ATM machine", "Smart board", "Antivirus software", "BIOS"], correct: 1},
-                {q: "Expert systems like MYCIN are used in:", options: ["Education", "Entertainment", "Medical diagnosis", "Gaming"], correct: 2},
-                {q: "CAD is primarily used in:", options: ["Banking", "Industrial design", "Education", "Communication"], correct: 1},
-                {q: "Computers in automobiles help by:", options: ["Increasing engine size", "Reducing tire wear", "Regulating fuel flow", "Enhancing paint quality"], correct: 2},
-                {q: "Which of the following is a military application of computers?", options: ["Payroll", "Missile control", "Online shopping", "Word processing"], correct: 1},
-                {q: "Which banking service is enabled by computers?", options: ["Manual ledger entry", "ATM transactions", "Handwritten checks", "Paper-based statements"], correct: 1},
-                {q: "Which technology allows real-time video communication?", options: ["Email", "Telnet", "Video conferencing", "FTP"], correct: 2},
-                {q: "Which characteristic ensures a computer performs tasks without fatigue?", options: ["Speed", "Reliability", "Flexibility", "Storage"], correct: 1},
-                {q: "Why is RAM considered volatile?", options: ["It stores permanent data", "It loses data when power is off", "It is read-only", "It is used for backups"], correct: 1},
-                {q: "ROM differs from RAM because it:", options: ["Is faster", "Is volatile", "Stores permanent instructions", "Can be erased easily"], correct: 2},
-                {q: "SSDs are more shock-resistant than HDDs because they:", options: ["Are heavier", "Use magnetic disks", "Have no moving parts", "Are made of metal"], correct: 2},
-                {q: "Which component connects all hardware in a computer?", options: ["CPU", "RAM", "Motherboard", "SSD"], correct: 2},
-                {q: "Which computer type is used for nuclear simulations?", options: ["Microcomputer", "Mainframe", "Supercomputer", "Workstation"], correct: 2},
-                {q: "Mainframe computers are typically used by:", options: ["Freelancers", "Small businesses", "Large organizations", "Students"], correct: 2},
-                {q: "Workstations are ideal for:", options: ["Word processing", "CAD applications", "Email", "Browsing"], correct: 1},
-                {q: "Microcontrollers are best suited for:", options: ["Data centers", "Embedded systems", "Gaming", "Cloud computing"], correct: 1},
-                {q: "Capacitive touchscreens detect input through:", options: ["Pressure", "Heat", "Electrical conductivity", "Light"], correct: 2},
-                {q: "Which input device is best for digital drawing?", options: ["Mouse", "Keyboard", "Graphics tablet", "Scanner"], correct: 2},
-                {q: "A plotter is primarily used for:", options: ["Printing receipts", "Drawing vector graphics", "Scanning documents", "Playing music"], correct: 1},
-                {q: "The PSU converts:", options: ["Data to information", "Software to hardware", "AC to DC power", "RAM to ROM"], correct: 2},
-                {q: "The CMOS battery powers:", options: ["RAM", "Hard drive", "BIOS settings", "Monitor"], correct: 2},
-                {q: "Voltage regulators are used to:", options: ["Increase CPU speed", "Maintain stable voltage", "Cool the system", "Store data"], correct: 1},
-                {q: "NICs are essential for:", options: ["Data storage", "Network connectivity", "Power supply", "Audio output"], correct: 1},
-                {q: "Ethernet cables transmit data using:", options: ["Light", "Sound", "Electrical signals", "Infrared"], correct: 2},
-                {q: "Routers are used to:", options: ["Store data", "Connect networks", "Print documents", "Scan files"], correct: 1},
-                {q: "Switches help in:", options: ["Reducing network congestion", "Increasing voltage", "Cooling the CPU", "Formatting hard drives"], correct: 0},
-                {q: "Patch panels are used for:", options: ["Data encryption", "Cable management", "Power regulation", "Audio output"], correct: 1},
-                {q: "Crimping tools are used to:", options: ["Cut wires", "Attach connectors", "Measure voltage", "Test speed"], correct: 1},
-                {q: "Powerline adapters use:", options: ["Fiber optics", "Wireless signals", "Electrical wiring", "Infrared beams"], correct: 2},
-                {q: "GPUs are optimized for:", options: ["Serial processing", "Arithmetic only", "Parallel processing", "Data storage"], correct: 2},
-                {q: "Buffer memory in switches helps with:", options: ["Cooling", "Data backup", "Traffic management", "Encryption"], correct: 2},
-                {q: "Heat sinks are used to:", options: ["Store heat", "Prevent overheating", "Increase voltage", "Reduce noise"], correct: 1},
-                {q: "Lithium batteries are used in CMOS because they:", options: ["Are rechargeable", "Last long", "Are heavy", "Are magnetic"], correct: 1},
-                {q: "Which component translates user input into machine signals?", options: ["Monitor", "CPU", "Keyboard", "RAM"], correct: 2},
-                {q: "Graphics tablets offer better precision than touchscreens because they:", options: ["Use styluses", "Are larger", "Are wireless", "Have screens"], correct: 0},
-                {q: "Mechanical data processing is not scalable because:", options: ["It is too fast", "It is manual", "It is expensive", "It is digital"], correct: 1},
-                {q: "Automated data processing is preferred in:", options: ["Small offices", "High-volume environments", "Manual accounting", "Handwritten reports"], correct: 1},
-                {q: "Classification in data processing involves:", options: ["Deleting data", "Grouping data", "Encrypting data", "Transmitting data"], correct: 1},
-                {q: "Barcodes and scanners improve inventory by:", options: ["Increasing shelf life", "Reducing product cost", "Automating tracking", "Enhancing display"], correct: 2},
-                {q: "Computer-aided instruction impacts teaching by:", options: ["Replacing teachers", "Making learning interactive", "Reducing student numbers", "Limiting access"], correct: 1},
-                {q: "A computer’s flexibility means it can:", options: ["Only run one program", "Perform logical tasks", "Be used only in offices", "Store unlimited data"], correct: 1},
-                {q: "Interface connectors on a motherboard are used to:", options: ["Increase RAM", "Connect peripherals", "Cool the CPU", "Store programs"], correct: 1},
-                {q: "Accuracy in computing ensures:", options: ["Faster typing", "Reliable results", "More storage", "Better graphics"], correct: 1}
-            ],
-                        MTH101: [
-    {q: "The nth term of an A.P is given by an = 5n - 2. What is the 7th term??", options: ["33", "31", "35", "37"], correct: 0},
-    {q: "What is 5 × 3?", options: ["15", "8", "12", "20"], correct: 0},
-    {q: "What is 10 ÷ 2?", options: ["5", "8", "2", "20"], correct: 0},
-    {q: "What is 8 - 3?", options: ["5", "11", "4", "6"], correct: 0},
-    {q: "Square root of 16?", options: ["4", "8", "2", "16"], correct: 0},
-    {q: "What is 2³?", options: ["6", "8", "9", "4"], correct: 1},
-    {q: "What is 50% of 100?", options: ["50", "25", "75", "100"], correct: 0},
-    {q: "What is the value of π (pi)?", options: ["3.14", "2.71", "1.41", "1.73"], correct: 0},
-    {q: "Which of the following best defines a set?", options: ["A group of repeated elements", "A collection of random objects", "A collection of well-defined and distinct objects", "A list of infinite numbers"], correct: 2},
-    {q: "What does the notation a ∈ A signify?", options: ["a is not in set A", "a is a subset of A", "a is an element of set A", "a is equal to A"], correct: 2},
-    {q: "Which of the following is a proper subset?", options: ["{1, 2, 3} = {1, 2, 3}", "{2, 4} ⊆ {2, 4, 6}", "{a, b} ⊇ {a, b, c}", "{x, y, z} = {z, y, x, x}"], correct: 1},
-    {q: "Two sets A and B are equal if:", options: ["A ⊆ B only", "B ⊆ A only", "A ∩ B = ∅", "A ⊆ B and B ⊆ A"], correct: 3},
-    {q: "Which of the following is an empty set?", options: ["{0}", "{x: x is a prime number less than 2}", "{1, 2, 3}", "{x: x is even and odd}"], correct: 3},
-    {q: "The union of sets A and B includes:", options: ["Only elements in A", "Only elements in B", "Elements in both A and B", "Elements in A or B or both"], correct: 3},
-    {q: "The intersection of two sets A and B is defined as:", options: ["A ∪ B", "A \\ B", "A ∩ B", "A ⊆ B"], correct: 2},
-    {q: "The complement of a set A includes:", options: ["Elements in A", "Elements not in A", "Elements in A ∩ B", "Elements in A ∪ B"], correct: 1},
-    {q: "If A = {1, 2, 3} and B = {3, 4, 5}, then A \\ B is:", options: ["{3}", "{1, 2}", "{4, 5}", "{1, 2, 4, 5}"], correct: 1},
-    {q: "The symmetric difference A Δ B is equivalent to:", options: ["A ∩ B", "A ∪ B", "(A \\ B) ∪ (B \\ A)", "A ⊆ B"], correct: 2},
-    {q: "Two sets are disjoint if:", options: ["A ∪ B = ∅", "A ∩ B = ∅", "A = B", "A ⊆ B"], correct: 1},
-    {q: "The cardinality of the set {a, b, c, d} is:", options: ["3", "4", "5", "0"], correct: 1},
-    {q: "Which of the following is a Venn diagram used to represent?", options: ["Only finite sets", "Only infinite sets", "Set operations", "Number lines"], correct: 2},
-    {q: "Which of the following is true about the identity law in set theory?", options: ["A ∪ ∅ = ∅", "A ∩ ∅ = A", "A ∪ ∅ = A", "A ∩ U = ∅"], correct: 2},
-    {q: "According to De Morgan’s Law, (A ∪ B)ᶜ equals:", options: ["Aᶜ ∪ Bᶜ", "Aᶜ ∩ Bᶜ", "Aᶜ", "Bᶜ"], correct: 1},
-    {q: "Which of the following sets is finite?", options: ["{x: x ∈ N and x < 100}", "{x: x is a real number}", "{x: x is irrational}", "{x: x ∈ Z}"], correct: 0},
-    {q: "A set is countable if:", options: ["It is infinite and unstructured", "It has no elements", "It can be listed in a sequence", "It contains only real numbers"], correct: 2},
-    {q: "Which of the following is an uncountable set?", options: ["N", "Q", "{1, 2, 3}", "R"], correct: 3},
-    {q: "Which of the following is a rational number?", options: ["√2", "π", "3/4", "e"], correct: 2},
-    {q: "Which of the following is an irrational number?", options: ["1/2", "0.25", "√3", "4"], correct: 2},
-    {q: "The set of complex numbers is denoted by:", options: ["R", "Q", "C", "Z"], correct: 2},
-    {q: "The imaginary unit i is defined as:", options: ["√1", "√0", "√−1", "-1"], correct: 2},
-    {q: "Which of the following is a composite number?", options: ["2", "3", "5", "6"], correct: 3},
-    {q: "Which of the following is NOT a property of mathematical induction?", options: ["Base case", "Inductive step", "Contrapositive", "Generalization"], correct: 2},
-    {q: "The sum of the first n natural numbers is given by:", options: ["n(n - 1)/2", "n(n + 1)/2", "n²", "n + 1"], correct: 1},
-    {q: "Which of the following is a sequence?", options: ["{1, 2, 3, 4}", "1 + 2 + 3 + 4", "a₁, a₂, a₃,...", "1, 2, 3, 4, 5"], correct: 2},
-    {q: "The general term of the sequence 1, 3, 5, 7,... is:", options: ["aₙ = n + 1", "aₙ = 2n", "aₙ = 2n - 1", "aₙ = n²"], correct: 2},
-    {q: "The sequence 1, 4, 9, 16,... has a general term:", options: ["aₙ = n", "aₙ = 2n", "aₙ = n²", "aₙ = 2n + 1"], correct: 2},
-    {q: "A series is defined as:", options: ["A list of numbers", "A set of elements", "A sum of sequence terms", "A product of numbers"], correct: 2},
-    {q: "Which of the following is an arithmetic progression?", options: ["1, 2, 4, 8", "2, 4, 6, 8", "1, 3, 6, 10", "1, 4, 9, 16"], correct: 1},
-    {q: "The nth term of an A.P. is given by:", options: ["Tₙ = a × rⁿ", "Tₙ = a + (n - 1)d", "Tₙ = a - d", "Tₙ = a + nd"], correct: 1},
-    {q: "The sum of the first n terms of an A.P. is:", options: ["Sₙ = n/2 [2a + (n - 1)d]", "Sₙ = a + nd", "Sₙ = a × rⁿ", "Sₙ = n(a + d)"], correct: 0},
-    {q: "Which of the following is a geometric progression?", options: ["1, 2, 3, 4", "2, 4, 8, 16", "1, 3, 5, 7", "1, 4, 9, 16"], correct: 1},
-    {q: "The nth term of a G.P. is given by:", options: ["Tₙ = a + (n - 1)d", "Tₙ = a × rⁿ⁻¹", "Tₙ = a × n", "Tₙ = a + r"], correct: 1},
-    {q: "Which of the following sequences has a common ratio of -2?", options: ["1, -2, 4, -8", "2, 4, 6, 8", "1, 3, 5, 7", "1, 2, 3, 4"], correct: 0},
-    {q: "If a = 2 and r = 3, what is the 4th term of the G.P.?", options: ["18", "54", "24", "16"], correct: 1},
-    {q: "Which of the following is NOT a property of sets?", options: ["Idempotent law", "Associative law", "Distributive law", "Transitive law"], correct: 3},
-    {q: "Which of the following is true about the empty set ∅?", options: ["It contains one element", "It is infinite", "It is a subset of every set", "It is equal to the universal set"], correct: 2},
-    {q: "The power set of {a, b} contains how many elements?", options: ["2", "3", "4", "5"], correct: 2},
-    {q: "Which of the following is a unit set?", options: ["{}", "{a}", "{a, b}", "{{}}"], correct: 1},
-    {q: "Which of the following is a correct representation of a set in set-builder notation?", options: ["{1, 2, 3}", "{x: x is even}", "{x ∈ N: x > 5}", "{1, 2, 3, ...}"], correct: 1},
-    {q: "What is the degree of the polynomial P(x) = 5x⁴ - 2x³ + 7x - 1?", options: ["1", "3", "4", "5"], correct: 2}
-],
-            // --- NEW COURSES ADDED BELOW ---
-            CHS101: [
-                {q: "What is the primary purpose of a security and safety management system?", options: ["To increase profits", "To protect assets, people, and the environment", "To simplify administrative tasks", "To monitor employee performance"], correct: 1},
-                {q: "The 'A' in the CIA triad of information security stands for:", options: ["Authority", "Authenticity", "Availability", "Accountability"], correct: 2},
-                {q: "What is the first step in a risk assessment process?", options: ["Implementing controls", "Monitoring and review", "Identifying hazards and risks", "Analyzing the severity of harm"], correct: 2},
-                {q: "A near miss is defined as:", options: ["An incident causing major injury", "An incident causing property damage", "An unplanned event that did not result in injury or damage, but had the potential to", "A successful safety drill"], correct: 2},
-                {q: "What is the main characteristic of a fire's Class A rating?", options: ["Flammable liquids", "Electrical equipment", "Ordinary combustibles (wood, paper)", "Combustible metals"], correct: 2},
-                {q: "The best fire extinguisher type for a Class C (electrical) fire is typically:", options: ["Water (APW)", "Foam", "Dry Chemical (DCP)", "Carbon Dioxide (CO2)"], correct: 3},
-                {q: "What does PPE stand for?", options: ["Personal Program Equipment", "Pre-Planned Events", "Personal Protective Equipment", "Public Protection Element"], correct: 2},
-                {q: "Hazard identification should be:", options: ["Done once a year", "Continuous and proactive", "Only performed after an incident", "Only performed by safety experts"], correct: 1},
-                {q: "What is the primary goal of an Incident Response Plan?", options: ["To assign blame", "To minimize damage and restore normal operations quickly", "To file insurance claims", "To prevent all future incidents"], correct: 1},
-                {q: "Ergonomics focuses on:", options: ["The aesthetic design of workspaces", "The relationship between a worker and their environment", "The chemical hazards in a lab", "The financial management of a company"], correct: 1},
-                {q: "Which of these is a form of access control?", options: ["CCTV cameras", "Fire extinguishers", "Password authentication", "Safety signage"], correct: 2},
-                {q: "The term 'Confidentiality' in security ensures that:", options: ["Data is only available to authorized users", "Data is accurate and complete", "Systems are always operational", "Users can be tracked by their actions"], correct: 0},
-                {q: "What is a 'LOTO' procedure used for in industrial safety?", options: ["Lifting Objects Together Only", "Lockout/Tagout", "Logging of Training Outcomes", "Local Office Temperature Optimization"], correct: 1},
-                {q: "What is the most effective way to communicate a new safety policy?", options: ["Post it in a rarely visited location", "Send a single email", "Use multiple channels (training, signs, meetings)", "Only tell supervisors"], correct: 2},
-                {q: "What is the significance of an SDS (Safety Data Sheet)?", options: ["It lists employee contact information", "It provides detailed information on hazardous chemicals", "It contains the company's emergency response phone numbers", "It tracks safety inspection dates"], correct: 1},
-                {q: "The hierarchy of controls suggests which method is the most effective?", options: ["Personal Protective Equipment (PPE)", "Substitution", "Elimination", "Administrative Controls"], correct: 2},
-                {q: "What is 'phishing'?", options: ["A type of physical surveillance", "An attempt to obtain sensitive information by disguising as a trustworthy entity", "A form of data backup", "A network diagnostic tool"], correct: 1},
-                {q: "Which fire triangle element is removed by using a CO2 extinguisher?", options: ["Heat", "Fuel", "Oxygen", "Chain Reaction"], correct: 2},
-                {q: "What does 'Integrity' in the CIA triad refer to?", options: ["Ensuring that data is correct and unaltered", "Ensuring systems are physically secure", "Ensuring fast network speed", "Ensuring only administrators can log in"], correct: 0},
-                {q: "A Job Safety Analysis (JSA) is used to:", options: ["Review salary performance", "Break down a job into steps and identify hazards at each step", "Calculate worker productivity", "Manage time off requests"], correct: 1},
-                {q: "What is the primary concern when managing portable electrical tools?", options: ["Color of the casing", "Electrical shock and fire hazards", "Brand name of the tool", "The weight of the tool"], correct: 1},
-                {q: "A root cause analysis (RCA) is performed to:", options: ["Quickly fix a visible problem", "Determine the underlying reason why an incident occurred", "Punish the people involved in an incident", "Check the compliance status of the facility"], correct: 1},
-                {q: "Which factor is most important in determining the effectiveness of a safety training program?", options: ["The number of people who attended", "The quality of the follow-up and retention of knowledge", "The cost of the training materials", "The length of the presentation"], correct: 1},
-                {q: "In a workplace, 'Housekeeping' primarily refers to:", options: ["Cleaning the floor once a week", "Maintaining order and cleanliness to prevent hazards", "Decorating the office for holidays", "Managing the organization's financial records"], correct: 1},
-                {q: "What is 'Two-Factor Authentication' (2FA)?", options: ["Using two different passwords", "A security process requiring two different methods of verification", "Logging in twice in a row", "Having two administrators approve a login"], correct: 1}
-            ],
-            CHM101: [
-                {q: "What is the SI unit for the amount of substance?", options: ["Kilogram", "Mole", "Gram", "Liter"], correct: 1},
-                {q: "Which of the following is a physical change?", options: ["Burning wood", "Rusting of iron", "Dissolving sugar in water", "Cooking an egg"], correct: 2},
-                {q: "The number of protons in an atom is known as its:", options: ["Mass number", "Atomic number", "Neutron number", "Isotope number"], correct: 1},
-                {q: "Which state of matter has a definite volume but no definite shape?", options: ["Solid", "Liquid", "Gas", "Plasma"], correct: 1},
-                {q: "An ion with a net positive charge is called a(n):", options: ["Anion", "Cation", "Isotope", "Electron"], correct: 1},
-                {q: "The chemical symbol for Gold is:", options: ["Ag", "Au", "Gd", "Ge"], correct: 1},
-                {q: "What is the maximum number of electrons that can be held in the second energy shell (n=2)?", options: ["2", "8", "18", "32"], correct: 1},
-                {q: "What type of bond is formed when electrons are shared between two atoms?", options: ["Ionic bond", "Metallic bond", "Covalent bond", "Hydrogen bond"], correct: 2},
-                {q: "A substance that dissolves another substance is called the:", options: ["Solute", "Solvent", "Solution", "Precipitate"], correct: 1},
-                {q: "What is the approximate molar mass of water (H₂O)? (Atomic masses: H=1, O=16)", options: ["17 g/mol", "18 g/mol", "16 g/mol", "20 g/mol"], correct: 1},
-                {q: "Which of the following elements is a noble gas?", options: ["Nitrogen", "Oxygen", "Neon", "Chlorine"], correct: 2},
-                {q: "An atom that loses an electron becomes:", options: ["Neutral", "A cation", "An anion", "An isotope"], correct: 1},
-                {q: "What is the common name for NaCl?", options: ["Baking soda", "Table sugar", "Table salt", "Vinegar"], correct: 2},
-                {q: "Boyle's Law relates which two variables of a gas at constant temperature?", options: ["Volume and Temperature", "Pressure and Temperature", "Pressure and Volume", "Volume and Moles"], correct: 2},
-                {q: "A reaction in which heat is absorbed from the surroundings is called:", options: ["Exothermic", "Endothermic", "Combustion", "Neutralization"], correct: 1},
-                {q: "The process of a solid turning directly into a gas is called:", options: ["Evaporation", "Condensation", "Sublimation", "Melting"], correct: 2},
-                {q: "What is the pH of a neutral solution at 25°C?", options: ["0", "7", "14", "10"], correct: 1},
-                {q: "Which scientist is credited with developing the periodic table?", options: ["Ernest Rutherford", "Niels Bohr", "Dmitri Mendeleev", "John Dalton"], correct: 2},
-                {q: "The outermost electrons of an atom are called:", options: ["Core electrons", "Valence electrons", "Transition electrons", "Inner electrons"], correct: 1},
-                {q: "The Law of Conservation of Mass states that in a chemical reaction:", options: ["Mass is always lost", "New elements are created", "Mass is neither created nor destroyed", "Volume is conserved"], correct: 2},
-                {q: "What is the oxidation number of oxygen in most compounds?", options: ["+2", "-1", "-2", "0"], correct: 2},
-                {q: "A catalyst is a substance that:", options: ["Is consumed in the reaction", "Changes the products", "Increases the reaction rate without being consumed", "Decreases the energy of the products"], correct: 2},
-                {q: "The splitting of a heavy nucleus into two smaller nuclei is called:", options: ["Fusion", "Fission", "Ionization", "Sublimation"], correct: 1},
-                {q: "In organic chemistry, a hydrocarbon that contains only single bonds is classified as a(n):", options: ["Alkene", "Alkyne", "Alkane", "Aromatic compound"], correct: 2},
-                {q: "What color does litmus paper turn in a basic (alkaline) solution?", options: ["Red", "Green", "Blue", "Yellow"], correct: 2},
-                {q: "How many milliliters are in one liter?", options: ["10", "100", "1000", "10000"], correct: 2},
-                {q: "The energy required to remove an electron from a gaseous atom is called:", options: ["Electronegativity", "Ionization energy", "Electron affinity", "Atomic radius"], correct: 1},
-                {q: "Which element is the most electronegative on the periodic table?", options: ["Oxygen", "Chlorine", "Fluorine", "Nitrogen"], correct: 2},
-                {q: "Isotopes are atoms of the same element that have different numbers of:", options: ["Protons", "Electrons", "Neutrons", "Nuclei"], correct: 2},
-                {q: "What is the maximum number of covalent bonds a carbon atom can typically form?", options: ["2", "3", "4", "5"], correct: 2},
-                {q: "A homogenous mixture is one that:", options: ["Has visible distinct parts", "Has a uniform composition throughout", "Is only composed of metals", "Always separates into layers"], correct: 1},
-                {q: "Which piece of lab equipment is primarily used to measure the volume of a liquid precisely?", options: ["Beaker", "Erlenmeyer flask", "Graduated cylinder", "Watch glass"], correct: 2}
-            ]
+            PHY101: [{q: "SI unit of force?", opts: ["Joule", "Newton", "Watt", "Pascal"], ans: 1}, {q: "Acceleration due to gravity?", opts: ["9.8 m/s²", "10 m/s²", "8.9 m/s²", "11 m/s²"], ans: 0}, {q: "Newton's first law?", opts: ["Law of inertia", "Law of acceleration", "Law of action", "Law of momentum"], ans: 0}, {q: "Kinetic energy formula?", opts: ["mgh", "1/2 mv²", "mv", "Fd"], ans: 1}, {q: "SI unit of work?", opts: ["Newton", "Joule", "Watt", "Pascal"], ans: 1}, {q: "Power definition?", opts: ["Work/Time", "Force×Distance", "Mass×Velocity", "Force×Time"], ans: 0}, {q: "Momentum?", opts: ["Mass×Velocity", "Mass×Acceleration", "Force×Time", "Work/Time"], ans: 0}, {q: "SI unit of pressure?", opts: ["Newton", "Pascal", "Joule", "Watt"], ans: 1}, {q: "Speed of light?", opts: ["3×10⁸ m/s", "3×10⁶ m/s", "3×10⁷ m/s", "3×10⁹ m/s"], ans: 0}, {q: "F = ma?", opts: ["First Law", "Second Law", "Third Law", "Gravitation"], ans: 1}, {q: "Fundamental quantity?", opts: ["Velocity", "Pressure", "Mass", "Force"], ans: 2}, {q: "Luminous intensity unit?", opts: ["Lux", "Lumen", "Candela", "Watt"], ans: 2}, {q: "Derived quantity?", opts: ["Time", "Length", "Mass", "Velocity"], ans: 3}, {q: "Pressure SI unit?", opts: ["Pascal", "Newton", "Joule", "Watt"], ans: 0}, {q: "Not base SI unit?", opts: ["Kilogram", "Second", "Radian", "Mole"], ans: 2}, {q: "Dimensionless quantity?", opts: ["Acceleration", "Strain", "Force", "Pressure"], ans: 1}, {q: "Electric charge unit?", opts: ["Ampere", "Coulomb", "Volt", "Ohm"], ans: 1}, {q: "Incorrect pair?", opts: ["Hertz–Frequency", "Tesla–Flux", "Farad–Capacitance", "Watt–Power"], ans: 1}, {q: "Pressure dimension?", opts: ["ML⁻¹T⁻²", "MLT⁻²", "MLT⁻¹", "M²L²T⁻²"], ans: 0}, {q: "Energy unit?", opts: ["Watt", "Joule", "Newton", "Pascal"], ans: 1}, {q: "Potential difference unit?", opts: ["Ampere", "Coulomb", "Volt", "Ohm"], ans: 2}, {q: "Magnetic flux unit?", opts: ["Tesla", "Weber", "Henry", "Farad"], ans: 1}, {q: "Not derived unit?", opts: ["Newton", "Joule", "Kilogram", "Pascal"], ans: 2}, {q: "Acceleration dimension?", opts: ["LT⁻²", "L²T⁻²", "MT⁻²", "MLT⁻¹"], ans: 0}, {q: "Power SI unit?", opts: ["Joule", "Watt", "Newton", "Volt"], ans: 1}, {q: "Surface tension dimension?", opts: ["MT⁻²", "ML⁻¹T⁻²", "MLT⁻²", "ML²T⁻²"], ans: 0}, {q: "Viscosity dimension?", opts: ["ML⁻¹T⁻¹", "MLT⁻²", "MLT⁻¹", "ML²T⁻²"], ans: 0}, {q: "Gravitational constant dimension?", opts: ["M⁻¹L³T⁻²", "ML²T⁻²", "MLT⁻²", "M²L⁻²T⁻²"], ans: 0}, {q: "Specific heat unit?", opts: ["Jkg⁻¹K⁻¹", "Jm⁻¹K⁻¹", "JkgK", "JmK⁻¹"], ans: 0}, {q: "Incorrect dimension?", opts: ["Charge–TI", "Resistance–ML²T⁻³I⁻²", "Field–MLT⁻³I⁻¹", "Capacitance–M⁻¹L⁻²T⁴I²"], ans: 0}, {q: "Inductance dimension?", opts: ["ML²T⁻²I⁻²", "MLT⁻²", "ML²T⁻³", "M⁻¹L²T²"], ans: 0}, {q: "Magnetic field dimension?", opts: ["L⁻¹I", "MLT⁻²", "ML²T⁻²", "MLT⁻³"], ans: 0}, {q: "Electric power dimension?", opts: ["ML²T⁻³", "MLT⁻²", "ML²T⁻²", "MLT⁻³"], ans: 0}, {q: "Capacitance dimension?", opts: ["M⁻¹L⁻²T⁴I²", "ML²T⁻²", "MLT⁻²", "ML⁻¹T⁻²"], ans: 0}, {q: "Potential dimension?", opts: ["ML²T⁻³I⁻¹", "MLT⁻²", "ML²T⁻²", "MLT⁻³"], ans: 0}, {q: "Scalar quantity?", opts: ["Force", "Acceleration", "Pressure", "Displacement"], ans: 2}, {q: "Vector quantity?", opts: ["Time", "Mass", "Velocity", "Temperature"], ans: 2}, {q: "Unit vector magnitude?", opts: ["0", "1", "√2", "Undefined"], ans: 1}, {q: "i × j =?", opts: ["i", "j", "k", "0"], ans: 2}, {q: "i · i =?", opts: ["0", "1", "-1", "k"], ans: 1}, {q: "(3i+2j) + (2i+4j) =?", opts: ["5i+6j", "i-2j", "6i+8j", "3i+2j"], ans: 0}, {q: "(5i-3j) - (2i+4j) =?", opts: ["3i-7j", "7i+j", "-3i+7j", "3i+j"], ans: 0}, {q: "|3i+4j| =?", opts: ["5", "7", "1", "25"], ans: 0}, {q: "Perpendicular vectors dot?", opts: ["1", "0", "-1", "Undefined"], ans: 1}, {q: "Parallel vectors cross?", opts: ["Maximum", "Zero", "Negative", "Undefined"], ans: 1}, {q: "(2i+3j+k)·(-4i+2j-k) =?", opts: ["-3", "3", "0", "5"], ans: 0}, {q: "Angle between vectors uses?", opts: ["Cross", "Sum", "Dot", "Difference"], ans: 2}, {q: "(2i-j+k)×(i+2j-2k) =?", opts: ["5j+5k", "-j+3k", "5j-5k", "5j+k"], ans: 2}, {q: "|A×B| =?", opts: ["AB cosθ", "AB sinθ", "A+B", "A-B"], ans: 1}, {q: "Vector addition is?", opts: ["Not associative", "Not commutative", "Both", "Distributive only"], ans: 2}],
+            CSC101: [{q: "PC stands for?", opts: ["Personal Computer", "Public Computer", "Private Computer", "Professional Computer"], ans: 0}, {q: "Motherboard is?", opts: ["Main circuit board", "Power supply", "Storage device", "Display unit"], ans: 0}, {q: "BIOS stands for?", opts: ["Basic Input Output System", "Binary Input Output System", "Basic Internal OS", "Binary Internal OS"], ans: 0}, {q: "RAM function?", opts: ["Temporary storage", "Permanent storage", "Processing", "Display"], ans: 0}, {q: "Hard disk is?", opts: ["Storage device", "Input device", "Output device", "Processing unit"], ans: 0}, {q: "SSD stands for?", opts: ["Solid State Drive", "Super Storage Drive", "System State Drive", "Solid Storage Device"], ans: 0}, {q: "Power supply purpose?", opts: ["Provide electricity", "Store data", "Process info", "Display output"], ans: 0}, {q: "GPU stands for?", opts: ["Graphics Processing Unit", "General Processing Unit", "Graphics Program Unit", "General Program Unit"], ans: 0}, {q: "IPO model?", opts: ["Input-Program-Output", "Input-Process-Output", "Instruction-Processing-Operation", "Input-Peripheral-Output"], ans: 1}, {q: "Data vs information?", opts: ["Data processed; info raw", "Data numeric; info text", "Data raw; info meaningful", "Data stored; info deleted"], ans: 2}, {q: "Most error-prone processing?", opts: ["Mechanical", "Manual", "Computerized", "Automated"], ans: 1}, {q: "Mechanical processing limit?", opts: ["Needs programming", "Can't use in offices", "Noisy and error-prone", "Too fast"], ans: 2}, {q: "First microcomputer year?", opts: ["1965", "1975", "1985", "1995"], ans: 1}, {q: "NOT EDP benefit?", opts: ["Speed", "Accuracy", "Manual entry", "Reliability"], ans: 2}, {q: "Program is?", opts: ["Hardware type", "Instruction sequence", "Storage unit", "Peripheral"], ans: 1}, {q: "CAI example?", opts: ["ATM", "Smart board", "Antivirus", "BIOS"], ans: 1}, {q: "MYCIN used in?", opts: ["Education", "Entertainment", "Medical diagnosis", "Gaming"], ans: 2}, {q: "CAD used in?", opts: ["Banking", "Industrial design", "Education", "Communication"], ans: 1}, {q: "Auto computers help by?", opts: ["Increasing engine", "Reducing tire wear", "Regulating fuel", "Enhancing paint"], ans: 2}, {q: "Military computer app?", opts: ["Payroll", "Missile control", "Shopping", "Word processing"], ans: 1}, {q: "Banking service?", opts: ["Manual ledger", "ATM transactions", "Handwritten checks", "Paper statements"], ans: 1}, {q: "Real-time video tech?", opts: ["Email", "Telnet", "Video conferencing", "FTP"], ans: 2}, {q: "Computer no fatigue?", opts: ["Speed", "Reliability", "Flexibility", "Storage"], ans: 1}, {q: "RAM volatile because?", opts: ["Stores permanent", "Loses data when off", "Read-only", "For backups"], ans: 1}, {q: "ROM differs because?", opts: ["Faster", "Volatile", "Permanent instructions", "Erasable"], ans: 2}, {q: "SSD shock-resistant why?", opts: ["Heavier", "Magnetic disks", "No moving parts", "Metal"], ans: 2}, {q: "Component connects all?", opts: ["CPU", "RAM", "Motherboard", "SSD"], ans: 2}, {q: "Nuclear simulations use?", opts: ["Microcomputer", "Mainframe", "Supercomputer", "Workstation"], ans: 2}, {q: "Mainframes used by?", opts: ["Freelancers", "Small business", "Large orgs", "Students"], ans: 2}, {q: "Workstations ideal for?", opts: ["Word processing", "CAD apps", "Email", "Browsing"], ans: 1}, {q: "Microcontrollers for?", opts: ["Data centers", "Embedded systems", "Gaming", "Cloud"], ans: 1}, {q: "Capacitive touchscreen detects?", opts: ["Pressure", "Heat", "Electrical conductivity", "Light"], ans: 2}, {q: "Best for digital drawing?", opts: ["Mouse", "Keyboard", "Graphics tablet", "Scanner"], ans: 2}, {q: "Plotter used for?", opts: ["Printing receipts", "Vector graphics", "Scanning docs", "Playing music"], ans: 1}, {q: "PSU converts?", opts: ["Data to info", "Software to hardware", "AC to DC power", "RAM to ROM"], ans: 2}, {q: "CMOS battery powers?", opts: ["RAM", "Hard drive", "BIOS settings", "Monitor"], ans: 2}, {q: "Voltage regulators for?", opts: ["Increase CPU speed", "Stable voltage", "Cool system", "Store data"], ans: 1}, {q: "NICs essential for?", opts: ["Storage", "Network connectivity", "Power", "Audio"], ans: 1}, {q: "Ethernet cables use?", opts: ["Light", "Sound", "Electrical signals", "Infrared"], ans: 2}, {q: "Routers connect?", opts: ["Store data", "Networks", "Print docs", "Scan files"], ans: 1}, {q: "Switches help with?", opts: ["Reducing congestion", "Increasing voltage", "Cooling CPU", "Formatting drives"], ans: 0}, {q: "Patch panels for?", opts: ["Encryption", "Cable management", "Power regulation", "Audio"], ans: 1}, {q: "Crimping tools for?", opts: ["Cut wires", "Attach connectors", "Measure voltage", "Test speed"], ans: 1}, {q: "Powerline adapters use?", opts: ["Fiber optics", "Wireless", "Electrical wiring", "Infrared"], ans: 2}, {q: "GPUs optimized for?", opts: ["Serial processing", "Arithmetic only", "Parallel processing", "Storage"], ans: 2}, {q: "Buffer memory helps?", opts: ["Cooling", "Backup", "Traffic management", "Encryption"], ans: 2}, {q: "Heat sinks for?", opts: ["Store heat", "Prevent overheating", "Increase voltage", "Reduce noise"], ans: 1}, {q: "CMOS lithium batteries?", opts: ["Rechargeable", "Last long", "Heavy", "Magnetic"], ans: 1}, {q: "Component translates input?", opts: ["Monitor", "CPU", "Keyboard", "RAM"], ans: 2}, {q: "Graphics tablets precise why?", opts: ["Use styluses", "Larger", "Wireless", "Have screens"], ans: 0}],
+            MTH101: [{q: "an = 5n-2, 7th term?", opts: ["33", "31", "35", "37"], ans: 0}, {q: "5 × 3 =?", opts: ["15", "8", "12", "20"], ans: 0}, {q: "10 ÷ 2 =?", opts: ["5", "8", "2", "20"], ans: 0}, {q: "8 - 3 =?", opts: ["5", "11", "4", "6"], ans: 0}, {q: "√16 =?", opts: ["4", "8", "2", "16"], ans: 0}, {q: "2³ =?", opts: ["6", "8", "9", "4"], ans: 1}, {q: "50% of 100?", opts: ["50", "25", "75", "100"], ans: 0}, {q: "π value?", opts: ["3.14", "2.71", "1.41", "1.73"], ans: 0}, {q: "Set definition?", opts: ["Repeated elements", "Random objects", "Well-defined distinct objects", "Infinite numbers"], ans: 2}, {q: "a ∈ A means?", opts: ["Not in A", "Subset of A", "Element of A", "Equal to A"], ans: 2}, {q: "Proper subset?", opts: ["{1,2,3}={1,2,3}", "{2,4}⊆{2,4,6}", "{a,b}⊇{a,b,c}", "{x,y,z}={z,y,x,x}"], ans: 1}, {q: "A=B if?", opts: ["A⊆B only", "B⊆A only", "A∩B=∅", "A⊆B and B⊆A"], ans: 3}, {q: "Empty set?", opts: ["{0}", "{prime<2}", "{1,2,3}", "{even and odd}"], ans: 3}, {q: "A∪B includes?", opts: ["Only A", "Only B", "Both A and B", "A or B or both"], ans: 3}, {q: "A∩B defined as?", opts: ["A∪B", "A\\B", "A∩B", "A⊆B"], ans: 2}, {q: "Complement includes?", opts: ["In A", "Not in A", "In A∩B", "In A∪B"], ans: 1}, {q: "A={1,2,3}, B={3,4,5}, A\\B?", opts: ["{3}", "{1,2}", "{4,5}", "{1,2,4,5}"], ans: 1}, {q: "AΔB equivalent to?", opts: ["A∩B", "A∪B", "(A\\B)∪(B\\A)", "A⊆B"], ans: 2}, {q: "Disjoint sets if?", opts: ["A∪B=∅", "A∩B=∅", "A=B", "A⊆B"], ans: 1}, {q: "{a,b,c,d} cardinality?", opts: ["3", "4", "5", "0"], ans: 1}, {q: "Venn diagram for?", opts: ["Finite only", "Infinite only", "Set operations", "Number lines"], ans: 2}, {q: "Identity law?", opts: ["A∪∅=∅", "A∩∅=A", "A∪∅=A", "A∩U=∅"], ans: 2}, {q: "De Morgan: (A∪B)ᶜ =?", opts: ["Aᶜ∪Bᶜ", "Aᶜ∩Bᶜ", "Aᶜ", "Bᶜ"], ans: 1}, {q: "Finite set?", opts: ["{x∈N:x<100}", "{x real}", "{x irrational}", "{x∈Z}"], ans: 0}, {q: "Countable set?", opts: ["Infinite unstructured", "No elements", "Listed in sequence", "Only real"], ans: 2}, {q: "Uncountable set?", opts: ["N", "Q", "{1,2,3}", "R"], ans: 3}, {q: "Rational number?", opts: ["√2", "π", "3/4", "e"], ans: 2}, {q: "Irrational number?", opts: ["1/2", "0.25", "√3", "4"], ans: 2}, {q: "Complex numbers?", opts: ["R", "Q", "C", "Z"], ans: 2}, {q: "i defined as?", opts: ["√1", "√0", "√−1", "-1"], ans: 2}, {q: "Composite number?", opts: ["2", "3", "5", "6"], ans: 3}, {q: "NOT induction property?", opts: ["Base case", "Inductive step", "Contrapositive", "Generalization"], ans: 2}, {q: "Sum first n naturals?", opts: ["n(n-1)/2", "n(n+1)/2", "n²", "n+1"], ans: 1}, {q: "Sequence is?", opts: ["{1,2,3,4}", "1+2+3+4", "a₁,a₂,a₃,...", "1,2,3,4,5"], ans: 2}, {q: "1,3,5,7,... general term?", opts: ["n+1", "2n", "2n-1", "n²"], ans: 2}, {q: "1,4,9,16,... term?", opts: ["n", "2n", "n²", "2n+1"], ans: 2}, {q: "Series defined as?", opts: ["Number list", "Element set", "Sum of terms", "Number product"], ans: 2}, {q: "Arithmetic progression?", opts: ["1,2,4,8", "2,4,6,8", "1,3,6,10", "1,4,9,16"], ans: 1}, {q: "AP nth term?", opts: ["a×rⁿ", "a+(n-1)d", "a-d", "a+nd"], ans: 1}, {q: "AP sum formula?", opts: ["n/2[2a+(n-1)d]", "a+nd", "a×rⁿ", "n(a+d)"], ans: 0}, {q: "Geometric progression?", opts: ["1,2,3,4", "2,4,8,16", "1,3,5,7", "1,4,9,16"], ans: 1}, {q: "GP nth term?", opts: ["a+(n-1)d", "a×rⁿ⁻¹", "a×n", "a+r"], ans: 1}, {q: "Ratio -2 sequence?", opts: ["1,-2,4,-8", "2,4,6,8", "1,3,5,7", "1,2,3,4"], ans: 0}, {q: "a=2, r=3, 4th term?", opts: ["18", "54", "24", "16"], ans: 1}, {q: "NOT set property?", opts: ["Idempotent", "Associative", "Distributive", "Transitive"], ans: 3}, {q: "Empty set ∅?", opts: ["One element", "Infinite", "Subset of every set", "Universal set"], ans: 2}, {q: "Power set {a,b} elements?", opts: ["2", "3", "4", "5"], ans: 2}, {q: "Unit set?", opts: ["{}", "{a}", "{a,b}", "{{}}"], ans: 1}, {q: "Set-builder notation?", opts: ["{1,2,3}", "{x:even}", "{x∈N:x>5}", "{1,2,3,...}"], ans: 1}, {q: "P(x)=5x⁴-2x³+7x-1 degree?", opts: ["1", "3", "4", "5"], ans: 2}],
+            BIO101: [{q: "Cell discovered 1665?", opts: ["Darwin", "Hooke", "Schleiden", "Schwann"], ans: 1}, {q: "Cell theory year?", opts: ["1665", "1839", "1858", "1900"], ans: 1}, {q: "NOT cell theory?", opts: ["All cells", "Mitochondria", "Pre-existing", "Vital functions"], ans: 1}, {q: "Prokaryotic nuclear region?", opts: ["Nucleus", "Nucleoid", "Nucleolus", "Membrane"], ans: 1}, {q: "Bacteria lacks wall?", opts: ["E.coli", "Mycoplasma", "Staph", "Strep"], ans: 1}, {q: "Bacterial wall of?", opts: ["Cellulose", "Chitin", "Peptidoglycan", "Lignin"], ans: 2}, {q: "Eukaryotic wider by?", opts: ["5×", "10×", "15×", "20×"], ans: 2}, {q: "Prokaryotic ribosomes?", opts: ["60S", "70S", "80S", "90S"], ans: 1}, {q: "Mitochondria function?", opts: ["Protein synthesis", "Photosynthesis", "ATP production", "Division"], ans: 2}, {q: "Protein packaging?", opts: ["ER", "Golgi", "Lysosome", "Ribosome"], ans: 1}, {q: "Lysosomes contain?", opts: ["DNA", "RNA", "Enzymes", "Chlorophyll"], ans: 2}, {q: "Controls cell?", opts: ["Mitochondrion", "Nucleus", "Ribosome", "Golgi"], ans: 1}, {q: "Photosynthesis in?", opts: ["Mitochondrion", "Chloroplast", "Lysosome", "Peroxisome"], ans: 1}, {q: "ER with ribosomes?", opts: ["Smooth", "Rough", "Both", "Neither"], ans: 1}, {q: "Centrioles in?", opts: ["Plant only", "Animal only", "Bacterial", "All types"], ans: 1}, {q: "Plant vacuole membrane?", opts: ["Plasma", "Tonoplast", "Wall", "Nuclear"], ans: 1}, {q: "Swedish botanist?", opts: ["Darwin", "Linnaeus", "Hooke", "Haeckel"], ans: 1}, {q: "Modern kingdoms?", opts: ["Two", "Three", "Four", "Five"], ans: 3}, {q: "Monera consists of?", opts: ["Fungi algae", "Bacteria algae", "Protozoa algae", "Plants animals"], ans: 1}, {q: "Protista mostly?", opts: ["Multi nucleus", "Uni no nucleus", "Uni nucleus", "Multi no nucleus"], ans: 2}, {q: "Fungal walls of?", opts: ["Cellulose", "Chitin", "Peptidoglycan", "Starch"], ans: 1}, {q: "Fungal filaments?", opts: ["Hypha", "Mycelium", "Sporangium", "Rhizoid"], ans: 1}, {q: "Naked seeds?", opts: ["Angiosperms", "Gymnosperms", "Bryophytes", "Pteridophytes"], ans: 1}, {q: "Bryophytes characterized by?", opts: ["Vascular", "Sporophyte", "Water fertilization", "True roots"], ans: 2}, {q: "Fern leaves?", opts: ["Fronds", "Blades", "Needles", "Scales"], ans: 0}, {q: "Seeds enclosed in?", opts: ["Cones", "Fruits", "Spores", "Rhizomes"], ans: 1}, {q: "Asexual reproduction?", opts: ["Two parents", "Gamete fusion", "Single parent", "Meiosis"], ans: 2}, {q: "NOT asexual?", opts: ["Fission", "Budding", "Fragmentation", "Fertilization"], ans: 3}, {q: "Sperm + egg =?", opts: ["Gamete", "Zygote", "Spore", "Bud"], ans: 1}, {q: "Meiosis produces?", opts: ["Diploid", "Haploid", "Triploid", "Polyploid"], ans: 1}, {q: "Separate sexes?", opts: ["Hermaphroditic", "Unisexual", "Parthenogenetic", "Bisexual"], ans: 1}, {q: "Parthenogenesis involves?", opts: ["Two parents", "Fertilized eggs", "Unfertilized offspring", "Spores"], ans: 2}, {q: "Oviparity eggs?", opts: ["Internal", "External", "Never", "Unfertilized"], ans: 1}, {q: "Viviparity characterized by?", opts: ["External egg", "Yolk only", "Mother's blood", "Spores"], ans: 2}, {q: "Underground stems?", opts: ["Cuttings", "Rhizomes", "Runners", "Bulbs"], ans: 1}, {q: "Potato tubers?", opts: ["Modified roots", "Storage stems", "Runners", "Bulbs"], ans: 1}, {q: "Basic inheritance unit?", opts: ["Chromosome", "Gene", "Nucleotide", "Allele"], ans: 1}, {q: "Mendel First Law?", opts: ["Independent", "Segregation", "Dominance", "Linkage"], ans: 1}, {q: "DD×dd F1?", opts: ["All DD", "All dd", "All Dd", "1:2:1"], ans: 2}, {q: "Monohybrid F2 phenotype?", opts: ["1:1", "1:2:1", "3:1", "9:3:3:1"], ans: 2}, {q: "Monohybrid F2 genotype?", opts: ["1:1", "1:2:1", "3:1", "9:3:3:1"], ans: 1}, {q: "Mendel Second Law?", opts: ["Segregation", "Independent", "Dominance", "Linkage"], ans: 1}, {q: "Dihybrid trait pairs?", opts: ["One", "Two", "Three", "Four"], ans: 1}, {q: "Dihybrid F2 ratio?", opts: ["3:1", "1:2:1", "9:3:3:1", "1:1:1:1"], ans: 2}, {q: "Identical alleles?", opts: ["Heterozygous", "Homozygous", "Hemizygous", "Polygenic"], ans: 1}, {q: "Observable characteristics?", opts: ["Genotype", "Phenotype", "Karyotype", "Genome"], ans: 1}, {q: "Lamarck theory?", opts: ["Natural selection", "Use and disuse", "Mutation", "Random variation"], ans: 1}, {q: "Darwin theory based on?", opts: ["Acquired", "Natural selection", "Spontaneous", "Divine"], ans: 1}],
+            CHS101: [{q: "Security system purpose?", opts: ["Increase profits", "Protect assets", "Simplify admin", "Monitor employees"], ans: 1}, {q: "CIA triad 'A'?", opts: ["Authority", "Authenticity", "Availability", "Accountability"], ans: 2}, {q: "Risk assessment first step?", opts: ["Implementing", "Monitoring", "Identifying hazards", "Analyzing severity"], ans: 2}, {q: "Near miss defined as?", opts: ["Major injury", "Property damage", "Potential incident", "Safety drill"], ans: 2}, {q: "Class A fire?", opts: ["Flammable liquids", "Electrical", "Ordinary combustibles", "Metals"], ans: 2}, {q: "Class C extinguisher?", opts: ["Water", "Foam", "Dry Chemical", "CO2"], ans: 3}, {q: "PPE stands for?", opts: ["Program Equipment", "Pre-Planned", "Protective Equipment", "Protection Element"], ans: 2}, {q: "Hazard identification?", opts: ["Once yearly", "Continuous", "After incident", "Experts only"], ans: 1}, {q: "Incident Response goal?", opts: ["Assign blame", "Minimize damage", "File insurance", "Prevent all"], ans: 1}, {q: "Ergonomics focuses on?", opts: ["Aesthetic design", "Worker environment", "Chemical hazards", "Financial management"], ans: 1}, {q: "Access control form?", opts: ["CCTV", "Extinguishers", "Password auth", "Signage"], ans: 2}, {q: "Confidentiality ensures?", opts: ["Authorized only", "Accurate complete", "Always operational", "User tracking"], ans: 0}, {q: "LOTO procedure for?", opts: ["Lifting Objects", "Lockout/Tagout", "Training Logging", "Temperature Optimization"], ans: 1}, {q: "Effective policy communication?", opts: ["Rarely visited", "Single email", "Multiple channels", "Supervisors only"], ans: 2}, {q: "SDS significance?", opts: ["Employee contacts", "Hazardous chemical info", "Emergency phones", "Inspection dates"], ans: 1}, {q: "Most effective control?", opts: ["PPE", "Substitution", "Elimination", "Administrative"], ans: 2}, {q: "Phishing is?", opts: ["Physical surveillance", "Trustworthy disguise", "Data backup", "Diagnostic tool"], ans: 1}, {q: "CO2 removes?", opts: ["Heat", "Fuel", "Oxygen", "Chain Reaction"], ans: 2}, {q: "Integrity refers to?", opts: ["Data unaltered", "Physical security", "Fast network", "Admin login"], ans: 0}, {q: "JSA used to?", opts: ["Salary review", "Identify hazards", "Calculate productivity", "Time off"], ans: 1}, {q: "Electrical tools concern?", opts: ["Casing color", "Shock and fire", "Brand name", "Tool weight"], ans: 1}, {q: "Root cause analysis?", opts: ["Quick fix", "Underlying reason", "Punish people", "Check compliance"], ans: 1}, {q: "Training effectiveness?", opts: ["Attendance number", "Knowledge retention", "Material cost", "Presentation length"], ans: 1}, {q: "Housekeeping refers to?", opts: ["Weekly cleaning", "Prevent hazards", "Holiday decor", "Financial records"], ans: 1}, {q: "2FA is?", opts: ["Two passwords", "Two verification methods", "Login twice", "Two admins"], ans: 1}],
+            CHM101: [{q: "Amount of substance unit?", opts: ["Kilogram", "Mole", "Gram", "Liter"], ans: 1}, {q: "Physical change?", opts: ["Burning wood", "Rusting iron", "Dissolving sugar", "Cooking egg"], ans: 2}, {q: "Protons number is?", opts: ["Mass number", "Atomic number", "Neutron number", "Isotope number"], ans: 1}, {q: "Definite volume no shape?", opts: ["Solid", "Liquid", "Gas", "Plasma"], ans: 1}, {q: "Positive ion?", opts: ["Anion", "Cation", "Isotope", "Electron"], ans: 1}, {q: "Gold symbol?", opts: ["Ag", "Au", "Gd", "Ge"], ans: 1}, {q: "Second shell electrons?", opts: ["2", "8", "18", "32"], ans: 1}, {q: "Shared electrons bond?", opts: ["Ionic", "Metallic", "Covalent", "Hydrogen"], ans: 2}, {q: "Dissolves substance?", opts: ["Solute", "Solvent", "Solution", "Precipitate"], ans: 1}, {q: "Water molar mass?", opts: ["17", "18", "16", "20"], ans: 1}, {q: "Noble gas?", opts: ["Nitrogen", "Oxygen", "Neon", "Chlorine"], ans: 2}, {q: "Loses electron becomes?", opts: ["Neutral", "Cation", "Anion", "Isotope"], ans: 1}, {q: "NaCl common name?", opts: ["Baking soda", "Table sugar", "Table salt", "Vinegar"], ans: 2}, {q: "Boyle's Law relates?", opts: ["Volume Temp", "Pressure Temp", "Pressure Volume", "Volume Moles"], ans: 2}, {q: "Heat absorbed?", opts: ["Exothermic", "Endothermic", "Combustion", "Neutralization"], ans: 1}, {q: "Solid to gas?", opts: ["Evaporation", "Condensation", "Sublimation", "Melting"], ans: 2}, {q: "Neutral pH at 25°C?", opts: ["0", "7", "14", "10"], ans: 1}, {q: "Periodic table?", opts: ["Rutherford", "Bohr", "Mendeleev", "Dalton"], ans: 2}, {q: "Outermost electrons?", opts: ["Core", "Valence", "Transition", "Inner"], ans: 1}, {q: "Conservation of Mass?", opts: ["Always lost", "New elements", "Neither created destroyed", "Volume conserved"], ans: 2}, {q: "Oxygen oxidation number?", opts: ["+2", "-1", "-2", "0"], ans: 2}, {q: "Catalyst is?", opts: ["Consumed", "Changes products", "Increases rate", "Decreases energy"], ans: 2}, {q: "Heavy nucleus splits?", opts: ["Fusion", "Fission", "Ionization", "Sublimation"], ans: 1}, {q: "Only single bonds?", opts: ["Alkene", "Alkyne", "Alkane", "Aromatic"], ans: 2}, {q: "Basic litmus color?", opts: ["Red", "Green", "Blue", "Yellow"], ans: 2}, {q: "mL in liter?", opts: ["10", "100", "1000", "10000"], ans: 2}, {q: "Remove electron energy?", opts: ["Electronegativity", "Ionization energy", "Electron affinity", "Atomic radius"], ans: 1}, {q: "Most electronegative?", opts: ["Oxygen", "Chlorine", "Fluorine", "Nitrogen"], ans: 2}, {q: "Isotopes differ in?", opts: ["Protons", "Electrons", "Neutrons", "Nuclei"], ans: 2}, {q: "Carbon covalent bonds?", opts: ["2", "3", "4", "5"], ans: 2}, {q: "Homogenous mixture?", opts: ["Visible parts", "Uniform composition", "Only metals", "Separates layers"], ans: 1}, {q: "Precise volume measure?", opts: ["Beaker", "Flask", "Graduated cylinder", "Watch glass"], ans: 2}]
         };
 
-        // Global State Variables
-        let currentUser = null;
-        let selectedCourse = null;
-        let questionCount = 10;
-        let timerMinutes = 5;
-        let currentQuestions = [];
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
-        let timerInterval = null;
-        let timeRemaining = 0;
+        // State
+        let user = null;
+        let course = null;
+        let numQuestions = 10;
+        let timeMinutes = 5;
+        let testQuestions = [];
+        let currentQ = 0;
+        let answers = [];
+        let timer = null;
+        let timeLeft = 0;
 
-
-        // --- 2. AUTHENTICATION FUNCTIONS ---
-
+        // Auth Functions
         function showRegister() {
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('registerForm').style.display = 'block';
@@ -1037,554 +877,389 @@ h1, h2, h3, h4, h5, h6, p, label, span {
             document.getElementById('loginForm').style.display = 'block';
         }
 
-        async function register() {
+        async function handleRegister() {
             const name = document.getElementById('regName').value.trim();
             const email = document.getElementById('regEmail').value.trim();
-            const password = document.getElementById('regPassword').value;
-            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            const pass = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('regConfirmPassword').value;
 
-            if (!name || !email || !password || !confirmPassword) return alert('Please fill all fields');
-            if (password !== confirmPassword) return alert('Passwords do not match');
-            if (password.length < 6) return alert('Password must be at least 6 characters');
+            if (!name || !email || !pass || !confirm) return alert('Fill all fields');
+            if (pass !== confirm) return alert('Passwords do not match');
+            if (pass.length < 6) return alert('Password min 6 characters');
 
             try {
-                // 1. Create user in Firebase Auth
-                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-                const user = userCredential.user;
-
-                // 2. Save user profile to Firestore
-                await db.collection('users').doc(user.uid).set({
+                const cred = await auth.createUserWithEmailAndPassword(email, pass);
+                await db.collection('users').doc(cred.user.uid).set({
                     name: name,
                     email: email,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    created: firebase.firestore.FieldValue.serverTimestamp()
                 });
-
                 alert('Registration successful! Please login.');
                 showLogin();
-            } catch (error) {
-                console.error('Registration error:', error);
-                alert('Registration failed: ' + error.message);
+            } catch (e) {
+                alert('Registration failed: ' + e.message);
             }
         }
 
-        async function login() {
+        async function handleLogin() {
             const email = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value;
+            const pass = document.getElementById('loginPassword').value;
 
-            if (!email || !password) return alert('Please fill all fields');
+            if (!email || !pass) return alert('Fill all fields');
 
             try {
-                const userCredential = await auth.signInWithEmailAndPassword(email, password);
-                const user = userCredential.user;
-
-                // 1. Get user profile
-                const userDoc = await db.collection('users').doc(user.uid).get();
-                if (userDoc.exists) {
-                    currentUser = {
-                        uid: user.uid,
-                        ...userDoc.data()
-                    };
-                    
-                    document.getElementById('userName').textContent = currentUser.name;
-                    await loadUserStats();
-                    showSection('courseSelection');
+                const cred = await auth.signInWithEmailAndPassword(email, pass);
+                const doc = await db.collection('users').doc(cred.user.uid).get();
+                if (doc.exists) {
+                    user = { uid: cred.user.uid, ...doc.data() };
+                    document.getElementById('userName').textContent = user.name;
+                    await loadStats();
+                    showSection('courseSection');
                     document.getElementById('logoutBtn').style.display = 'block';
                     document.getElementById('historyBtn').style.display = 'block';
-                } else {
-                    alert('User profile not found. Data may be inconsistent.');
                 }
-            } catch (error) {
-                console.error('Login error:', error);
-                alert('Login failed: ' + error.message);
+            } catch (e) {
+                alert('Login failed: ' + e.message);
             }
         }
 
-        // --- NEW PASSWORD RESET FUNCTION ---
         async function resetPassword() {
             const email = document.getElementById('loginEmail').value.trim();
-            if (!email) {
-                alert('Please enter your email address in the field above to reset your password.');
-                return;
-            }
-
+            if (!email) return alert('Enter email to reset password');
             try {
                 await auth.sendPasswordResetEmail(email);
-                alert(`Password reset link sent to ${email}. Check your inbox (and spam folder)!`);
-            } catch (error) {
-                console.error('Password reset error:', error);
-                alert('Error sending password reset email. Please ensure the email address is registered.');
-            }
-        }
-        // --- END NEW PASSWORD RESET FUNCTION ---
-
-        async function logout() {
-            try {
-                await auth.signOut();
-                currentUser = null;
-                showSection('authSection');
-                document.getElementById('logoutBtn').style.display = 'none';
-                document.getElementById('historyBtn').style.display = 'none';
-                document.getElementById('timerDisplay').style.display = 'none'; // Hide timer
-                resetTestState();
-            } catch (error) {
-                console.error('Logout error:', error);
-                alert('Logout failed: ' + error.message);
+                alert('Reset link sent to ' + email);
+            } catch (e) {
+                alert('Error: ' + e.message);
             }
         }
 
-        // --- 3. NAVIGATION & UI FUNCTIONS (UNCHANGED) ---
-
-        function showSection(sectionId) {
-            const sections = ['authSection', 'courseSelection', 'testConfig', 'testSection', 'resultsSection', 'historySection', 'reviewSection']; // Added reviewSection
-            sections.forEach(id => {
-                document.getElementById(id).classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
+        async function handleLogout() {
+            await auth.signOut();
+            user = null;
+            showSection('authSection');
+            document.getElementById('logoutBtn').style.display = 'none';
+            document.getElementById('historyBtn').style.display = 'none';
+            document.getElementById('timer').style.display = 'none';
         }
 
-        function selectCourse(courseCode) {
-            selectedCourse = courseCode;
-            document.getElementById('selectedCourseName').textContent = courseCode;
-            resetConfigSelection(); // Reset buttons on course selection
-            showSection('testConfig');
+        // Navigation
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
         }
 
-        function resetConfigSelection() {
-            // Remove 'selected' class from all config buttons
-            document.querySelectorAll('.option-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            // Reset to default internal values
-            questionCount = 10;
-            timerMinutes = 5;
+        function selectCourse(c) {
+            course = c;
+            document.getElementById('courseName').textContent = c;
+            resetConfig();
+            showSection('configSection');
         }
 
-        function selectQuestionCount(count) {
-            questionCount = count;
-            document.querySelectorAll('#questionButtons .option-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            // Find and select the button that was clicked
-            const button = Array.from(document.querySelectorAll('#questionButtons .option-btn')).find(b => parseInt(b.textContent) === count);
-            if (button) button.classList.add('selected');
+        function resetConfig() {
+            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            numQuestions = 10;
+            timeMinutes = 5;
         }
 
-        function selectTimer(minutes) {
-            timerMinutes = minutes;
-            document.querySelectorAll('#timerButtons .option-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            // Find and select the button that was clicked
-            const button = Array.from(document.querySelectorAll('#timerButtons .option-btn')).find(b => parseInt(b.textContent) === minutes);
-            if (button) button.classList.add('selected');
+        function selectQuestions(n) {
+            numQuestions = n;
+            document.querySelectorAll('#questionBtns .option-btn').forEach(b => b.classList.remove('selected'));
+            event.target.classList.add('selected');
+        }
+
+        function selectTime(t) {
+            timeMinutes = t;
+            document.querySelectorAll('#timerBtns .option-btn').forEach(b => b.classList.remove('selected'));
+            event.target.classList.add('selected');
         }
 
         function backToCourses() {
-            resetTestState();
-            loadUserStats(); // Reload stats on return
-            showSection('courseSelection');
+            resetTest();
+            loadStats();
+            showSection('courseSection');
         }
 
-
-        // --- 4. TEST LOGIC FUNCTIONS (UNCHANGED) ---
-
+        // Test Functions
         function startTest() {
-            if (!questionCount || !timerMinutes || !selectedCourse) {
-                alert('Please ensure you have selected a course, number of questions, and a timer.');
-                return;
-            }
-
-            const allQuestions = questionBank[selectedCourse];
-            currentQuestions = [];
-            const usedIndices = new Set();
+            const all = questions[course];
+            testQuestions = [];
+            const used = new Set();
             
-            // Randomly select unique questions
-            while (currentQuestions.length < Math.min(questionCount, allQuestions.length)) {
-                const randomIndex = Math.floor(Math.random() * allQuestions.length);
-                if (!usedIndices.has(randomIndex)) {
-                    usedIndices.add(randomIndex);
-                    currentQuestions.push(allQuestions[randomIndex]);
+            while (testQuestions.length < Math.min(numQuestions, all.length)) {
+                const i = Math.floor(Math.random() * all.length);
+                if (!used.has(i)) {
+                    used.add(i);
+                    testQuestions.push(all[i]);
                 }
             }
 
-            userAnswers = new Array(currentQuestions.length).fill(null);
-            currentQuestionIndex = 0;
-            
-            timeRemaining = timerMinutes * 60;
+            answers = new Array(testQuestions.length).fill(null);
+            currentQ = 0;
+            timeLeft = timeMinutes * 60;
             
             showSection('testSection');
-            document.getElementById('timerDisplay').style.display = 'block';
+            document.getElementById('timer').style.display = 'block';
             startTimer();
             displayQuestion();
         }
 
         function startTimer() {
-            updateTimerDisplay();
-            if (timerInterval) clearInterval(timerInterval); // Clear any existing interval
+            updateTimer();
+            if (timer) clearInterval(timer);
             
-            timerInterval = setInterval(() => {
-                timeRemaining--;
-                updateTimerDisplay();
-                
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimer();
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
                     submitTest();
                 }
             }, 1000);
         }
 
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-            document.getElementById('timerDisplay').textContent = 
-                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        function updateTimer() {
+            const m = Math.floor(timeLeft / 60);
+            const s = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
         }
 
         function displayQuestion() {
-            const question = currentQuestions[currentQuestionIndex];
+            const q = testQuestions[currentQ];
+            document.getElementById('questionNum').textContent = 
+                `Question ${currentQ + 1} of ${testQuestions.length}`;
+            document.getElementById('questionText').textContent = q.q;
             
-            document.getElementById('questionNumber').textContent = 
-                `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
-            document.getElementById('questionText').textContent = question.q;
+            const list = document.getElementById('optionsList');
+            list.innerHTML = '';
             
-            const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = '';
-            
-            question.options.forEach((option, index) => {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'option';
-                if (userAnswers[currentQuestionIndex] === index) {
-                    optionDiv.classList.add('selected');
-                }
-                optionDiv.textContent = option;
-                optionDiv.onclick = () => selectAnswer(index);
-                optionsContainer.appendChild(optionDiv);
+            q.opts.forEach((opt, i) => {
+                const div = document.createElement('div');
+                div.className = 'option-item';
+                if (answers[currentQ] === i) div.classList.add('selected');
+                div.textContent = opt;
+                div.onclick = () => selectAnswer(i);
+                list.appendChild(div);
             });
 
-            // Update Progress Bar
-            const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
+            const prog = ((currentQ + 1) / testQuestions.length) * 100;
+            document.getElementById('progress').style.width = prog + '%';
 
-            // Update Navigation Buttons
-            document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+            document.getElementById('prevBtn').disabled = currentQ === 0;
             document.getElementById('nextBtn').textContent = 
-                currentQuestionIndex === currentQuestions.length - 1 ? 'Submit' : 'Next';
+                currentQ === testQuestions.length - 1 ? 'Submit' : 'Next';
         }
 
-        function selectAnswer(answerIndex) {
-            userAnswers[currentQuestionIndex] = answerIndex;
-            displayQuestion(); // Re-render to show selection
+        function selectAnswer(i) {
+            answers[currentQ] = i;
+            displayQuestion();
         }
 
-        function previousQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
+        function prevQuestion() {
+            if (currentQ > 0) {
+                currentQ--;
                 displayQuestion();
             }
         }
 
         function nextQuestion() {
-            if (currentQuestionIndex === currentQuestions.length - 1) {
+            if (currentQ === testQuestions.length - 1) {
                 submitTest();
             } else {
-                currentQuestionIndex++;
+                currentQ++;
                 displayQuestion();
             }
         }
 
         async function submitTest() {
-            clearInterval(timerInterval);
-            document.getElementById('timerDisplay').style.display = 'none';
+            clearInterval(timer);
+            document.getElementById('timer').style.display = 'none';
 
-            let correct = 0;
-            let wrong = 0;
-            
-            currentQuestions.forEach((question, index) => {
-                if (userAnswers[index] === question.correct) {
-                    correct++;
-                } else {
-                    wrong++;
-                }
+            let correct = 0, wrong = 0;
+            testQuestions.forEach((q, i) => {
+                if (answers[i] === q.ans) correct++;
+                else wrong++;
             });
 
-            const percentage = Math.round((correct / currentQuestions.length) * 100);
+            const pct = Math.round((correct / testQuestions.length) * 100);
 
-            // Save test result to Firebase
             try {
                 await db.collection('tests').add({
-                    userId: currentUser.uid,
-                    userName: currentUser.name,
-                    course: selectedCourse,
-                    totalQuestions: currentQuestions.length,
+                    userId: user.uid,
+                    userName: user.name,
+                    course: course,
+                    total: testQuestions.length,
                     correct: correct,
                     wrong: wrong,
-                    percentage: percentage,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    percentage: pct,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
-
-                console.log('Test result saved successfully');
-            } catch (error) {
-                console.error('Error saving test result:', error);
-                alert('Could not save test result. Check console.');
+            } catch (e) {
+                console.error('Save error:', e);
             }
 
-            // Display Results
-            document.getElementById('scorePercentage').textContent = percentage;
+            document.getElementById('scorePercent').textContent = pct + '%';
             document.getElementById('correctCount').textContent = correct;
             document.getElementById('wrongCount').textContent = wrong;
-            document.getElementById('totalCount').textContent = currentQuestions.length;
+            document.getElementById('totalCount').textContent = testQuestions.length;
 
             showSection('resultsSection');
         }
 
-        function resetTestState() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-            }
-            currentQuestions = [];
-            currentQuestionIndex = 0;
-            userAnswers = [];
-            timeRemaining = 0;
-        }
-
-        // --- 5. REVIEW FUNCTION (UNCHANGED) ---
-
         function showReview() {
-            if (currentQuestions.length === 0) return alert('No test data to review.');
-
-            const reviewContent = document.getElementById('reviewContent');
-            reviewContent.innerHTML = '';
+            const content = document.getElementById('reviewContent');
+            content.innerHTML = '';
             
-            currentQuestions.forEach((question, index) => {
-                const userChoice = userAnswers[index];
-                const isCorrect = userChoice === question.correct;
-                const statusClass = isCorrect ? 'correct' : 'wrong';
+            testQuestions.forEach((q, i) => {
+                const userAns = answers[i];
+                const isCorrect = userAns === q.ans;
 
-                let questionHTML = `
-                    <div class="review-question ${statusClass}">
-                        <h4>Question ${index + 1}: ${question.q}</h4>
-                `;
+                let html = `<div class="review-item">
+                    <h4>Question ${i + 1}: ${q.q}</h4>`;
                 
-                question.options.forEach((option, optionIndex) => {
-                    let optionClass = 'review-option';
-                    let prefix = '';
+                q.opts.forEach((opt, j) => {
+                    let cls = 'review-option';
+                    let pre = '';
                     
-                    if (optionIndex === question.correct) {
-                        // This is the correct answer
-                        optionClass += ' correct-answer';
-                        prefix = '✅ Correct Answer: ';
-                    } else if (optionIndex === userChoice && !isCorrect) {
-                        // This is the user's selected answer, and it was wrong
-                        optionClass += ' user-wrong';
-                        prefix = '❌ Your Wrong Answer: ';
-                    } else if (optionIndex === userChoice && isCorrect) {
-                         // This is the user's selected answer, and it was correct (use a slightly different look)
-                        optionClass += ' correct-answer';
-                        prefix = '✅ Your Correct Answer: ';
+                    if (j === q.ans) {
+                        cls += ' correct';
+                        pre = '✅ Correct: ';
+                    } else if (j === userAns && !isCorrect) {
+                        cls += ' wrong';
+                        pre = '❌ Your answer: ';
                     }
 
-                    questionHTML += `<div class="${optionClass}">${prefix}${option}</div>`;
+                    html += `<div class="${cls}">${pre}${opt}</div>`;
                 });
 
-                questionHTML += '</div>';
-                reviewContent.innerHTML += questionHTML;
+                html += '</div>';
+                content.innerHTML += html;
             });
 
             showSection('reviewSection');
         }
 
+        function showResults() {
+            showSection('resultsSection');
+        }
 
-        // --- 6. STATS AND HISTORY FUNCTIONS (UNCHANGED) ---
-        
-        async function loadUserStats() {
-            if (!currentUser) return;
+        function resetTest() {
+            if (timer) clearInterval(timer);
+            testQuestions = [];
+            currentQ = 0;
+            answers = [];
+            timeLeft = 0;
+        }
+
+        // Stats & History
+        async function loadStats() {
+            if (!user) return;
             try {
-                // Fetch all tests for the current user
-                const testsSnapshot = await db.collection('tests')
-                    .where('userId', '==', currentUser.uid)
+                const snap = await db.collection('tests')
+                    .where('userId', '==', user.uid)
                     .get();
 
-                const totalTests = testsSnapshot.size;
-                let totalScore = 0;
-                let highestScore = 0;
+                const total = snap.size;
+                let sum = 0, high = 0;
 
-                testsSnapshot.forEach(doc => {
-                    const data = doc.data();
-                    const percentage = data.percentage || 0;
-                    totalScore += percentage;
-                    if (percentage > highestScore) {
-                        highestScore = percentage;
-                    }
+                snap.forEach(doc => {
+                    const pct = doc.data().percentage || 0;
+                    sum += pct;
+                    if (pct > high) high = pct;
                 });
 
-                const averageScore = totalTests > 0 ? Math.round(totalScore / totalTests) : 0;
+                const avg = total > 0 ? Math.round(sum / total) : 0;
 
-                const statsHTML = `
+                document.getElementById('statsGrid').innerHTML = `
                     <div class="stat-card">
                         <h3>Total Tests</h3>
-                        <p>${totalTests}</p>
+                        <p>${total}</p>
                     </div>
                     <div class="stat-card">
-                        <h3>Average Score</h3>
-                        <p>${averageScore}%</p>
+                        <h3>Average</h3>
+                        <p>${avg}%</p>
                     </div>
                     <div class="stat-card">
-                        <h3>Highest Score</h3>
-                        <p>${highestScore}%</p>
+                        <h3>Highest</h3>
+                        <p>${high}%</p>
                     </div>
                 `;
-
-                document.getElementById('userStats').innerHTML = statsHTML;
-            } catch (error) {
-                console.error('Error loading stats:', error);
+            } catch (e) {
+                console.error('Stats error:', e);
             }
         }
 
         async function showHistory() {
-            if (!currentUser) return;
-
+            if (!user) return;
             showSection('historySection');
-            document.getElementById('historyContent').innerHTML = '<div class="loading">Loading history...</div>';
+            document.getElementById('historyContent').innerHTML = '<div class="loading">Loading...</div>';
 
             try {
-                const testsSnapshot = await db.collection('tests')
-                    .where('userId', '==', currentUser.uid)
+                const snap = await db.collection('tests')
+                    .where('userId', '==', user.uid)
                     .orderBy('timestamp', 'desc')
-                    .limit(20) // Limit to last 20 tests
+                    .limit(20)
                     .get();
 
-                if (testsSnapshot.empty) {
+                if (snap.empty) {
                     document.getElementById('historyContent').innerHTML = 
-                        '<p style="text-align: center; color: #666;">No test history yet. Take your first test!</p>';
+                        '<p style="text-align:center;color:#ffd700;">No history yet</p>';
                     return;
                 }
 
-                let tableHTML = `
-                    <table class="history-table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Course</th>
-                                <th>Questions</th>
-                                <th>Correct</th>
-                                <th>Wrong</th>
-                                <th>Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                `;
+                let html = `<table class="history-table"><thead><tr>
+                    <th>Date</th><th>Course</th><th>Questions</th>
+                    <th>Correct</th><th>Wrong</th><th>Score</th>
+                </tr></thead><tbody>`;
 
-                testsSnapshot.forEach(doc => {
-                    const data = doc.data();
-                    // Convert Firestore Timestamp to local date string
-                    const date = data.timestamp ? data.timestamp.toDate().toLocaleDateString('en-GB') : 'N/A';
-                    tableHTML += `
-                        <tr>
-                            <td>${date}</td>
-                            <td>${data.course}</td>
-                            <td>${data.totalQuestions}</td>
-                            <td style="color: #4caf50;">${data.correct}</td>
-                            <td style="color: #f44336;">${data.wrong}</td>
-                            <td style="font-weight: bold;">${data.percentage}%</td>
-                        </tr>
-                    `;
+                snap.forEach(doc => {
+                    const d = doc.data();
+                    const date = d.timestamp ? d.timestamp.toDate().toLocaleDateString() : 'N/A';
+                    html += `<tr>
+                        <td>${date}</td>
+                        <td>${d.course}</td>
+                        <td>${d.total}</td>
+                        <td style="color:#4caf50">${d.correct}</td>
+                        <td style="color:#f44336">${d.wrong}</td>
+                        <td><strong>${d.percentage}%</strong></td>
+                    </tr>`;
                 });
 
-                tableHTML += '</tbody></table>';
-                document.getElementById('historyContent').innerHTML = tableHTML;
-            } catch (error) {
-                console.error('Error loading history:', error);
+                html += '</tbody></table>';
+                document.getElementById('historyContent').innerHTML = html;
+            } catch (e) {
                 document.getElementById('historyContent').innerHTML = 
-                    '<p style="text-align: center; color: #f44336;">Error loading history. Please try again.</p>';
+                    '<p style="text-align:center;color:#f44336;">Error loading history</p>';
             }
         }
 
-        // --- 7. INITIALIZATION & AUTH STATE LISTENER (UNCHANGED) ---
-
-        // Firebase Auth listener to handle page reload/initial state
-        auth.onAuthStateChanged(async (user) => {
-            if (user) {
-                // User is signed in. Load profile data.
+        // Auth State Listener
+        auth.onAuthStateChanged(async (u) => {
+            if (u) {
                 try {
-                    const userDoc = await db.collection('users').doc(user.uid).get();
-                    if (userDoc.exists) {
-                        currentUser = {
-                            uid: user.uid,
-                            ...userDoc.data()
-                        };
-                        document.getElementById('userName').textContent = currentUser.name;
-                        await loadUserStats();
-                        showSection('courseSelection');
+                    const doc = await db.collection('users').doc(u.uid).get();
+                    if (doc.exists) {
+                        user = { uid: u.uid, ...doc.data() };
+                        document.getElementById('userName').textContent = user.name;
+                        await loadStats();
+                        showSection('courseSection');
                         document.getElementById('logoutBtn').style.display = 'block';
                         document.getElementById('historyBtn').style.display = 'block';
                     } else {
-                        // Profile missing, log out user for safety
-                        console.error("User profile document missing.");
-                        logout();
+                        handleLogout();
                     }
-                } catch (error) {
-                    console.error("Error fetching user data on startup:", error);
-                    logout();
+                } catch (e) {
+                    handleLogout();
                 }
             } else {
-                // User is signed out.
-                currentUser = null;
+                user = null;
                 showSection('authSection');
                 document.getElementById('logoutBtn').style.display = 'none';
                 document.getElementById('historyBtn').style.display = 'none';
-                document.getElementById('timerDisplay').style.display = 'none';
+                document.getElementById('timer').style.display = 'none';
             }
         });
-
     </script>
 </body>
-<script>
-    document.addEventListener('click', function(e) {
-        // Create 12 particles per click
-        const particleCount = 12;
-        
-        for (let i = 0; i < particleCount; i++) {
-            createSnowParticle(e.clientX, e.clientY);
-        }
-    });
-
-    function createSnowParticle(x, y) {
-        const particle = document.createElement('div');
-        
-        // Style the particle dynamically
-        particle.style.position = 'fixed';
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
-        particle.style.width = '8px';
-        particle.style.height = '8px';
-        particle.style.background = 'white';
-        particle.style.borderRadius = '50%';
-        particle.style.pointerEvents = 'none'; // Click through them
-        particle.style.zIndex = '9999';
-        particle.style.boxShadow = '0 0 10px white'; // Glow effect
-        
-        // Randomize movement direction
-        const destinationX = (Math.random() - 0.5) * 200; // Move left/right
-        const destinationY = (Math.random() - 0.5) * 200; // Move up/down
-        const rotation = Math.random() * 520;
-        const delay = Math.random() * 200;
-
-        // Apply animation via Web Animations API (Smoother than CSS classes for dynamic coords)
-        particle.animate([
-            { transform: `translate(0, 0) scale(1)`, opacity: 1 },
-            { transform: `translate(${destinationX}px, ${destinationY}px) scale(0)`, opacity: 0 }
-        ], {
-            duration: 1000 + delay,
-            easing: 'cubic-bezier(0, .9, .57, 1)',
-            delay: delay
-        });
-
-        document.body.appendChild(particle);
-
-        // Remove particle from DOM after animation finishes
-        setTimeout(() => {
-            particle.remove();
-        }, 1200 + delay);
-    }
-</script>
 </html>
